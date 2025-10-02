@@ -106,34 +106,102 @@
     <!-- Hero Section -->
     <main id="main-content" role="main">
     <section id="home" class="hero" aria-labelledby="hero-title">
+        <!-- Hero Background with Parallax Effect -->
         <div class="hero-background">
+            <div class="hero-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+            </div>
             <div class="hero-overlay"></div>
         </div>
+        
+        <!-- Floating Elements -->
+        <div class="hero-floating-elements">
+            <div class="floating-icon floating-icon-1">
+                <i class="fas fa-shopping-bag"></i>
+            </div>
+            <div class="floating-icon floating-icon-2">
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="floating-icon floating-icon-3">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="floating-icon floating-icon-4">
+                <i class="fas fa-gift"></i>
+            </div>
+        </div>
+        
         <div class="container">
-            <div class="hero-content">
-                <h1 id="hero-title" class="hero-title">
+            <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
+                <!-- Hero Badge -->
+                <div class="hero-badge" data-aos="zoom-in" data-aos-delay="100">
+                    <i class="fas fa-award"></i>
+                    <span>Premium Quality Store</span>
+                </div>
+                
+                <h1 id="hero-title" class="hero-title" data-aos="fade-up" data-aos-delay="300">
                     Discover products of <span class="highlight">exceptional quality</span>
                 </h1>
-                <p class="hero-description">
+                
+                <p class="hero-description" data-aos="fade-up" data-aos-delay="400">
                     We offer a curated selection of products and services that will transform your experience. 
-                    Guaranteed quality and personalized attention.
+                    <strong>Guaranteed quality</strong> and personalized attention for every customer.
                 </p>
-                <div class="hero-actions">
-                    <a href="products.html" class="btn btn-primary btn-large">
+                
+                <!-- Hero Features -->
+                <div class="hero-features" data-aos="fade-up" data-aos-delay="500">
+                    <div class="hero-feature">
+                        <i class="fas fa-shipping-fast"></i>
+                        <span>Free Shipping</span>
+                    </div>
+                    <div class="hero-feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Secure Payment</span>
+                    </div>
+                    <div class="hero-feature">
+                        <i class="fas fa-undo"></i>
+                        <span>30-Day Returns</span>
+                    </div>
+                </div>
+                
+                <div class="hero-actions" data-aos="fade-up" data-aos-delay="600">
+                    <a href="products.html" class="btn btn-primary btn-large btn-hero">
                         <i class="fas fa-shopping-cart"></i>
-                        View Products
+                        <span>Shop Now</span>
+                        <div class="btn-shine"></div>
                     </a>
-                    <a href="services.html" class="btn btn-secondary btn-large">
-                        <i class="fas fa-info-circle"></i>
-                        Learn More
+                    <a href="services.html" class="btn btn-secondary btn-large btn-hero btn-outline">
+                        <i class="fas fa-play"></i>
+                        <span>Watch Demo</span>
                     </a>
+                </div>
+                
+                <!-- Hero Stats -->
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="700">
+                    <div class="hero-stat">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Happy Customers</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Products</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="stat-number">99%</div>
+                        <div class="stat-label">Satisfaction</div>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- Scroll Indicator -->
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
+        <!-- Enhanced Scroll Indicator -->
+        <div class="scroll-indicator" data-aos="fade-in" data-aos-delay="800">
+            <div class="scroll-text">Scroll to explore</div>
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
         </div>
     </section>
 
