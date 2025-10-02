@@ -31,12 +31,35 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
 });
 
+// Safari mobile viewport fix
+function fixSafariMobileViewport() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    
+    // Listen to resize events
+    window.addEventListener('resize', () => {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+    
+    // Safari-specific orientation change handling
+    window.addEventListener('orientationchange', () => {
+        setTimeout(() => {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }, 100);
+    });
+}
+
 // Main initialization function
 function initializeApp() {
     if (isMainJsInitialized) return;
     isMainJsInitialized = true;
     
     console.log('Initializing Main.js - single instance');
+    
+    // Fix Safari mobile viewport
+    fixSafariMobileViewport();
     
     // Initialize AOS (Animate On Scroll)
     if (typeof AOS !== 'undefined') {
@@ -70,14 +93,29 @@ function initMobileMenu() {
     
     if (!mobileMenuBtn || !nav) return;
     
-    mobileMenuBtn.addEventListener('click', function() {
+    mobileMenuBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
         const isOpen = nav.classList.contains('mobile-open');
+        
+        console.log('Mobile menu clicked, isOpen:', isOpen);
         
         if (isOpen) {
             closeMobileMenu();
         } else {
             openMobileMenu();
         }
+    });
+    
+    // Add touch event for better Safari mobile support
+    mobileMenuBtn.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+    });
+    
+    mobileMenuBtn.addEventListener('touchend', function(e) {
+        this.style.backgroundColor = '';
     });
     
     // Close menu when clicking on a link
@@ -95,12 +133,30 @@ function initMobileMenu() {
 }
 
 function openMobileMenu() {
+    console.log('Opening mobile menu...');
     const nav = document.getElementById('nav');
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     
+    if (!nav || !mobileMenuBtn) {
+        console.error('Nav elements not found');
+        return;
+    }
+    
     nav.classList.add('mobile-open');
     mobileMenuBtn.classList.add('active');
+    
+    // Safari-specific fixes
     document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.documentElement.style.overflow = 'hidden';
+    
+    // Force repaint for Safari
+    nav.style.display = 'none';
+    nav.offsetHeight; // Trigger reflow
+    nav.style.display = '';
+    
+    console.log('Mobile menu opened');
     
     // Add CSS styles for mobile if they don't exist
     if (!document.querySelector('#mobile-nav-styles')) {
@@ -150,12 +206,33 @@ function openMobileMenu() {
 }
 
 function closeMobileMenu() {
+    console.log('Cerrando menú móvil...');
+    
     const nav = document.getElementById('nav');
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     
-    nav.classList.remove('mobile-open');
-    mobileMenuBtn.classList.remove('active');
+    if (nav) {
+        nav.classList.remove('mobile-open');
+        console.log('Clase mobile-open removida del nav');
+    }
+    
+    if (mobileMenuBtn) {
+        mobileMenuBtn.classList.remove('active');
+        console.log('Clase active removida del botón');
+    }
+    
+    // Restaurar scroll del body
     document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
+    
+    // Safari mobile fix: forzar reflow
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        nav && nav.offsetHeight;
+        mobileMenuBtn && mobileMenuBtn.offsetHeight;
+    }
+    
+    console.log('Menú móvil cerrado completamente');
 }
 
 /* ==========================================================================
