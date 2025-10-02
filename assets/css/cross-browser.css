@@ -64,6 +64,8 @@
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 /* Box-shadow prefixes */
@@ -131,12 +133,14 @@
     /* Firefox-specific fixes */
     .btn {
         -moz-appearance: none;
+        appearance: none;
     }
-    
     select {
         -moz-appearance: none;
+        appearance: none;
     }
-}
+    }
+
 
 /* Fixes para Edge */
 @supports (-ms-ime-align: auto) {
