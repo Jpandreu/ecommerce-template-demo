@@ -864,6 +864,7 @@ class CheckoutManager {
 
     // Setup payment method change handlers
     setupPaymentMethodHandlers() {
+        const self = this; // Define self to maintain context in callbacks
         const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
         const creditCardBtn = document.getElementById('placeOrderBtn');
         const paypalContainer = document.getElementById('paypal-button-container');
