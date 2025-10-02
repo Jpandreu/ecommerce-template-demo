@@ -22,6 +22,7 @@ class CheckoutManager {
         this.attachEventListeners();
         this.setupFormValidation();
         this.setupCardFormatting();
+        this.setupRealTimeValidation();
         this.updateCartCount();
         
         // Initialize payment method display
@@ -34,6 +35,34 @@ class CheckoutManager {
         }, 500);
         
         console.log('CheckoutManager initialized successfully');
+    }
+
+    // Setup real-time validation for PayPal
+    setupRealTimeValidation() {
+        const requiredFields = ['firstName', 'lastName', 'email', 'address', 'city', 'postalCode'];
+        
+        console.log('Setting up real-time validation for PayPal...');
+        
+        requiredFields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                console.log(`✅ Adding listeners to field: ${fieldId}`);
+                
+                // Add listeners for real-time validation
+                const updatePayPal = () => {
+                    console.log(`🔄 Field ${fieldId} changed, updating PayPal...`);
+                    setTimeout(() => {
+                        this.handlePaymentMethodChange();
+                    }, 100);
+                };
+                
+                field.addEventListener('input', updatePayPal);
+                field.addEventListener('blur', updatePayPal);
+                field.addEventListener('change', updatePayPal);
+            } else {
+                console.warn(`❌ Required field ${fieldId} not found in form`);
+            }
+        });
     }
 
     // Load cart from localStorage
@@ -665,21 +694,26 @@ class CheckoutManager {
         // Show PayPal button for PayPal method
         if (selectedMethod === 'paypal') {
             if (paypalContainer) {
-                if (!this.areRequiredFieldsFilled()) {
+                console.log('🔍 Checking PayPal conditions...');
+                const fieldsValid = this.areRequiredFieldsFilled();
+                
+                if (!fieldsValid) {
+                    console.log('❌ Required fields not filled, showing message');
                     // Show message instead of PayPal button
-                    paypalContainer.innerHTML = '<div style="padding: 15px; background: #f0f0f0; border-radius: 5px; text-align: center; color: #666;">Please complete all required shipping information above to enable PayPal payment.</div>';
+                    paypalContainer.innerHTML = '<div style="padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; text-align: center; color: #856404; font-weight: 500;">⚠️ Please complete all required shipping information above to enable PayPal payment.</div>';
                     paypalContainer.style.display = 'block';
                 } else {
+                    console.log('✅ All fields valid, setting up PayPal button');
                     // Show PayPal button
                     paypalContainer.style.display = 'block';
-                    // Re-initialize PayPal buttons if they don't exist or are showing message
-                    if (paypalContainer.children.length === 0 || paypalContainer.innerHTML.includes('Please complete')) {
-                        paypalContainer.innerHTML = ''; // Clear any messages
-                        this.setupPayPalButtons();
-                    }
+                    // Always re-initialize PayPal buttons when fields are valid
+                    paypalContainer.innerHTML = ''; // Clear any messages
+                    this.setupPayPalButtons();
                 }
                 
                 if (instructions) instructions.style.display = 'none';
+            } else {
+                console.error('❌ PayPal container not found');
             }
         }
 
@@ -820,6 +854,20 @@ class CheckoutManager {
     // Setup PayPal buttons
     setupPayPalButtons() {
         const self = this;
+        
+        console.log('🔧 Setting up PayPal buttons...');
+        
+        // Double check that PayPal is available
+        if (typeof paypal === 'undefined') {
+            console.error('❌ PayPal SDK not loaded');
+            return;
+        }
+        
+        // Double check that all required fields are filled
+        if (!this.areRequiredFieldsFilled()) {
+            console.error('❌ Cannot setup PayPal buttons - required fields not filled');
+            return;
+        }
         
         paypal.Buttons({
             style: {
@@ -962,15 +1010,21 @@ class CheckoutManager {
     areRequiredFieldsFilled() {
         const requiredFields = ['firstName', 'lastName', 'email', 'address', 'city', 'postalCode'];
         
-        console.log('Checking required fields...');
+        console.log('=== CHECKING REQUIRED FIELDS ===');
         const result = requiredFields.every(fieldName => {
             const field = document.getElementById(fieldName);
-            const isValid = field && field.value && field.value.trim() !== '';
-            console.log(`Field ${fieldName}: ${field ? field.value : 'not found'} - Valid: ${isValid}`);
+            if (!field) {
+                console.log(`❌ Field ${fieldName}: NOT FOUND`);
+                return false;
+            }
+            
+            const value = field.value ? field.value.trim() : '';
+            const isValid = value !== '';
+            console.log(`${isValid ? '✅' : '❌'} Field ${fieldName}: "${value}" - Valid: ${isValid}`);
             return isValid;
         });
         
-        console.log('All required fields filled:', result);
+        console.log(`=== RESULT: All required fields filled: ${result} ===`);
         return result;
     }
 
@@ -1172,3 +1226,71 @@ if (typeof window !== 'undefined') {
 }
 
 // Force GitHub Pages update - PayPal fix deployed
+
+// Enhanced debugging function for PayPal issues
+window.debugPayPalAdvanced = function() {
+    console.clear();
+    console.log('🔍 ADVANCED PAYPAL DEBUG STARTED');
+    console.log('=================================');
+    
+    // Check PayPal SDK
+    console.log('1. PayPal SDK Status:');
+    console.log('  - PayPal loaded:', typeof paypal !== 'undefined');
+    console.log('  - PayPal.Buttons available:', typeof paypal?.Buttons !== 'undefined');
+    
+    // Check form fields
+    console.log('\n2. Required Fields Status:');
+    const requiredFields = ['firstName', 'lastName', 'email', 'address', 'city', 'postalCode'];
+    requiredFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field) {
+            const value = field.value.trim();
+            console.log(`  - ${fieldId}: "${value}" (${value ? '✅ FILLED' : '❌ EMPTY'})`);
+        } else {
+            console.log(`  - ${fieldId}: ❌ FIELD NOT FOUND`);
+        }
+    });
+    
+    // Check payment method
+    console.log('\n3. Payment Method:');
+    const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
+    paymentMethods.forEach(method => {
+        console.log(`  - ${method.value}: ${method.checked ? '✅ SELECTED' : '⭕ not selected'}`);
+    });
+    
+    // Check PayPal container
+    console.log('\n4. PayPal Container:');
+    const container = document.getElementById('paypal-button-container');
+    if (container) {
+        console.log('  - Container found: ✅');
+        console.log('  - Display:', container.style.display);
+        console.log('  - Children count:', container.children.length);
+        console.log('  - Inner HTML preview:', container.innerHTML.substring(0, 100) + '...');
+    } else {
+        console.log('  - Container found: ❌');
+    }
+    
+    // Check checkout manager
+    console.log('\n5. Checkout Manager:');
+    if (window.checkoutManager) {
+        console.log('  - Manager loaded: ✅');
+        console.log('  - Cart items:', window.checkoutManager.cart.length);
+        try {
+            const fieldsValid = window.checkoutManager.areRequiredFieldsFilled();
+            console.log('  - Required fields valid:', fieldsValid ? '✅' : '❌');
+        } catch (e) {
+            console.log('  - Error checking fields:', e.message);
+        }
+    } else {
+        console.log('  - Manager loaded: ❌');
+    }
+    
+    console.log('\n🔍 DEBUG COMPLETE');
+    console.log('==================');
+    
+    // Try to force PayPal update
+    if (window.checkoutManager && typeof window.checkoutManager.handlePaymentMethodChange === 'function') {
+        console.log('\n🔄 Forcing PayPal update...');
+        window.checkoutManager.handlePaymentMethodChange();
+    }
+};
