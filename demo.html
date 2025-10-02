@@ -164,11 +164,27 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
         }
         
+        .button-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .primary-button {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%) !important;
+        }
+        
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
             margin: 60px 0;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .feature {
@@ -288,6 +304,10 @@
             .logo {
                 font-size: 3rem;
             }
+            .button-grid {
+                flex-direction: column;
+                gap: 15px;
+            }
             .features { 
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -296,7 +316,9 @@
             .demo-button {
                 padding: 15px 35px;
                 font-size: 1rem;
-                margin: 8px;
+                margin: 5px;
+                width: 100%;
+                max-width: 280px;
             }
             .footer-buttons {
                 flex-direction: column;
@@ -308,6 +330,12 @@
                 text-align: center;
             }
         }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -315,42 +343,52 @@
     <div class="demo-container">
         <div class="logo">🛍️</div>
         <h1>Professional Ecommerce Template</h1>
-        <p class="subtitle">Modern • Responsive • PayPal Ready • ThemeForest Quality</p>
+        <p class="subtitle">Modern • Fully Responsive • PayPal Integration • Premium Quality</p>
         
-        <div style="margin: 40px 0;">
-            <a href="index.html" class="demo-button">🚀 View Live Demo</a>
-            <a href="#" onclick="redirectToPurchase()" class="demo-button secondary-button">💰 Purchase Template</a>
-            <a href="https://github.com/Jpandreu/ecommerce-template-demo" class="demo-button source-button" target="_blank">📁 View Source</a>
+        <div class="button-grid">
+            <a href="index.html" class="demo-button primary-button">🚀 Live Demo</a>
+            <a href="#" onclick="redirectToPurchase()" class="demo-button secondary-button">💰 Buy Now</a>
+            <a href="https://github.com/Jpandreu/ecommerce-template-demo" class="demo-button source-button" target="_blank">📁 Source Code</a>
         </div>
         
         <div class="features">
             <div class="feature">
                 <div class="feature-icon">💳</div>
                 <h3>PayPal Integration</h3>
-                <p>Real payment processing with secure checkout</p>
+                <p>Secure payment processing with real PayPal checkout functionality</p>
             </div>
             <div class="feature">
                 <div class="feature-icon">📱</div>
                 <h3>Fully Responsive</h3>
-                <p>Perfect on all devices and screen sizes</p>
+                <p>Perfectly optimized for desktop, tablet and mobile devices</p>
             </div>
             <div class="feature">
                 <div class="feature-icon">⚡</div>
-                <h3>Fast Loading</h3>
-                <p>Optimized for performance and SEO</p>
+                <h3>Performance Optimized</h3>
+                <p>Fast loading with SEO-friendly structure and clean code</p>
             </div>
             <div class="feature">
                 <div class="feature-icon">🛒</div>
-                <h3>Advanced Cart</h3>
-                <p>Complete shopping cart with persistence</p>
+                <h3>Smart Shopping Cart</h3>
+                <p>Advanced cart system with local storage and quantity management</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎨</div>
+                <h3>Modern Design</h3>
+                <p>Contemporary UI/UX with smooth animations and transitions</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔧</div>
+                <h3>Easy Customization</h3>
+                <p>Well-structured code with comprehensive documentation included</p>
             </div>
         </div>
         
         <div class="footer">
-            <p class="footer-text">🎯 Ready for ThemeForest • ⭐ Commercial License • 📖 Full Documentation</p>
+            <p class="footer-text">🎯 ThemeForest Ready • ⭐ Commercial License Available • 📖 Complete Documentation</p>
             <div class="footer-buttons">
-                <a href="#" onclick="redirectToPurchase()" class="footer-button purchase-button">💳 Get Template</a>
-                <a href="#" onclick="redirectToProfile()" class="footer-button profile-button">👤 View Author Profile</a>
+                <a href="#" onclick="redirectToPurchase()" class="footer-button purchase-button">💳 Purchase Template</a>
+                <a href="#" onclick="redirectToProfile()" class="footer-button profile-button">👤 Developer Profile</a>
             </div>
         </div>
     </div>
@@ -394,27 +432,27 @@
             modal.innerHTML = `
                 <div style="background: white; padding: 40px; border-radius: 15px; max-width: 500px; text-align: center; color: #333;">
                     <div style="font-size: 3rem; margin-bottom: 20px;">🚀</div>
-                    <h2 style="margin-bottom: 15px;">Template en Revisión</h2>
+                    <h2 style="margin-bottom: 15px;">Template Under Review</h2>
                     <p style="margin-bottom: 25px; line-height: 1.6;">
-                        Este template está siendo revisado por ThemeForest. 
-                        Una vez aprobado, estará disponible para compra.
+                        This template is currently being reviewed by ThemeForest. 
+                        Once approved, it will be available for purchase.
                     </p>
                     <div style="margin-bottom: 25px;">
-                        <strong>💰 Disponible pronto en ThemeForest</strong><br>
-                        <span style="color: #666;">Licencia Regular + Licencia Extendida disponible</span>
+                        <strong>💰 Coming Soon to ThemeForest</strong><br>
+                        <span style="color: #666;">Regular License + Extended License available</span>
                     </div>
                     <p style="margin-bottom: 25px;">
-                        <strong>¿Interesado en una versión temprana?</strong><br>
-                        Contáctanos para acceso anticipado.
+                        <strong>Interested in early access?</strong><br>
+                        Contact us for preview availability.
                     </p>
                     <div>
-                        <button onclick="window.open('mailto:${THEMEFOREST_CONFIG.contactEmail}?subject=Interés en Professional Ecommerce Template&body=Hola, estoy interesado en el template de ecommerce que vi en la demo. ¿Podrías darme más información sobre disponibilidad y precios?')" 
+                        <button onclick="window.open('mailto:${THEMEFOREST_CONFIG.contactEmail}?subject=Interest in Professional Ecommerce Template&body=Hello, I am interested in the ecommerce template I saw in the demo. Could you provide more information about availability and pricing?')" 
                                 style="background: #007cba; color: white; border: none; padding: 12px 25px; border-radius: 25px; margin: 5px; cursor: pointer; font-weight: 600;">
-                            📧 Contactar Autor
+                            📧 Contact Author
                         </button>
                         <button onclick="this.parentElement.parentElement.parentElement.remove()" 
                                 style="background: #666; color: white; border: none; padding: 12px 25px; border-radius: 25px; margin: 5px; cursor: pointer;">
-                            Cerrar
+                            Close
                         </button>
                     </div>
                 </div>
@@ -434,14 +472,14 @@
             modal.innerHTML = `
                 <div style="background: white; padding: 40px; border-radius: 15px; max-width: 500px; text-align: center; color: #333;">
                     <div style="font-size: 3rem; margin-bottom: 20px;">👨‍💻</div>
-                    <h2 style="margin-bottom: 15px;">Perfil del Desarrollador</h2>
+                    <h2 style="margin-bottom: 15px;">Developer Profile</h2>
                     <p style="margin-bottom: 25px; line-height: 1.6;">
-                        Desarrollador especializado en templates de ecommerce profesionales.
-                        Enfoque en UX/UI, performance y conversiones.
+                        Specialized developer in professional ecommerce templates.
+                        Focus on UX/UI, performance optimization and conversion rates.
                     </p>
                     <div style="margin-bottom: 25px;">
-                        <strong>🎯 Especialidades:</strong><br>
-                        <span style="color: #666;">E-commerce • PayPal • Responsive Design • SEO</span>
+                        <strong>🎯 Specialties:</strong><br>
+                        <span style="color: #666;">E-commerce • PayPal Integration • Responsive Design • SEO</span>
                     </div>
                     <div style="margin-bottom: 25px;">
                         <strong>🔗 GitHub:</strong><br>
@@ -450,15 +488,15 @@
                     <div>
                         <button onclick="window.open('${THEMEFOREST_CONFIG.authorUrl}', '_blank')" 
                                 style="background: #333; color: white; border: none; padding: 12px 25px; border-radius: 25px; margin: 5px; cursor: pointer; font-weight: 600;">
-                            🐙 Ver GitHub
+                            🐙 View GitHub
                         </button>
-                        <button onclick="window.open('mailto:${THEMEFOREST_CONFIG.contactEmail}?subject=Consulta sobre templates&body=Hola, me gustaría conocer más sobre tus templates y servicios.')" 
+                        <button onclick="window.open('mailto:${THEMEFOREST_CONFIG.contactEmail}?subject=Template inquiry&body=Hello, I would like to know more about your templates and services.')" 
                                 style="background: #28a745; color: white; border: none; padding: 12px 25px; border-radius: 25px; margin: 5px; cursor: pointer; font-weight: 600;">
-                            📧 Contactar
+                            📧 Contact
                         </button>
                         <button onclick="this.parentElement.parentElement.parentElement.remove()" 
                                 style="background: #666; color: white; border: none; padding: 12px 25px; border-radius: 25px; margin: 5px; cursor: pointer;">
-                            Cerrar
+                            Close
                         </button>
                     </div>
                 </div>
@@ -482,8 +520,8 @@
                         <div style="display: flex; align-items: center;">
                             <span style="font-size: 1.5rem; margin-right: 10px;">⏳</span>
                             <div>
-                                <strong>En Revisión</strong><br>
-                                <small>Pronto en ThemeForest</small>
+                                <strong>Under Review</strong><br>
+                                <small>Coming to ThemeForest</small>
                             </div>
                         </div>
                     `;
