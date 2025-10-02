@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete your purchase securely - Payment and confirmation process">
+    <meta name="keywords" content="checkout, payment, secure purchase, complete order">
+    <meta name="author" content="Your Company">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Checkout - Complete Purchase">
+    <meta property="og:description" content="Secure payment process to complete your order">
+    <meta property="og:image" content="./assets/images/og-image.jpg">
+    <meta property="og:type" content="website">
+    
+    <title>Checkout - Complete Purchase | YourStore</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/checkout-page.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="./assets/images/logo.svg" alt="Your Store" class="logo-img">
+                        <span class="logo-text">YourStore</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Menu -->
+                <nav class="nav" id="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="products.html" class="nav-link">Products</a></li>
+                        <li><a href="services.html" class="nav-link">Services</a></li>
+                        <li><a href="index.html#Testimonials" class="nav-link">Testimonials</a></li>
+                        <li><a href="index.html#Contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <a href="cart.html" class="btn btn-outline cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Mobile menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="cart.html">Cart</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Checkout</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Checkout Progress -->
+    <section class="checkout-progress">
+        <div class="container">
+            <div class="progress-steps">
+                <div class="step completed">
+                    <div class="step-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="step-info">
+                        <span class="step-title">Cart</span>
+                        <span class="step-description">Selected products</span>
+                    </div>
+                </div>
+                <div class="step active">
+                    <div class="step-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="step-info">
+                        <span class="step-title">Payment</span>
+                        <span class="step-description">Billing information</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="step-info">
+                        <span class="step-title">Confirmation</span>
+                        <span class="step-description">Order completed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checkout Content -->
+    <section class="checkout-content">
+        <div class="container">
+            <div class="checkout-layout">
+                <!-- Checkout Form -->
+                <div class="checkout-form-section">
+                    <form class="checkout-form" id="checkoutForm">
+                        <!-- Contact Information -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <h3 class="section-title">
+                                    <i class="fas fa-user"></i>
+                                    Contact Information
+                                </h3>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label for="email">Email *</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone *</label>
+                                    <input type="tel" id="phone" name="phone" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Shipping Address -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <h3 class="section-title">
+                                    <i class="fas fa-shipping-fast"></i>
+                                    Shipping Address
+                                </h3>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group full-width">
+                                    <label for="address">Address *</label>
+                                    <input type="text" id="address" name="address" placeholder="Street, number, floor, door" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">City *</label>
+                                    <input type="text" id="city" name="city" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="postalCode">Postal Code *</label>
+                                    <input type="text" id="postalCode" name="postalCode" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="state">State/Province *</label>
+                                    <input type="text" id="state" name="state" placeholder="Enter your state/province" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">Country *</label>
+                                    <select id="country" name="country" required>
+                                        <option value="ES">Spain</option>
+                                        <option value="PT">Portugal</option>
+                                        <option value="FR">France</option>
+                                        <option value="IT">Italy</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Same as Billing Address -->
+                            <div class="form-group checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="sameAsBilling" name="sameAsBilling" checked>
+                                    <span class="label-text">
+                                        <i class="fas fa-copy"></i>
+                                        Billing address is the same as shipping address
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Billing Address (Hidden by default) -->
+                        <div class="form-section" id="billingSection" style="display: none;">
+                            <div class="section-header">
+                                <h3 class="section-title">
+                                    <i class="fas fa-file-invoice"></i>
+                                    Billing Address
+                                </h3>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group full-width">
+                                    <label for="billingAddress">Address *</label>
+                                    <input type="text" id="billingAddress" name="billingAddress" placeholder="Street, number, floor, door">
+                                </div>
+                                <div class="form-group">
+                                    <label for="billingCity">City *</label>
+                                    <input type="text" id="billingCity" name="billingCity">
+                                </div>
+                                <div class="form-group">
+                                    <label for="billingPostalCode">Postal Code *</label>
+                                    <input type="text" id="billingPostalCode" name="billingPostalCode">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <h3 class="section-title">
+                                    <i class="fas fa-credit-card"></i>
+                                    Payment Method
+                                </h3>
+                            </div>
+                            
+                            <div class="payment-methods">
+                                <div class="payment-option">
+                                    <label class="payment-label">
+                                        <input type="radio" name="paymentMethod" value="card" checked>
+                                        <span class="payment-checkmark"></span>
+                                        <div class="payment-info">
+                                            <span class="payment-title">Credit/Debit Card</span>
+                                            <div class="payment-icons">
+                                                <i class="fab fa-cc-visa"></i>
+                                                <i class="fab fa-cc-mastercard"></i>
+                                                <i class="fab fa-cc-amex"></i>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="payment-option">
+                                    <label class="payment-label">
+                                        <input type="radio" name="paymentMethod" value="paypal">
+                                        <span class="payment-checkmark"></span>
+                                        <div class="payment-info">
+                                            <span class="payment-title">PayPal</span>
+                                            <i class="fab fa-paypal"></i>
+                                            <small style="display: block; color: #666; font-size: 12px; margin-top: 4px;">
+                                                Complete shipping information first
+                                            </small>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="payment-option">
+                                    <label class="payment-label">
+                                        <input type="radio" name="paymentMethod" value="transfer">
+                                        <span class="payment-checkmark"></span>
+                                        <div class="payment-info">
+                                            <span class="payment-title">Bank Transfer</span>
+                                            <i class="fas fa-university"></i>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Card Details (Shown when card is selected) -->
+                            <div class="card-details" id="cardDetails">
+                                <div class="form-grid">
+                                    <div class="form-group full-width">
+                                        <label for="cardNumber">Card Number *</label>
+                                        <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cardName">Name on Card *</label>
+                                        <input type="text" id="cardName" name="cardName" placeholder="Full name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cardExpiry">Expiry Date *</label>
+                                        <input type="text" id="cardExpiry" name="cardExpiry" placeholder="MM/YY" maxlength="5">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cardCvv">CVV *</label>
+                                        <input type="text" id="cardCvv" name="cardCvv" placeholder="123" maxlength="4">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Order Notes -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <h3 class="section-title">
+                                    <i class="fas fa-sticky-note"></i>
+                                    Order Notes (Optional)
+                                </h3>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="orderNotes" name="orderNotes" rows="4" 
+                                          placeholder="Special delivery instructions, additional comments..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Terms and Conditions -->
+                        <div class="form-section">
+                            <div class="form-group checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="acceptTerms" name="acceptTerms" required>
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">
+                                        <i class="fas fa-shield-alt"></i>
+                                        I accept the <a href="#" target="_blank">terms and conditions</a> 
+                                        and the <a href="#" target="_blank">privacy policy</a>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="form-group checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="newsletter" name="newsletter">
+                                    <span class="checkmark"></span>
+                                    <span class="label-text">
+                                        <i class="fas fa-envelope"></i>
+                                        I want to receive offers and news via email
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <div class="summary-card">
+                        <h3 class="summary-title">Order Summary</h3>
+                        
+                        <!-- Order Items -->
+                        <div class="order-items" id="orderItems">
+                            <!-- Items will be loaded dynamically -->
+                        </div>
+
+                        <!-- Summary Totals -->
+                        <div class="summary-totals" id="summaryTotals">
+                            <!-- Totals will be calculated dynamically -->
+                        </div>
+
+                        <!-- Security Badges -->
+                        <div class="security-info">
+                            <div class="security-badge">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>100% Secure Payment</span>
+                            </div>
+                            <div class="security-badge">
+                                <i class="fas fa-lock"></i>
+                                <span>SSL Protected Data</span>
+                            </div>
+                        </div>
+
+                        <!-- Payment Buttons -->
+                        <div class="payment-buttons">
+                            <!-- Credit Card Button -->
+                            <button type="submit" form="checkoutForm" class="btn btn-primary btn-full place-order-btn" id="placeOrderBtn" style="display: none;">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Complete Order</span>
+                                <div class="loading-spinner" style="display: none;">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </div>
+                            </button>
+
+                            <!-- PayPal Button Container -->
+                            <div id="paypal-button-container" style="display: none; margin-top: 15px;"></div>
+
+                            <!-- Payment Method Instructions -->
+                            <div class="payment-instructions" id="paymentInstructions">
+                                <p><i class="fas fa-info-circle"></i> Please select a payment method above to continue</p>
+                            </div>
+                        </div>
+
+                        <p class="order-guarantee">
+                            <i class="fas fa-info-circle"></i>
+                            Your order will be processed securely. You will receive a confirmation email.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Footer Brand -->
+                <div class="footer-brand">
+                    <div class="logo">
+                        <img src="./assets/images/logo-white.svg" alt="Your Store" class="logo-img">
+                        <span class="logo-text">YourStore</span>
+                    </div>
+                    <p class="footer-description">
+                        Your trusted partner para Products y Services de alta calidad. 
+                        Comprometidos con la excelencia From 2020.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Footer Links -->
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#consulting">Strategic Consulting</a></li>
+                            <li><a href="#implementation">Technical Implementation</a></li>
+                            <li><a href="#support">Support and Maintenance</a></li>
+                            <li><a href="#">Success Stories</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Products</h4>
+                        <ul>
+                            <li><a href="products.html">All Products</a></li>
+                            <li><a href="products.html?category=electronics">Electronics</a></li>
+                            <li><a href="products.html?category=fashion">Fashion</a></li>
+                            <li><a href="products.html?category=home">Home</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">Frequently Asked Questions</a></li>
+                            <li><a href="#">Help Center</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="index.html#Contact">Contact Form</a></li>
+                            <li><a href="tel:+34123456789">+34 123 456 789</a></li>
+                            <li><a href="mailto:info@yourstore.com">info@yourstore.com</a></li>
+                            <li><a href="#">Live Chat</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <p>&copy; 2025 TuTienda. All rights reserved.</p>
+                    <div class="legal-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a></li>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Legal Notice</a>
+                    </div>
+                </div>
+                <div class="template-credits">
+                    <p class="template-copyright">
+                        <i class="fas fa-code"></i>
+                        Template designed and developed by <strong>Josep Andreu</strong> &copy; 2025
+                        <br>
+                        <small>Commercial use license included - Do not redistribute without authorization</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Volver arriba">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- PayPal SDK - SANDBOX MODE for testing -->
+    <!-- Replace with your production client ID for live payments -->
+    <!-- Get your client ID from: https://developer.paypal.com/ -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AZ9iJD_rQThbLgbXhsW0XDx1sJbAKjiL6wf8C5YGV0vcF7K2hXniErnzw3MQaw8zuEw4Jh7_5q6E7Tmu&currency=USD&disable-funding=credit,card"></script>
+
+    <!-- JavaScript -->
+    <script src="./assets/js/analytics.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="./assets/js/image-loader.js"></script>
+    <script src="./assets/js/cart-sync.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/cart.js"></script>
+    <script src="./assets/js/checkout.js"></script>
+</body>
+</html>

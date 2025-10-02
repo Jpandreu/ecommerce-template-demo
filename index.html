@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<!--
+    Professional Ecommerce Template v2.0
+    Copyright © 2025 Josep Andreu
+    License: Commercial use allowed - See LICENSE.md
+    
+    This template is protected by copyright.
+    Keep author credits to comply with the license.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Modern and professional ecommerce template - Perfect for your online store">
+    <meta name="keywords" content="ecommerce, online store, web template, responsive, professional">
+    <meta name="author" content="Your Company">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Your Online Store - Ecommerce Template">
+    <meta property="og:description" content="Discover our collection of high-quality products">
+    <meta property="og:image" content="./assets/images/og-image.jpg">
+    <meta property="og:type" content="website">
+    
+    <title>Your Online Store - Professional Ecommerce Template</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+</head>
+
+<body>
+    <!-- Demo Banner -->
+    <div class="demo-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; padding: 12px 0; position: relative; z-index: 1001;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <p style="margin: 0; font-size: 14px; font-weight: 500;">
+                🎯 <strong>ThemeForest Demo</strong> • Professional Ecommerce Template • 
+                <a href="https://github.com/your-username/ecommerce-template-demo" style="color: #FFE066; text-decoration: none; font-weight: 600; margin-left: 10px;">📁 Download Now</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Skip Links for Accessibility -->
+    <nav class="skip-links" aria-label="Skip navigation">
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+        <a href="#navigation" class="skip-link">Skip to navigation</a>
+        <a href="#contact" class="skip-link">Skip to contact</a>
+    </nav>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="#home">
+                        <img src="./assets/images/logo.svg" alt="Your Store" class="logo-img">
+                        <span class="logo-text">YourStore</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Menu -->
+                <nav class="nav" id="navigation" role="navigation" aria-label="Main navigation">
+                    <ul class="nav-list">
+                        <li><a href="#home" class="nav-link">Home</a></li>
+                        <li><a href="products.html" class="nav-link">Products</a></li>
+                        <li><a href="services.html" class="nav-link">Services</a></li>
+                        <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <a href="cart.html" class="btn btn-outline cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Mobile menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main id="main-content" role="main">
+    <section id="home" class="hero" aria-labelledby="hero-title">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 id="hero-title" class="hero-title">
+                    Discover products of <span class="highlight">exceptional quality</span>
+                </h1>
+                <p class="hero-description">
+                    We offer a curated selection of products and services that will transform your experience. 
+                    Guaranteed quality and personalized attention.
+                </p>
+                <div class="hero-actions">
+                    <a href="products.html" class="btn btn-primary btn-large">
+                        <i class="fas fa-shopping-cart"></i>
+                        View Products
+                    </a>
+                    <a href="services.html" class="btn btn-secondary btn-large">
+                        <i class="fas fa-info-circle"></i>
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Products</h2>
+                <p class="section-description">
+                    Discover our carefully curated selection of products designed to meet your needs
+                </p>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Product Card 1 -->
+                <div class="product-card" data-aos="fade-up">
+                    <div class="product-image">
+                        <img src="./assets/images/product1.jpg" alt="Premium Product 1">
+                        <div class="product-overlay">
+                            <button class="btn btn-white btn-small">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Premium Product 1</h3>
+                        <p class="product-description">Detailed product description highlighting its main benefits and features.</p>
+                        <div class="product-price">
+                            <span class="price-current">$99.99</span>
+                            <span class="price-original">$129.99</span>
+                        </div>
+                        <button class="btn btn-primary btn-full">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product Card 2 -->
+                <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-image">
+                        <img src="./assets/images/product2.jpg" alt="Premium Product 2">
+                        <div class="product-badge">New</div>
+                        <div class="product-overlay">
+                            <button class="btn btn-white btn-small">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Premium Product 2</h3>
+                        <p class="product-description">Innovative design that combines functionality and style for a unique experience.</p>
+                        <div class="product-price">
+                            <span class="price-current">$149.99</span>
+                        </div>
+                        <button class="btn btn-primary btn-full">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product Card 3 -->
+                <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-image">
+                        <img src="./assets/images/product3.jpg" alt="Premium Product 3">
+                        <div class="product-badge sale">-30%</div>
+                        <div class="product-overlay">
+                            <button class="btn btn-white btn-small">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Premium Product 3</h3>
+                        <p class="product-description">Complete solution integrating advanced technology with intuitive design.</p>
+                        <div class="product-price">
+                            <span class="price-current">$89.99</span>
+                            <span class="price-original">$129.99</span>
+                        </div>
+                        <button class="btn btn-primary btn-full">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-footer">
+                <a href="products.html" class="btn btn-outline">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-description">
+                    Professional services designed to drive your success
+                </p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-right">
+                    <div class="service-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="service-title">Strategic Consulting</h3>
+                    <p class="service-description">
+                        Deep analysis of your business to identify growth and optimization opportunities.
+                    </p>
+                    <a href="#contact" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card" data-aos="fade-up">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="service-title">Technical Implementation</h3>
+                    <p class="service-description">
+                        Development and implementation of custom solutions tailored to your specific needs.
+                    </p>
+                    <a href="#contact" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card" data-aos="fade-left">
+                    <div class="service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="service-title">Ongoing Support</h3>
+                    <p class="service-description">
+                        Continuous support to ensure optimal performance of your systems.
+                    </p>
+                    <a href="#contact" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What our customers say</h2>
+                <p class="section-description">
+                    Over 1,000 satisfied customers trust us
+                </p>
+            </div>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial-card active" data-aos="fade-up">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "Exceptional quality and customer service. The products exceeded my expectations 
+                            and the after-sales service is impeccable."
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="./assets/images/testimonial1.jpg" alt="Maria González">
+                            <div class="author-info">
+                                <h4>Maria González</h4>
+                                <span>Marketing Director</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "The implementation was fast and efficient. The technical team showed great professionalism 
+                            and knowledge at every stage of the project."
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="./assets/images/testimonial2.jpg" alt="Carlos Ruiz">
+                            <div class="author-info">
+                                <h4>Carlos Ruiz</h4>
+                                <span>CEO Startup Tech</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "Incredible transformation of our business. The results speak for themselves: 
+                            +300% in sales in the first 6 months."
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="./assets/images/testimonial3.jpg" alt="Ana Martin">
+                            <div class="author-info">
+                                <h4>Ana Martin</h4>
+                                <span>Boutique Owner</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonials Navigation -->
+            <div class="testimonials-nav">
+                <button class="testimonial-btn active" data-slide="0"></button>
+                <button class="testimonial-btn" data-slide="1"></button>
+                <button class="testimonial-btn" data-slide="2"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content" data-aos="fade-up">
+                <h2 class="newsletter-title">Stay Updated</h2>
+                <p class="newsletter-description">
+                    Receive the latest news, special offers and exclusive content directly to your email
+                </p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="form-group">
+                        <input type="email" placeholder="Your email" required class="newsletter-input">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Subscribe
+                        </button>
+                    </div>
+                    <p class="newsletter-privacy">
+                        By subscribing, you accept our <a href="#">privacy policy</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info" data-aos="fade-right">
+                    <h2 class="section-title">Contact Us</h2>
+                    <p class="section-description">
+                        We're here to help you. Get in touch with us and we'll respond as soon as possible.
+                    </p>
+                    
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Address</h4>
+                                <p>Example Street, 123<br>28001 Madrid, Spain</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Phone</h4>
+                                <p>+34 123 456 789</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>info@yourstore.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Hours</h4>
+                                <p>Mon - Fri: 9:00 - 18:00<br>Sat: 10:00 - 14:00</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Map Section -->
+                    <div class="contact-map" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Find Us</h3>
+                        <div class="map-container">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.8261!2d-3.7037902!3d40.4167754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42287fd40b67ab%3A0x9f9b931c46b50e62!2sPuerta%20del%20Sol%2C%20Madrid%2C%20Spain!5e0!3m2!1sen!2sus!4v1696348800000!5m2!1sen!2sus"
+                                width="100%" 
+                                height="300" 
+                                style="border:0; border-radius: 8px;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="Our Location - Madrid, Spain">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container" data-aos="fade-left">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="info">General information</option>
+                                <option value="support">Technical support</option>
+                                <option value="sales">Sales inquiry</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Write your message here..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" required>
+                                I accept the <a href="#">privacy policy</a> *
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Footer Brand -->
+                <div class="footer-brand">
+                    <div class="logo">
+                        <img src="./assets/images/logo-white.svg" alt="Your Store" class="logo-img">
+                        <span class="logo-text">YourStore</span>
+                    </div>
+                    <p class="footer-description">
+                        Your trusted partner para Products y Services de alta calidad. 
+                        Comprometidos con la excelencia From 2020.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Footer Links -->
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#consulting">Strategic Consulting</a></li>
+                            <li><a href="#implementation">Technical Implementation</a></li>
+                            <li><a href="#support">Support and Maintenance</a></li>
+                            <li><a href="#">Success Stories</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Products</h4>
+                        <ul>
+                            <li><a href="products.html">All Products</a></li>
+                            <li><a href="products.html?category=electronics">Electronics</a></li>
+                            <li><a href="products.html?category=fashion">Fashion</a></li>
+                            <li><a href="products.html?category=home">Home</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">Frequently Asked Questions</a></li>
+                            <li><a href="#">Help Center</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="index.html#Contact">Contact Form</a></li>
+                            <li><a href="tel:+34123456789">+34 123 456 789</a></li>
+                            <li><a href="mailto:info@yourstore.com">info@yourstore.com</a></li>
+                            <li><a href="#">Live Chat</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <p>&copy; 2025 TuTienda. All rights reserved.</p>
+                    <div class="legal-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Legal Notice</a>
+                    </div>
+                </div>
+                <div class="template-credits">
+                    <p class="template-copyright">
+                        <i class="fas fa-code"></i>
+                        Template designed and developed by <strong>Josep Andreu</strong> &copy; 2025
+                        <br>
+                        <small>Commercial use license included - Do not redistribute without authorization</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "YourStore",
+        "url": "https://yourstore.com",
+        "logo": "https://yourstore.com/assets/images/logo.svg",
+        "description": "Professional ecommerce template with complete shopping functionality",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Example Street, 123",
+            "addressLocality": "Madrid",
+            "postalCode": "28001",
+            "addressCountry": "ES"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+34-123-456-789",
+            "contactType": "Customer Service",
+            "email": "info@yourstore.com"
+        },
+        "sameAs": [
+            "https://facebook.com/yourstore",
+            "https://instagram.com/yourstore",
+            "https://twitter.com/yourstore"
+        ]
+    }
+    </script>
+    
+    <!-- JavaScript -->
+    <script src="./assets/js/analytics.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="./assets/js/image-loader.js"></script>
+    <script src="./assets/js/cart-sync.js"></script>
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>

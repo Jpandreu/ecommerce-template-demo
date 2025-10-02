@@ -1,0 +1,89 @@
+# Professional Ecommerce Template - Robots.txt
+# © 2025 Josep Andreu - SEO Optimized Configuration
+
+# ====================
+# MAIN CRAWLERS
+# ====================
+User-agent: *
+Allow: /
+
+# ====================
+# DISALLOW SENSITIVE FILES
+# ====================
+# Prevent indexing of development files
+Disallow: /*.md$
+Disallow: /package.json
+Disallow: /LICENSE.md
+Disallow: /README.md
+Disallow: /CONFIG.md
+Disallow: /IMAGE-SYSTEM.md
+Disallow: /.htaccess
+Disallow: /start.bat
+Disallow: /start.sh
+
+# Prevent indexing of logs and temp files
+Disallow: /*.log$
+Disallow: /temp/
+Disallow: /tmp/
+
+# ====================
+# EXPLICITLY ALLOW IMPORTANT ASSETS
+# ====================
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/images/
+Allow: /favicon.ico
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+# ====================
+# SITEMAPS
+# ====================
+Sitemap: https://yourstore.com/sitemap.xml
+
+# ====================
+# SPECIFIC BOT CONFIGURATIONS
+# ====================
+
+# Google Bot - Ecommerce optimized
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Bing Bot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+# Facebook Bot (for social sharing)
+User-agent: facebookexternalhit
+Allow: /
+
+# Twitter Bot (for social cards)
+User-agent: Twitterbot
+Allow: /
+
+# ====================
+# BAD BOTS BLOCKING
+# ====================
+# Block known spam/malicious bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+# ====================
+# CRAWL RATE CONTROL
+# ====================
+# Default crawl delay for all bots
+Crawl-delay: 1

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shopping Cart - Review and manage your products">
+    <meta name="keywords" content="cart, shopping, products, checkout">
+    <meta name="author" content="Your Company">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Shopping Cart - Your Online Store">
+    <meta property="og:description" content="Review and manage products in your cart">
+    <meta property="og:image" content="./assets/images/og-image.jpg">
+    <meta property="og:type" content="website">
+    
+    <title>Shopping Cart - Your Online Store</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/cart-page.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="./assets/images/logo.svg" alt="Your Store" class="logo-img">
+                        <span class="logo-text">YourStore</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Menu -->
+                <nav class="nav" id="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="products.html" class="nav-link">Products</a></li>
+                        <li><a href="services.html" class="nav-link">Services</a></li>
+                        <li><a href="index.html#Testimonials" class="nav-link">Testimonials</a></li>
+                        <li><a href="index.html#Contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <a href="cart.html" class="btn btn-outline cart-btn active">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Mobile menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="products.html">Products</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Cart</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Cart Header -->
+    <section class="cart-header">
+        <div class="container">
+            <h1 class="page-title">Your Shopping Cart</h1>
+            <p class="page-description">Review and manage the products you want to purchase before completing your order</p>
+        </div>
+    </section>
+
+    <!-- Cart Content -->
+    <section class="cart-content">
+        <div class="container">
+            <!-- Empty Cart State -->
+            <div class="empty-cart" id="emptyCart" style="display: none;">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>Your Cart is empty</h3>
+                <p>Add some amazing products to your cart and come back here to complete your purchase.</p>
+                <a href="products.html" class="btn btn-primary">
+                    <i class="fas fa-shopping-bag"></i>
+                    Go Shopping
+                </a>
+            </div>
+
+            <!-- Cart Layout -->
+            <div class="cart-layout">
+                <!-- Cart Items -->
+                <div class="cart-items" id="cartItemsList">
+                    <div class="cart-items-header">
+                        <h2>
+                            <i class="fas fa-shopping-cart"></i>
+                            Products in your Cart
+                        </h2>
+                        <button class="btn btn-outline btn-small" id="clearCart">
+                            <i class="fas fa-trash"></i>
+                            Empty Cart
+                        </button>
+                    </div>
+                    <div class="cart-items-list">
+                        <!-- Items will be dynamically loaded here -->
+                    </div>
+                </div>
+
+                    <!-- Cart Summary -->
+                <div class="cart-summary" id="cartSummary">
+                    <h3>Order Summary</h3>
+                    
+                    <div id="summaryContent">
+                        <!-- Summary will be dynamically loaded here -->
+                    </div>
+
+                    <!-- Coupon Section -->
+                    <div class="coupon-section">
+                        <h4>Discount Code</h4>
+                        <form class="coupon-form" id="couponForm">
+                            <input type="text" id="couponCode" class="coupon-input" placeholder="Enter your code">
+                            <button type="submit" class="coupon-btn">Apply</button>
+                        </form>
+                    </div>
+
+                    <!-- Summary Actions -->
+                    <div class="summary-actions">
+                        <button class="btn btn-primary btn-full" id="checkoutBtn">
+                            <i class="fas fa-credit-card"></i>
+                            Proceed to Checkout
+                        </button>
+                        
+                        <button class="btn btn-outline btn-full" id="continueShopping">
+                            <i class="fas fa-arrow-left"></i>
+                            Continue Shopping
+                        </button>
+                    </div>
+
+                    <!-- Trust Indicators -->
+                    <div class="trust-indicators">
+                        <div class="trust-item">
+                            <i class="fas fa-shipping-fast"></i>
+                            Fast shipping 24-48h
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-undo"></i>
+                            Free returns
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-shield-alt"></i>
+                            100% secure shopping
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-headset"></i>
+                            24/7 support
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommended Products -->
+            <div class="recommended-section">
+                <h2 class="section-title">Recommended Products</h2>
+                <p>Other products that might interest you</p>
+                
+                <div class="recommended-products" id="recommendedProducts">
+                    <!-- Recommended products will be loaded here dynamically -->
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content" data-aos="fade-up">
+                <h2 class="newsletter-title">Don't miss our offers</h2>
+                <p class="newsletter-description">
+                    Subscribe and receive exclusive promotions before anyone else
+                </p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="form-group">
+                        <input type="email" placeholder="Your email" required class="newsletter-input">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Subscribe
+                        </button>
+                    </div>
+                    <p class="newsletter-privacy">
+                        By subscribing, you accept our <a href="#">privacy policy</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Footer Brand -->
+                <div class="footer-brand">
+                    <div class="logo">
+                        <img src="./assets/images/logo-white.svg" alt="Your Store" class="logo-img">
+                        <span class="logo-text">YourStore</span>
+                    </div>
+                    <p class="footer-description">
+                        Your trusted partner para Products y Services de alta calidad. 
+                        Comprometidos con la excelencia From 2020.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Footer Links -->
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#consulting">Strategic Consulting</a></li>
+                            <li><a href="#implementation">Technical Implementation</a></li>
+                            <li><a href="#support">Support and Maintenance</a></li>
+                            <li><a href="#">Success Stories</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Products</h4>
+                        <ul>
+                            <li><a href="products.html">All Products</a></li>
+                            <li><a href="products.html?category=electronics">Electronics</a></li>
+                            <li><a href="products.html?category=fashion">Fashion</a></li>
+                            <li><a href="products.html?category=home">Home</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">Frequently Asked Questions</a></li>
+                            <li><a href="#">Help Center</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="index.html#Contact">Contact Form</a></li>
+                            <li><a href="tel:+34123456789">+34 123 456 789</a></li>
+                            <li><a href="mailto:info@yourstore.com">info@yourstore.com</a></li>
+                            <li><a href="#">Live Chat</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <p>&copy; 2025 TuTienda. All rights reserved.</p>
+                    <div class="legal-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Legal Notice</a>
+                    </div>
+                </div>
+                <div class="template-credits">
+                    <p class="template-copyright">
+                        <i class="fas fa-code"></i>
+                        Template designed and developed by <strong>Josep Andreu</strong> &copy; 2025
+                        <br>
+                        <small>Commercial use license included - Do not redistribute without authorization</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="./assets/js/analytics.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="./assets/js/image-loader.js"></script>
+    <script src="./assets/js/cart-sync.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/cart.js"></script>
+</body>
+</html>

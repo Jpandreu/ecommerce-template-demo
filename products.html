@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete product catalog - Find exactly what you need">
+    <meta name="keywords" content="products, catalog, online store, ecommerce, buy">
+    <meta name="author" content="Your Company">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Product Catalog - YourStore">
+    <meta property="og:description" content="Explore our complete catalog with advanced filters and detailed descriptions">
+    <meta property="og:image" content="./assets/images/og-image.jpg">
+    <meta property="og:type" content="website">
+    
+    <title>Product Catalog - YourStore</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/products-page.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="./assets/images/logo.svg" alt="Your Store" class="logo-img">
+                        <span class="logo-text">YourStore</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Menu -->
+                <nav class="nav" id="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="products.html" class="nav-link active">Products</a></li>
+                        <li><a href="services.html" class="nav-link">Services</a></li>
+                        <li><a href="index.html#testimonials" class="nav-link">Testimonials</a></li>
+                        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <a href="cart.html" class="btn btn-outline cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Mobile menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Products</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Products Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1 class="page-title">Our Products</h1>
+                <p class="page-description">
+                    Discover our wide range of carefully selected products to offer you 
+                    the best quality and shopping experience.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Filter and Catalog -->
+    <section class="products-catalog" style="margin-bottom: 80px;">
+        <div class="container">
+            <div class="catalog-layout">
+                <!-- Sidebar Filters -->
+                <aside class="filters-sidebar">
+                    <div class="filters-header">
+                        <h3>Filter Products</h3>
+                        <button class="filters-toggle" id="filtersToggle">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="filters-content" id="filtersContent">
+                        <!-- Categories Filter -->
+                        <div class="filter-group">
+                            <h4 class="filter-title">Categories</h4>
+                            <div class="filter-options">
+                                <label class="filter-option">
+                                    <input type="checkbox" name="category" value="all" checked>
+                                    <span class="checkmark"></span>
+                                    <span class="filter-text">All categories</span>
+                                    <span class="filter-count">(12)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="category" value="electronics">
+                                    <span class="checkmark"></span>
+                                    <span class="filter-text">Electronics</span>
+                                    <span class="filter-count">(4)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="category" value="fashion">
+                                    <span class="checkmark"></span>
+                                    <span class="filter-text">Fashion</span>
+                                    <span class="filter-count">(3)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="category" value="home">
+                                    <span class="checkmark"></span>
+                                    <span class="filter-text">Home</span>
+                                    <span class="filter-count">(3)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="category" value="sports">
+                                    <span class="checkmark"></span>
+                                    <span class="filter-text">Sports</span>
+                                    <span class="filter-count">(2)</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Price Range Filter -->
+                        <div class="filter-group">
+                            <h4 class="filter-title">Price Range</h4>
+                            <div class="price-range">
+                                <div class="price-inputs">
+                                    <input type="number" id="minPrice" placeholder="Min" min="0" value="0">
+                                    <span>-</span>
+                                    <input type="number" id="maxPrice" placeholder="Max" min="0" value="500">
+                                </div>
+                                <div class="price-slider">
+                                    <input type="range" id="priceRange" min="0" max="500" value="500">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Brand Filter -->
+                        <div class="filter-group">
+                            <h4 class="filter-title">Brand</h4>
+                            <div class="filter-options">
+                                <label class="filter-option">
+                                    <input type="checkbox" name="brand" value="premium">
+                                    <span class="checkmark"></span>
+                                    <span class="filter-text">Premium Brand</span>
+                                    <span class="filter-count">(5)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="brand" value="excellence">
+                                    <span class="checkmark"></span>
+                                    <span class="filter-text">Excellence</span>
+                                    <span class="filter-count">(4)</span>
+                                </label>
+                                <label class="filter-option">
+                                    <input type="checkbox" name="brand" value="quality">
+                                    <span class="checkmark"></span>
+                                    <span class="filter-text">Quality Plus</span>
+                                    <span class="filter-count">(3)</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Rating Filter -->
+                        <div class="filter-group">
+                            <h4 class="filter-title">Rating</h4>
+                            <div class="rating-filters">
+                                <label class="rating-option">
+                                    <input type="checkbox" name="rating" value="5">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span>(8)</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="checkbox" name="rating" value="4">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span>& up (10)</span>
+                                </label>
+                                <label class="rating-option">
+                                    <input type="checkbox" name="rating" value="3">
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span>& up (12)</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Clear Filters -->
+                        <div class="filter-actions">
+                            <button class="btn btn-outline btn-full" id="clearFilters">
+                                <i class="fas fa-times"></i>
+                                Clear Filters
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+                
+                <!-- Products Grid Area -->
+                <main class="products-main">
+                    <!-- Toolbar -->
+                    <div class="products-toolbar">
+                        <div class="toolbar-left">
+                            <span class="results-count">Showing <strong>6</strong> of <strong>12</strong> products</span>
+                        </div>
+                        <div class="toolbar-right">
+                            <div class="view-switcher">
+                                <button class="view-btn active" data-view="grid">
+                                    <i class="fas fa-th"></i>
+                                </button>
+                                <button class="view-btn" data-view="list">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                            <select class="sort-select" id="sortSelect">
+                                <option value="default">Sort by</option>
+                                <option value="name-asc">Name A-Z</option>
+                                <option value="name-desc">Name Z-A</option>
+                                <option value="price-asc">Price: Low to High</option>
+                                <option value="price-desc">Price: High to Low</option>
+                                <option value="rating">Best Rated</option>
+                                <option value="newest">Newest</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Products Grid -->
+                    <div class="products-grid" id="productsGrid">
+                        <!-- Product Item 1 -->
+                        <div class="product-item" data-category="electronics" data-price="299" data-brand="premium" data-rating="5">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img data-src="./assets/images/product1.jpg" src="./assets/images/placeholder.jpg" class="lazy" alt="Premium Smartphone">
+                                    <div class="product-badges">
+                                        <span class="badge badge-new">New</span>
+                                    </div>
+                                    <div class="product-overlay">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Electronics</div>
+                                    <h3 class="product-name">
+                                        <a href="product-detail.html?id=1">Smartphone Premium Pro Max</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(24 reviews)</span>
+                                    </div>
+                                    <p class="product-description">
+                                        Latest model with advanced technology, professional camera and long-lasting battery.
+                                    </p>
+                                    <div class="product-price">
+                                        <span class="price-current">$299.99</span>
+                                        <span class="price-original">$399.99</span>
+                                        <span class="price-discount">-25%</span>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary btn-full add-to-cart" data-product-id="1">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Item 2 -->
+                        <div class="product-item" data-category="fashion" data-price="89" data-brand="excellence" data-rating="4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img data-src="./assets/images/product2.jpg" src="./assets/images/placeholder.jpg" class="lazy" alt="Elegant Jacket">
+                                    <div class="product-overlay">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Fashion</div>
+                                    <h3 class="product-name">
+                                        <a href="product-detail.html?id=2">Elegant Jacket Premium</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(18 reviews)</span>
+                                    </div>
+                                    <p class="product-description">
+                                        High-quality jacket with modern design and premium materials for any occasion.
+                                    </p>
+                                    <div class="product-price">
+                                        <span class="price-current">$89.99</span>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary btn-full add-to-cart" data-product-id="2">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Item 3 -->
+                        <div class="product-item" data-category="home" data-price="149" data-brand="quality" data-rating="5">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img data-src="./assets/images/product3.jpg" src="./assets/images/placeholder.jpg" class="lazy" alt="Modern Lamp">
+                                    <div class="product-badges">
+                                        <span class="badge badge-sale">-30%</span>
+                                    </div>
+                                    <div class="product-overlay">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Home</div>
+                                    <h3 class="product-name">
+                                        <a href="product-detail.html?id=3">Modern Design Lamp</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(31 reviews)</span>
+                                    </div>
+                                    <p class="product-description">
+                                        Table lamp with contemporary design and energy-efficient LED technology.
+                                    </p>
+                                    <div class="product-price">
+                                        <span class="price-current">$149.99</span>
+                                        <span class="price-original">$214.99</span>
+                                        <span class="price-discount">-30%</span>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary btn-full add-to-cart" data-product-id="3">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Item 4 -->
+                        <div class="product-item" data-category="electronics" data-price="199" data-brand="premium" data-rating="4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img data-src="./assets/images/product4.jpg" src="./assets/images/placeholder.jpg" class="lazy" alt="Wireless Headphones">
+                                    <div class="product-overlay">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Electronics</div>
+                                    <h3 class="product-name">
+                                        <a href="product-detail.html?id=4">Wireless Pro Headphones</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(42 reviews)</span>
+                                    </div>
+                                    <p class="product-description">
+                                        Headphones with active noise cancellation and superior audio quality for an immersive experience.
+                                    </p>
+                                    <div class="product-price">
+                                        <span class="price-current">$199.99</span>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary btn-full add-to-cart" data-product-id="4">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Item 5 -->
+                        <div class="product-item" data-category="sports" data-price="79" data-brand="excellence" data-rating="5">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img data-src="./assets/images/product5.jpg" src="./assets/images/placeholder.jpg" class="lazy" alt="Sports Shoes">
+                                    <div class="product-badges">
+                                        <span class="badge badge-bestseller">Best Seller</span>
+                                    </div>
+                                    <div class="product-overlay">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Sports</div>
+                                    <h3 class="product-name">
+                                        <a href="product-detail.html?id=5">Pro Running Shoes</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(156 reviews)</span>
+                                    </div>
+                                    <p class="product-description">
+                                        Running shoes with advanced cushioning technology and ergonomic design for maximum performance.
+                                    </p>
+                                    <div class="product-price">
+                                        <span class="price-current">$79.99</span>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary btn-full add-to-cart" data-product-id="5">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Item 6 -->
+                        <div class="product-item" data-category="fashion" data-price="129" data-brand="quality" data-rating="4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img data-src="./assets/images/product6.jpg" src="./assets/images/placeholder.jpg" class="lazy" alt="Elegant Watch">
+                                    <div class="product-overlay">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Fashion</div>
+                                    <h3 class="product-name">
+                                        <a href="product-detail.html?id=6">Premium Classic Watch</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(73 reviews)</span>
+                                    </div>
+                                    <p class="product-description">
+                                        Classic wristwatch with Swiss precision mechanism. Timeless elegance for any occasion.
+                                    </p>
+                                    <div class="product-price">
+                                        <span class="price-current">$129.99</span>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary btn-full add-to-cart" data-product-id="6">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Item 7 -->
+                        <div class="product-item" data-category="home" data-price="89" data-brand="quality" data-rating="5" style="display: none;">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img data-src="./assets/images/product7.jpg" src="./assets/images/placeholder.jpg" class="lazy" alt="Decorative Cushion">
+                                    <div class="product-overlay">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Home</div>
+                                    <h3 class="product-name">
+                                        <a href="product-detail.html?id=7">Luxury Decorative Cushion</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(67 reviews)</span>
+                                    </div>
+                                    <p class="product-description">
+                                        Premium velvet decorative cushion with hypoallergenic filling and exclusive designs for modern home.
+                                    </p>
+                                    <div class="product-price">
+                                        <span class="price-current">$89.99</span>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary btn-full add-to-cart" data-product-id="7">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Item 8 -->
+                        <div class="product-item" data-category="electronics" data-price="449" data-brand="premium" data-rating="5" style="display: none;">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img data-src="./assets/images/product8.jpg" src="./assets/images/placeholder.jpg" class="lazy" alt="Professional Tablet">
+                                    <div class="product-badges">
+                                        <span class="badge badge-new">New</span>
+                                    </div>
+                                    <div class="product-overlay">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Electronics</div>
+                                    <h3 class="product-name">
+                                        <a href="product-detail.html?id=8">Ultra Professional Tablet</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(89 reviews)</span>
+                                    </div>
+                                    <p class="product-description">
+                                        High-performance tablet with 4K display, latest generation processor and professional stylus compatibility.
+                                    </p>
+                                    <div class="product-price">
+                                        <span class="price-current">$449.99</span>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary btn-full add-to-cart" data-product-id="8">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Item 9 -->
+                        <div class="product-item" data-category="fashion" data-price="179" data-brand="excellence" data-rating="4" style="display: none;">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img data-src="./assets/images/product9.jpg" src="./assets/images/placeholder.jpg" class="lazy" alt="Leather Bag">
+                                    <div class="product-overlay">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Fashion</div>
+                                    <h3 class="product-name">
+                                        <a href="product-detail.html?id=9">Handcrafted Leather Bag</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(134 reviews)</span>
+                                    </div>
+                                    <p class="product-description">
+                                        Genuine handmade leather bag with luxury finishes and multiple compartments for perfect organization.
+                                    </p>
+                                    <div class="product-price">
+                                        <span class="price-current">$179.99</span>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary btn-full add-to-cart" data-product-id="9">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Item 10 -->
+                        <div class="product-item" data-category="sports" data-price="159" data-brand="premium" data-rating="5" style="display: none;">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img data-src="./assets/images/product10.jpg" src="./assets/images/placeholder.jpg" class="lazy" alt="Sports Helmet">
+                                    <div class="product-badges">
+                                        <span class="badge badge-bestseller">Best Seller</span>
+                                    </div>
+                                    <div class="product-overlay">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Sports</div>
+                                    <h3 class="product-name">
+                                        <a href="product-detail.html?id=10">ProTech Sports Helmet</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(203 reviews)</span>
+                                    </div>
+                                    <p class="product-description">
+                                        Sports helmet with advanced ventilation technology and multi-impact protection system for maximum safety.
+                                    </p>
+                                    <div class="product-price">
+                                        <span class="price-current">$159.99</span>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary btn-full add-to-cart" data-product-id="10">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Item 11 -->
+                        <div class="product-item" data-category="home" data-price="299" data-brand="quality" data-rating="4" style="display: none;">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img data-src="./assets/images/product11.jpg" src="./assets/images/placeholder.jpg" class="lazy" alt="Robot Vacuum">
+                                    <div class="product-badges">
+                                        <span class="badge badge-sale">-20%</span>
+                                    </div>
+                                    <div class="product-overlay">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Home</div>
+                                    <h3 class="product-name">
+                                        <a href="product-detail.html?id=11">Smart Robot Vacuum</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(98 reviews)</span>
+                                    </div>
+                                    <p class="product-description">
+                                        Robotic vacuum with laser mapping, app control and self-emptying station for total autonomous cleaning.
+                                    </p>
+                                    <div class="product-price">
+                                        <span class="price-current">$299.99</span>
+                                        <span class="price-original">$374.99</span>
+                                        <span class="price-discount">-20%</span>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary btn-full add-to-cart" data-product-id="11">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Item 12 -->
+                        <div class="product-item" data-category="electronics" data-price="89" data-brand="excellence" data-rating="5" style="display: none;">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img data-src="./assets/images/product12.jpg" src="./assets/images/placeholder.jpg" class="lazy" alt="Bluetooth Speaker">
+                                    <div class="product-overlay">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">Electronics</div>
+                                    <h3 class="product-name">
+                                        <a href="product-detail.html?id=12">Portable Bluetooth Speaker</a>
+                                    </h3>
+                                    <div class="product-rating">
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="rating-count">(176 reviews)</span>
+                                    </div>
+                                    <p class="product-description">
+                                        Water-resistant Bluetooth speaker with 360� sound and 24-hour battery for limitless adventures.
+                                    </p>
+                                    <div class="product-price">
+                                        <span class="price-current">$89.99</span>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="btn btn-primary btn-full add-to-cart" data-product-id="12">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="page-btn prev disabled">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn next">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+  
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Footer Brand -->
+                <div class="footer-brand">
+                    <div class="logo">
+                        <img src="./assets/images/logo-white.svg" alt="Your Store" class="logo-img">
+                        <span class="logo-text">YourStore</span>
+                    </div>
+                    <p class="footer-description">
+                        Your trusted partner para Products y Services de alta calidad. 
+                        Comprometidos con la excelencia From 2020.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Footer Links -->
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#consulting">Strategic Consulting</a></li>
+                            <li><a href="#implementation">Technical Implementation</a></li>
+                            <li><a href="#support">Support and Maintenance</a></li>
+                            <li><a href="#">Success Stories</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Products</h4>
+                        <ul>
+                            <li><a href="products.html">All Products</a></li>
+                            <li><a href="products.html?category=electronics">Electronics</a></li>
+                            <li><a href="products.html?category=fashion">Fashion</a></li>
+                            <li><a href="products.html?category=home">Home</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">Frequently Asked Questions</a></li>
+                            <li><a href="#">Help Center</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="index.html#Contact">Contact Form</a></li>
+                            <li><a href="tel:+34123456789">+34 123 456 789</a></li>
+                            <li><a href="mailto:info@yourstore.com">info@yourstore.com</a></li>
+                            <li><a href="#">Live Chat</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <p>&copy; 2025 TuTienda. All rights reserved.</p>
+                    <div class="legal-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Legal Notice</a>
+                    </div>
+                </div>
+                <div class="template-credits">
+                    <p class="template-copyright">
+                        <i class="fas fa-code"></i>
+                        Template designed and developed by <strong>Josep Andreu</strong> &copy; 2025
+                        <br>
+                        <small>Commercial use license included - Do not redistribute without authorization</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Detail Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Product Details</h2>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-content">
+                <div class="modal-layout">
+                    <!-- Product Images -->
+                    <div class="modal-images">
+                        <div class="main-image">
+                            <img id="modalMainImage" src="" alt="Product Image">
+                            <div class="image-badges" id="modalBadges"></div>
+                        </div>
+                        <div class="image-thumbnails">
+                            <div class="thumbnail active">
+                                <img id="modalThumb1" src="" alt="Product Image 1">
+                            </div>
+                            <div class="thumbnail">
+                                <img id="modalThumb2" src="" alt="Product Image 2">
+                            </div>
+                            <div class="thumbnail">
+                                <img id="modalThumb3" src="" alt="Product Image 3">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Info -->
+                    <div class="modal-info">
+                        <div class="product-meta">
+                            <span class="product-category" id="modalCategory">Category</span>
+                            <div class="product-rating">
+                                <div class="stars" id="modalStars"></div>
+                                <span class="rating-count" id="modalRatingCount">(0 reviews)</span>
+                            </div>
+                        </div>
+                        
+                        <h1 class="product-title" id="modalProductTitle">Product Name</h1>
+                        
+                        <div class="product-price-section">
+                            <div class="price-container">
+                                <span class="current-price" id="modalCurrentPrice">$0.00</span>
+                                <span class="original-price" id="modalOriginalPrice">$0.00</span>
+                                <span class="discount-badge" id="modalDiscount">-0%</span>
+                            </div>
+                            <div class="price-info">
+                                <i class="fas fa-shipping-fast"></i>
+                                <span>Free shipping on orders over $50</span>
+                            </div>
+                        </div>
+                        
+                        <div class="product-description">
+                            <h3>Description</h3>
+                            <p id="modalDescription">Product description will be displayed here.</p>
+                        </div>
+                        
+                        <div class="product-features">
+                            <h3>Key Features</h3>
+                            <ul id="modalFeatures">
+                                <li>Feature 1</li>
+                                <li>Feature 2</li>
+                                <li>Feature 3</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="product-specifications">
+                            <h3>Specifications</h3>
+                            <div class="spec-grid" id="modalSpecs">
+                                <div class="spec-item">
+                                    <span class="spec-label">Brand:</span>
+                                    <span class="spec-value" id="modalBrand">Brand Name</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Model:</span>
+                                    <span class="spec-value" id="modalModel">Model Name</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Warranty:</span>
+                                    <span class="spec-value" id="modalWarranty">1 Year</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="product-options">
+                            <div class="option-group">
+                                <label>Color:</label>
+                                <div class="color-options" id="modalColors">
+                                    <div class="color-option active" data-color="black" style="background-color: #000;"></div>
+                                    <div class="color-option" data-color="white" style="background-color: #fff;"></div>
+                                    <div class="color-option" data-color="blue" style="background-color: #007bff;"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <label for="modalSize">Size:</label>
+                                <select id="modalSize" class="size-select">
+                                    <option value="s">Small</option>
+                                    <option value="m" selected>Medium</option>
+                                    <option value="l">Large</option>
+                                    <option value="xl">X-Large</option>
+                                </select>
+                            </div>
+                            
+                            <div class="option-group">
+                                <label for="modalQuantity">Quantity:</label>
+                                <div class="quantity-selector">
+                                    <button type="button" class="quantity-btn minus" id="quantityMinus">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" id="modalQuantity" value="1" min="1" max="10">
+                                    <button type="button" class="quantity-btn plus" id="quantityPlus">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="modal-actions">
+                            <button class="btn btn-primary btn-large add-to-cart-modal" id="addToCartModal">
+                                <i class="fas fa-shopping-cart"></i>
+                                Add to Cart
+                            </button>
+                            <button class="btn btn-secondary btn-large buy-now-modal" id="buyNowModal">
+                                <i class="fas fa-bolt"></i>
+                                Buy Now
+                            </button>
+                        </div>
+                        
+                        <div class="product-guarantees">
+                            <div class="guarantee-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>2-Year Warranty</span>
+                            </div>
+                            <div class="guarantee-item">
+                                <i class="fas fa-undo"></i>
+                                <span>30-Day Return</span>
+                            </div>
+                            <div class="guarantee-item">
+                                <i class="fas fa-truck"></i>
+                                <span>Free Shipping</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Volver arriba">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Schema.org Product Catalog -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Product Catalog - YourStore",
+        "description": "Complete catalog of premium products with advanced filtering",
+        "numberOfItems": 12,
+        "itemListElement": [
+            {
+                "@type": "Product",
+                "name": "Smartphone Premium Pro Max",
+                "image": "https://yourstore.com/assets/images/product1.jpg",
+                "description": "Latest model with advanced technology and professional camera",
+                "brand": {
+                    "@type": "Brand",
+                    "name": "Premium Brand"
+                },
+                "offers": {
+                    "@type": "Offer",
+                    "price": "299.99",
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock"
+                },
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "5",
+                    "reviewCount": "24"
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <!-- JavaScript -->
+    <script src="./assets/js/analytics.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="./assets/js/image-loader.js"></script>
+    <script src="./assets/js/cart-sync.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/products.js"></script>
+</body>
+</html>
+
+

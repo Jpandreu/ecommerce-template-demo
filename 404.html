@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Page not found - YourStore">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <title>404 - Page Not Found | YourStore</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+    
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+        
+        .error-content {
+            max-width: 600px;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .error-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .error-description {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-404 {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: white;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .btn-404:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            color: var(--primary-dark);
+        }
+        
+        .btn-outline-404 {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-outline-404:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+        
+        .error-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 5rem;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-404 {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error-page">
+        <div class="error-content">
+            <div class="error-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="error-code">404</div>
+            <h1 class="error-title">Page Not Found</h1>
+            <p class="error-description">
+                Sorry, the page you are looking for doesn't exist. It might have been moved, deleted, or you entered the wrong URL.
+            </p>
+            <div class="error-actions">
+                <a href="index.html" class="btn-404">
+                    <i class="fas fa-home"></i>
+                    Go to Homepage
+                </a>
+                <a href="products.html" class="btn-404 btn-outline-404">
+                    <i class="fas fa-shopping-bag"></i>
+                    Browse Products
+                </a>
+                <a href="javascript:history.back()" class="btn-404 btn-outline-404">
+                    <i class="fas fa-arrow-left"></i>
+                    Go Back
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for search functionality -->
+    <script>
+        // Auto-redirect common typos
+        const currentPath = window.location.pathname.toLowerCase();
+        const redirectMap = {
+            '/product.html': '/products.html',
+            '/service.html': '/services.html',
+            '/shop.html': '/products.html',
+            '/store.html': '/products.html',
+            '/basket.html': '/cart.html',
+            '/shopping-cart.html': '/cart.html'
+        };
+        
+        if (redirectMap[currentPath]) {
+            window.location.href = redirectMap[currentPath];
+        }
+        
+        // Track 404 errors (integrate with your analytics)
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'exception', {
+                'description': '404 - Page Not Found: ' + window.location.pathname,
+                'fatal': false
+            });
+        }
+    </script>
+</body>
+</html>

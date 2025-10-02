@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Specialized professional services - Consulting, implementation and technical support">
+    <meta name="keywords" content="professional services, consulting, implementation, technical support">
+    <meta name="author" content="Your Company">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Professional Services - YourStore">
+    <meta property="og:description" content="Discover our specialized services with success stories and customized proposals">
+    <meta property="og:image" content="./assets/images/og-image.jpg">
+    <meta property="og:type" content="website">
+    
+    <title>Professional Services - YourStore</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/services-page.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="./assets/images/logo.svg" alt="Your Store" class="logo-img">
+                        <span class="logo-text">YourStore</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Menu -->
+                <nav class="nav" id="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="products.html" class="nav-link">Products</a></li>
+                        <li><a href="services.html" class="nav-link active">Services</a></li>
+                        <li><a href="index.html#Testimonials" class="nav-link">Testimonials</a></li>
+                        <li><a href="index.html#Contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <a href="cart.html" class="btn btn-outline cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Mobile menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Services</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Services Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <h1 class="page-title">Our Professional Services</h1>
+                <p class="page-description">
+                    Specialized and customized solutions to drive your business growth 
+                    with proven methodologies and guaranteed results.
+                </p>
+                <div class="page-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Completed Projects</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Client Satisfaction</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="services-overview">
+        <div class="container">
+            <div class="services-grid">
+                <!-- Service 1: Consulting -->
+                <div class="service-detailed-card" id="consulting" data-aos="fade-up">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="service-meta">
+                            <h2 class="service-title">Strategic Consulting</h2>
+                            <p class="service-subtitle">We transform your vision into reality</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <div class="service-description">
+                            <p>
+                                Comprehensive analysis of your business to identify growth opportunities, 
+                                optimize processes and develop strategies that position you ahead of the competition.
+                            </p>
+                        </div>
+                        
+                        <div class="service-features">
+                            <h4>What's included?</h4>
+                            <ul class="features-list">
+                                <li><i class="fas fa-check"></i> Complete audit of current processes</li>
+                                <li><i class="fas fa-check"></i> Market and competition analysis</li>
+                                <li><i class="fas fa-check"></i> Personalized growth strategy</li>
+                                <li><i class="fas fa-check"></i> Detailed implementation plan</li>
+                                <li><i class="fas fa-check"></i> Tracking and performance metrics</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-process">
+                            <h4>Our Process</h4>
+                            <div class="process-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <h5>Initial Analysis</h5>
+                                        <p>Complete evaluation of your current situation</p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <h5>Strategy</h5>
+                                        <p>Development of personalized strategic plan</p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <h5>Implementation</h5>
+                                        <p>Gradual execution with continuous monitoring</p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <h5>Optimization</h5>
+                                        <p>Adjustments and improvements based on results</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-case-study">
+                            <h4>Success Story</h4>
+                            <div class="case-study">
+                                <div class="case-study-content">
+                                    <h5>Tech Startup - 300% Scale Up</h5>
+                                    <p>
+                                        We helped a technology startup scale their operations in 6 months, 
+                                        increasing their revenue by 300% and optimizing their internal processes.
+                                    </p>
+                                    <div class="case-results">
+                                        <div class="result">
+                                            <strong>+300%</strong>
+                                            <span>Revenue</span>
+                                        </div>
+                                        <div class="result">
+                                            <strong>-50%</strong>
+                                            <span>Operating Costs</span>
+                                        </div>
+                                        <div class="result">
+                                            <strong>6</strong>
+                                            <span>Months</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-pricing">
+                            <div class="pricing-info">
+                                <h4>Investment</h4>
+                                <div class="price-structure">
+                                    <div class="price-option">
+                                        <h5>Basic Consulting</h5>
+                                        <div class="price">$2,500</div>
+                                        <p>Initial analysis and recommendations</p>
+                                    </div>
+                                    <div class="price-option featured">
+                                        <h5>Complete Consulting</h5>
+                                        <div class="price">$5,000</div>
+                                        <p>Analysis + Strategy + Action plan</p>
+                                    </div>
+                                    <div class="price-option">
+                                        <h5>Accompaniment</h5>
+                                        <div class="price">$8,500</div>
+                                        <p>Complete consulting + 3 months follow-up</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-actions">
+                            <button class="btn btn-primary btn-large" onclick="openServiceForm('consulting')">
+                                <i class="fas fa-calendar"></i>
+                                Request Free Consultation
+                            </button>
+                            <a href="#implementation" class="btn btn-outline btn-large">
+                                <i class="fas fa-arrow-down"></i>
+                                View Implementation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 2: Implementation -->
+                <div class="service-detailed-card" id="implementation" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="service-meta">
+                            <h2 class="service-title">Technical Implementation</h2>
+                            <p class="service-subtitle">We turn ideas into real solutions</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <div class="service-description">
+                            <p>
+                                Development and implementation of personalized technological solutions, 
+                                from web systems to mobile applications and e-commerce platforms.
+                            </p>
+                        </div>
+                        
+                        <div class="service-technologies">
+                            <h4>Technologies We Master</h4>
+                            <div class="tech-stack">
+                                <div class="tech-category">
+                                    <h5>Frontend</h5>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">React</span>
+                                        <span class="tech-tag">Vue.js</span>
+                                        <span class="tech-tag">Angular</span>
+                                        <span class="tech-tag">HTML5/CSS3</span>
+                                    </div>
+                                </div>
+                                <div class="tech-category">
+                                    <h5>Backend</h5>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">Node.js</span>
+                                        <span class="tech-tag">Python</span>
+                                        <span class="tech-tag">PHP</span>
+                                        <span class="tech-tag">.NET</span>
+                                    </div>
+                                </div>
+                                <div class="tech-category">
+                                    <h5>Databases</h5>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">MongoDB</span>
+                                        <span class="tech-tag">PostgreSQL</span>
+                                        <span class="tech-tag">MySQL</span>
+                                        <span class="tech-tag">Redis</span>
+                                    </div>
+                                </div>
+                                <div class="tech-category">
+                                    <h5>Cloud & DevOps</h5>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">AWS</span>
+                                        <span class="tech-tag">Google Cloud</span>
+                                        <span class="tech-tag">Docker</span>
+                                        <span class="tech-tag">Kubernetes</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-projects">
+                            <h4>Project Types</h4>
+                            <div class="project-types">
+                                <div class="project-type">
+                                    <i class="fas fa-store"></i>
+                                    <h5>E-commerce</h5>
+                                    <p>Complete online stores with inventory management and payments</p>
+                                </div>
+                                <div class="project-type">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <h5>Mobile Apps</h5>
+                                    <p>Native and hybrid applications for iOS and Android</p>
+                                </div>
+                                <div class="project-type">
+                                    <i class="fas fa-globe"></i>
+                                    <h5>Websites</h5>
+                                    <p>Corporate pages, blogs and content portals</p>
+                                </div>
+                                <div class="project-type">
+                                    <i class="fas fa-chart-line"></i>
+                                    <h5>CRM Systems</h5>
+                                    <p>Customer and sales management platforms</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-timeline">
+                            <h4>Estimated Timelines</h4>
+                            <div class="timeline-items">
+                                <div class="timeline-item">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-store"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h5>E-commerce Completo</h5>
+                                        <span class="timeline-duration">6-12 weeks</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h5>Mobile Application</h5>
+                                        <span class="timeline-duration">8-16 weeks</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-globe"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h5>Corporate Website</h5>
+                                        <span class="timeline-duration">3-6 weeks</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-pricing">
+                            <div class="pricing-info">
+                                <h4>Investment per Project</h4>
+                                <div class="price-structure">
+                                    <div class="price-option">
+                                        <h5>Website</h5>
+                                        <div class="price">From $3,000</div>
+                                        <p>Landing page or corporate website</p>
+                                    </div>
+                                    <div class="price-option">
+                                        <h5>E-commerce</h5>
+                                        <div class="price">From $8,000</div>
+                                        <p>Complete online store</p>
+                                    </div>
+                                    <div class="price-option">
+                                        <h5>Mobile App</h5>
+                                        <div class="price">From $12,000</div>
+                                        <p>Cross-platform native application</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-actions">
+                            <button class="btn btn-primary btn-large" onclick="openServiceForm('implementation')">
+                                <i class="fas fa-rocket"></i>
+                                Start Project
+                            </button>
+                            <a href="#support" class="btn btn-outline btn-large">
+                                <i class="fas fa-arrow-down"></i>
+                                View Support
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 3: Support -->
+                <div class="service-detailed-card" id="support" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="service-meta">
+                            <h2 class="service-title">Support and Maintenance</h2>
+                            <p class="service-subtitle">Your peace of mind is our priority</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <div class="service-description">
+                            <p>
+                                24/7 technical support services, preventive maintenance and continuous updates 
+                                to ensure optimal performance of your systems.
+                            </p>
+                        </div>
+                        
+                        <div class="support-levels">
+                            <h4>Support Levels</h4>
+                            <div class="support-tiers">
+                                <div class="support-tier">
+                                    <div class="tier-header">
+                                        <h5>Basic</h5>
+                                        <div class="tier-price">$299/month</div>
+                                    </div>
+                                    <ul class="tier-features">
+                                        <li><i class="fas fa-check"></i> Email support</li>
+                                        <li><i class="fas fa-check"></i> Response time: 24h</li>
+                                        <li><i class="fas fa-check"></i> Security updates</li>
+                                        <li><i class="fas fa-check"></i> Weekly backup</li>
+                                        <li><i class="fas fa-check"></i> Monthly report</li>
+                                    </ul>
+                                    <button class="btn btn-outline btn-full" onclick="openServiceForm('support-basic')">
+                                        Choose Basic
+                                    </button>
+                                </div>
+                                
+                                <div class="support-tier featured">
+                                    <div class="tier-badge">Most Popular</div>
+                                    <div class="tier-header">
+                                        <h5>Professional</h5>
+                                        <div class="tier-price">$599/month</div>
+                                    </div>
+                                    <ul class="tier-features">
+                                        <li><i class="fas fa-check"></i> 24/7 priority support</li>
+                                        <li><i class="fas fa-check"></i> Response time: 4h</li>
+                                        <li><i class="fas fa-check"></i> All updates</li>
+                                        <li><i class="fas fa-check"></i> Daily backup</li>
+                                        <li><i class="fas fa-check"></i> Real-time monitoring</li>
+                                        <li><i class="fas fa-check"></i> 2h monthly development</li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-full" onclick="openServiceForm('support-pro')">
+                                        Choose Professional
+                                    </button>
+                                </div>
+                                
+                                <div class="support-tier">
+                                    <div class="tier-header">
+                                        <h5>Enterprise</h5>
+                                        <div class="tier-price">$1,199/month</div>
+                                    </div>
+                                    <ul class="tier-features">
+                                        <li><i class="fas fa-check"></i> 24/7 dedicated support</li>
+                                        <li><i class="fas fa-check"></i> Response time: 1h</li>
+                                        <li><i class="fas fa-check"></i> Personal account manager</li>
+                                        <li><i class="fas fa-check"></i> Real-time backup</li>
+                                        <li><i class="fas fa-check"></i> Guaranteed SLA 99.9%</li>
+                                        <li><i class="fas fa-check"></i> 8h monthly development</li>
+                                    </ul>
+                                    <button class="btn btn-outline btn-full" onclick="openServiceForm('support-enterprise')">
+                                        Choose Enterprise
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="support-metrics">
+                            <h4>Our Numbers</h4>
+                            <div class="metrics-grid">
+                                <div class="metric">
+                                    <div class="metric-number">99.9%</div>
+                                    <div class="metric-label">Guaranteed Uptime</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-number">< 2min</div>
+                                    <div class="metric-label">Average Response Time</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-number">24/7</div>
+                                    <div class="metric-label">Availability</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-number">50+</div>
+                                    <div class="metric-label">Active Clients</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-actions">
+                            <button class="btn btn-primary btn-large" onclick="openServiceForm('support')">
+                                <i class="fas fa-shield-alt"></i>
+                                Hire Support
+                            </button>
+                            <a href="index.html#Contact" class="btn btn-outline btn-large">
+                                <i class="fas fa-comments"></i>
+                                Talk to Expert
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Request Modal -->
+    <div class="modal-overlay" id="serviceModal">
+        <div class="modal service-modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Request Service</h3>
+                <button class="modal-close" id="closeServiceModal" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="service-form" id="serviceForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="clientName">Full Name *</label>
+                            <input type="text" id="clientName" name="clientName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clientEmail">Email *</label>
+                            <input type="email" id="clientEmail" name="clientEmail" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="clientPhone">Phone</label>
+                            <input type="tel" id="clientPhone" name="clientPhone">
+                        </div>
+                        <div class="form-group">
+                            <label for="clientCompany">Company</label>
+                            <input type="text" id="clientCompany" name="clientCompany">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="serviceType">Service of Interest *</label>
+                        <select id="serviceType" name="serviceType" required>
+                            <option value="">Select a service</option>
+                            <option value="consulting">Strategic Consulting</option>
+                            <option value="implementation">Technical Implementation</option>
+                            <option value="support-basic">Basic Support</option>
+                            <option value="support-pro">Professional Support</option>
+                            <option value="support-enterprise">Enterprise Support</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectBudget">Estimated Budget</label>
+                        <select id="projectBudget" name="projectBudget">
+                            <option value="">Select a range</option>
+                            <option value="under-5k">Less than $5,000</option>
+                            <option value="5k-10k">$5,000 - $10,000</option>
+                            <option value="10k-25k">$10,000 - $25,000</option>
+                            <option value="25k-50k">$25,000 - $50,000</option>
+                            <option value="over-50k">More than $50,000</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectDescription">Describe your Project *</label>
+                        <textarea id="projectDescription" name="projectDescription" rows="4" required 
+                                  placeholder="Tell us about your project, objectives, deadlines and any relevant details..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectTimeline">Desired Timeline</label>
+                        <select id="projectTimeline" name="projectTimeline">
+                            <option value="">Select timeline</option>
+                            <option value="asap">As soon as possible</option>
+                            <option value="1-month">In 1 month</option>
+                            <option value="2-3-months">In 2-3 months</option>
+                            <option value="6-months">In 6 months</option>
+                            <option value="Flexible">Flexible</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" required>
+                            <span class="checkmark"></span>
+                            I accept the <a href="#">privacy policy</a> and the processing of my data *
+                        </label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="newsletter">
+                            <span class="checkmark"></span>
+                            I want to receive information about new services and promotions
+                        </label>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Request
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Footer Brand -->
+                <div class="footer-brand">
+                    <div class="logo">
+                        <img src="./assets/images/logo-white.svg" alt="Your Store" class="logo-img">
+                        <span class="logo-text">YourStore</span>
+                    </div>
+                    <p class="footer-description">
+                        Your trusted partner for high-quality products and services. 
+                        Committed to excellence since 2020.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Footer Links -->
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#consulting">Strategic Consulting</a></li>
+                            <li><a href="#implementation">Technical Implementation</a></li>
+                            <li><a href="#support">Support and Maintenance</a></li>
+                            <li><a href="#">Success Stories</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Products</h4>
+                        <ul>
+                            <li><a href="products.html">All Products</a></li>
+                            <li><a href="products.html?category=electronics">Electronics</a></li>
+                            <li><a href="products.html?category=fashion">Fashion</a></li>
+                            <li><a href="products.html?category=home">Home</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">Frequently Asked Questions</a></li>
+                            <li><a href="#">Help Center</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="index.html#Contact">Contact Form</a></li>
+                            <li><a href="tel:+34123456789">+34 123 456 789</a></li>
+                            <li><a href="mailto:info@yourstore.com">info@yourstore.com</a></li>
+                            <li><a href="#">Live Chat</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <p>&copy; 2025 TuTienda. All rights reserved.</p>
+                    <div class="legal-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Legal Notice</a>
+                    </div>
+                </div>
+                <div class="template-credits">
+                    <p class="template-copyright">
+                        <i class="fas fa-code"></i>
+                        Template designed and developed by <strong>Josep Andreu</strong> &copy; 2025
+                        <br>
+                        <small>Commercial use license included - Do not redistribute without authorization</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="./assets/js/analytics.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="./assets/js/image-loader.js"></script>
+    <script src="./assets/js/cart-sync.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/services.js"></script>
+</body>
+</html>

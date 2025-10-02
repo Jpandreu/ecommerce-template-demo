@@ -1,0 +1,122 @@
+{
+  "name": "professional-ecommerce-template",
+  "version": "2.0.0",
+  "description": "Modern and professional ecommerce template with PayPal integration, complete cart system, and advanced features",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "live-server --port=3000",
+    "build": "echo 'Run production optimizations'",
+    "test": "echo 'Run accessibility and performance tests'",
+    "deploy": "echo 'Prepare for deployment'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/professional-ecommerce-template"
+  },
+  "keywords": [
+    "ecommerce",
+    "template",
+    "paypal",
+    "shopping-cart",
+    "responsive",
+    "html5",
+    "css3",
+    "javascript",
+    "seo",
+    "professional",
+    "modern",
+    "mobile-first",
+    "payment-integration",
+    "checkout",
+    "analytics",
+    "english",
+    "usd-currency",
+    "marketplace-ready"
+  ],
+  "author": "Josep Andreu",
+  "license": "Commercial",
+  "devDependencies": {
+    "notes": "Estas son dependencias opcionales para desarrollo avanzado",
+    "live-server": "^1.2.2",
+    "html-minifier": "^4.0.0", 
+    "clean-css-cli": "^5.6.2",
+    "uglify-js": "^3.17.4",
+    "imagemin-cli": "^7.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "config": {
+    "port": 8000,
+    "colors": {
+      "primary": "#2563eb",
+      "secondary": "#64748b", 
+      "accent": "#f59e0b"
+    },
+    "features": {
+      "responsive": true,
+      "seo": true,
+      "accessibility": true,
+      "performance": true,
+      "animations": true,
+      "forms": true,
+      "newsletter": true,
+      "testimonials": true,
+      "products": true,
+      "services": true
+    }
+  },
+  "optimization": {
+    "images": {
+      "format": "WebP preferred, JPG/PNG fallback",
+      "compression": "85% quality",
+      "lazy_loading": true
+    },
+    "css": {
+      "minify": true,
+      "autoprefixer": true,
+      "critical_css": true
+    },
+    "javascript": {
+      "minify": true,
+      "module_bundling": false,
+      "tree_shaking": false
+    },
+    "html": {
+      "minify": true,
+      "semantic": true,
+      "accessibility": true
+    }
+  },
+  "seo": {
+    "meta_tags": "Incluidos y optimizados",
+    "open_graph": "Configurado para redes sociales",
+    "twitter_cards": "Ready para implementar",
+    "schema_markup": "Estructura semántica HTML5",
+    "sitemap": "Generar manualmente",
+    "robots": "Configure according to needs"
+  },
+  "deployment": {
+    "static_hosting": "Compatible con Netlify, Vercel, GitHub Pages",
+    "cdn": "Recommended for static assets",
+    "ssl": "HTTPS requerido para funcionalidades completas",
+    "domain": "Personalizable"
+  },
+  "analytics": {
+    "google_analytics": "Listo para configurar",
+    "facebook_pixel": "Espacio reservado",
+    "hotjar": "Compatible",
+    "custom_events": "Implementados en JavaScript"
+  },
+  "integrations": {
+    "email_marketing": "Formulario newsletter listo",
+    "crm": "Formulario contacto preparado",
+    "payment_gateways": "Estructura base incluida",
+    "chat_widgets": "Compatible",
+    "social_media": "Enlaces configurables"
+  }
+}

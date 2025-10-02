@@ -1,0 +1,15 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="ogGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#ogGrad)"/>
+    <rect x="100" y="200" width="1000" height="230" rx="20" fill="rgba(255,255,255,0.1)"/>
+    <text x="600" y="280" text-anchor="middle" font-family="Inter, sans-serif" font-size="48" font-weight="700" fill="white">TuTienda - Ecommerce Profesional</text>
+    <text x="600" y="320" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="400" fill="rgba(255,255,255,0.9)">Plantilla moderna y profesional</text>
+    <text x="600" y="360" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="400" fill="rgba(255,255,255,0.9)">para ecommerce y servicios</text>
+    <circle cx="200" cy="150" r="40" fill="rgba(255,255,255,0.2)"/>
+    <circle cx="1000" cy="500" r="60" fill="rgba(255,255,255,0.15)"/>
+</svg>
