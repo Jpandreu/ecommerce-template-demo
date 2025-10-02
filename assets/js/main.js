@@ -80,6 +80,10 @@ function initializeApp() {
     initForms();
     initProductCards();
     initScrollIndicator();
+    initAddToCartButtons(); // Initialize add to cart functionality
+    
+    // Debug Safari mobile if needed
+    debugSafariMobile();
     
     console.log('Ecommerce Template initialized successfully');
 }
@@ -233,6 +237,34 @@ function closeMobileMenu() {
     }
     
     console.log('Menú móvil cerrado completamente');
+}
+
+// Safari mobile debugging helper
+function debugSafariMobile() {
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        console.log('🍎 Safari Mobile Detection:');
+        console.log('- User Agent:', navigator.userAgent);
+        console.log('- Window size:', window.innerWidth + 'x' + window.innerHeight);
+        console.log('- Screen size:', screen.width + 'x' + screen.height);
+        console.log('- Device pixel ratio:', window.devicePixelRatio);
+        
+        // Test button functionality
+        const testButtons = () => {
+            const buttons = document.querySelectorAll('.btn');
+            console.log(`- Found ${buttons.length} buttons`);
+            
+            const addToCartButtons = document.querySelectorAll('.btn.btn-primary.btn-full');
+            console.log(`- Found ${addToCartButtons.length} add to cart buttons`);
+            
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            console.log('- Mobile menu button:', mobileMenuBtn ? 'Found' : 'NOT FOUND');
+            
+            const nav = document.getElementById('nav');
+            console.log('- Navigation element:', nav ? 'Found' : 'NOT FOUND');
+        };
+        
+        setTimeout(testButtons, 1000);
+    }
 }
 
 /* ==========================================================================
@@ -1017,12 +1049,104 @@ window.addToCart = function(productId, quantity = 1) {
     }
 };
 
+/* ==========================================================================
+   Add to Cart Buttons Initialization
+   ========================================================================== */
+function initAddToCartButtons() {
+    console.log('Initializing Add to Cart buttons...');
+    
+    // Wait for cart manager to be available
+    const waitForCartManager = () => {
+        if (typeof window.cartManager !== 'undefined') {
+            console.log('Cart manager found, setting up buttons');
+            setupCartButtons();
+        } else {
+            console.log('Waiting for cart manager...');
+            setTimeout(waitForCartManager, 100);
+        }
+    };
+    
+    const setupCartButtons = () => {
+        // Find all Add to Cart buttons in index.html
+        const addToCartButtons = document.querySelectorAll('.btn.btn-primary.btn-full');
+        
+        console.log(`Found ${addToCartButtons.length} add to cart buttons`);
+        
+        addToCartButtons.forEach((button, index) => {
+            if (button.textContent.includes('Add to Cart') || button.textContent.includes('Añadir al carrito')) {
+                
+                // Remove any existing listeners
+                button.replaceWith(button.cloneNode(true));
+                const newButton = document.querySelectorAll('.btn.btn-primary.btn-full')[index];
+                
+                // Add click handler for Safari mobile compatibility
+                const handleAddToCart = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    console.log('Add to cart clicked - button', index + 1);
+                    
+                    // Static products for homepage (matching the displayed products)
+                    const products = [
+                        { id: 'premium-1', name: 'Premium Product 1', price: 99.99 },
+                        { id: 'premium-2', name: 'Premium Product 2', price: 149.99 },
+                        { id: 'premium-3', name: 'Premium Product 3', price: 89.99 }
+                    ];
+                    
+                    const product = products[index];
+                    if (product && window.cartManager) {
+                        window.cartManager.addToCart(product.id);
+                        console.log(`Added ${product.name} to cart`);
+                    } else {
+                        console.error('Product or cart manager not found');
+                    }
+                };
+                
+                // Add both click and touch events for maximum compatibility
+                newButton.addEventListener('click', handleAddToCart);
+                newButton.addEventListener('touchstart', handleAddToCart, { passive: false });
+                
+                console.log(`Set up cart button ${index + 1}`);
+            }
+        });
+        
+        // Also setup Quick View buttons
+        const quickViewButtons = document.querySelectorAll('.btn.btn-white.btn-small');
+        quickViewButtons.forEach((button, index) => {
+            if (button.textContent.includes('Quick View')) {
+                const handleQuickView = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    console.log('Quick view clicked - button', index + 1);
+                    
+                    // Show product modal (if cart.js is loaded)
+                    if (window.cartManager && typeof window.cartManager.showProductModal === 'function') {
+                        const productIds = ['premium-1', 'premium-2', 'premium-3'];
+                        window.cartManager.showProductModal(productIds[index]);
+                    } else {
+                        console.warn('Product modal not available');
+                    }
+                };
+                
+                button.addEventListener('click', handleQuickView);
+                button.addEventListener('touchstart', handleQuickView, { passive: false });
+                
+                console.log(`Set up quick view button ${index + 1}`);
+            }
+        });
+    };
+    
+    waitForCartManager();
+}
+
 // Exportar funciones para uso externo si es necesario
 window.PlantillaEcommerce = {
     trackEvent,
     updateMetaTags,
     showSuccessMessage,
     closeMobileMenu,
+    initAddToCartButtons,
     addToCart: window.addToCart
 };
 

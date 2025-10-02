@@ -112,19 +112,51 @@
         -webkit-tap-highlight-color: transparent !important;
     }
     
-    /* Fix button interactions */
+    /* Fix button interactions - CRITICAL for Safari mobile */
     .btn {
         -webkit-tap-highlight-color: transparent;
         -webkit-touch-callout: none;
         cursor: pointer;
         touch-action: manipulation;
+        min-width: 44px !important;
+        min-height: 44px !important;
+        position: relative;
+        z-index: 1;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
     }
-    
+
     .btn:active {
         transform: scale(0.98);
+        -webkit-transform: scale(0.98);
     }
     
-    /* Fix form elements */
+    /* Fix for add to cart buttons specifically */
+    .btn.btn-primary {
+        pointer-events: auto !important;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    /* Ensure product cards are touchable */
+    .product-card {
+        pointer-events: auto !important;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    
+    /* Fix modal and overlay interactions */
+    .modal, .product-overlay {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        pointer-events: auto !important;
+    }
+    
+    .product-overlay .btn {
+        z-index: 10 !important;
+    }    /* Fix form elements */
     input, select, textarea {
         -webkit-appearance: none;
         appearance: none;
@@ -148,6 +180,46 @@
     /* Prevent rubber band scrolling */
     body {
         overscroll-behavior-y: none;
+    }
+}
+
+/* Critical hero fixes for mobile */
+@media screen and (max-width: 768px) {
+    .hero {
+        min-height: 100vh !important;
+        min-height: calc(var(--vh, 1vh) * 100) !important;
+        padding-top: 80px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    .hero-content {
+        padding: 2rem 1rem !important;
+        width: 100% !important;
+        max-width: 90% !important;
+        text-align: center !important;
+    }
+    
+    .hero-title {
+        font-size: 2rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    .hero-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+        align-items: center !important;
+        width: 100% !important;
+    }
+    
+    .hero-actions .btn {
+        width: 100% !important;
+        max-width: 280px !important;
+        padding: 1rem 2rem !important;
+        font-size: 1rem !important;
     }
 }
 

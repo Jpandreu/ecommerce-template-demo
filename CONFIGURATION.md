@@ -4,6 +4,28 @@ This file contains all the settings you need to customize for your ecommerce sto
 
 ## 📍 Required Configurations
 
+### 0. Cross-Browser Compatibility (Already Configured)
+The template includes comprehensive cross-browser support files that work automatically:
+
+**CSS Files (Already included):**
+- `assets/css/styles.css` - Base styles
+- `assets/css/cross-browser.css` - Universal browser compatibility
+- `assets/css/safari-mobile-fixes.css` - Safari mobile optimizations
+
+**JavaScript Files (Already included):**
+- `assets/js/main.js` - Core functionality with mobile fixes
+- `assets/js/polyfills.js` - Cross-browser JavaScript support
+
+**Supported Browsers:**
+- ✅ Chrome 60+ (Full support)
+- ✅ Firefox 60+ (Full support)  
+- ✅ Safari 12+ (Full support with mobile optimizations)
+- ✅ Opera 50+ (Full support)
+- ✅ Microsoft Edge 79+ (Full support)
+- ✅ iOS Safari (Specially optimized)
+
+**No additional configuration needed** - These files work automatically!
+
 ### 1. PayPal Settings
 **File:** `checkout.html` (line ~497)
 
