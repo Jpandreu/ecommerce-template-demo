@@ -43,11 +43,11 @@
 
 <body>
     <!-- Demo Banner -->
-    <div id="demo-banner" class="demo-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; padding: 12px 0; position: fixed; top: 0; left: 0; right: 0; z-index: 1001; transition: transform 0.3s ease-in-out;">
-        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-            <p style="margin: 0; font-size: 14px; font-weight: 500;">
-                🎯 <strong>ThemeForest Demo</strong> • Professional Ecommerce Template • 
-                <a href="https://github.com/your-username/ecommerce-template-demo" style="color: #FFE066; text-decoration: none; font-weight: 600; margin-left: 10px;">📁 Download Now</a>
+    <div id="demo-banner" class="demo-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; padding: 8px 0; position: fixed; top: 0; left: 0; right: 0; z-index: 999; transition: transform 0.3s ease-in-out;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 15px;">
+            <p style="margin: 0; font-size: 12px; font-weight: 500;">
+                🎯 <strong>ThemeForest Demo</strong> • Professional Template • 
+                <a href="https://github.com/your-username/ecommerce-template-demo" style="color: #FFE066; text-decoration: none; font-weight: 600; margin-left: 8px;">📁 Download</a>
             </p>
         </div>
     </div>
@@ -60,7 +60,7 @@
     </nav>
     
     <!-- Header -->
-        <header class="header" id="header" style="margin-top: 48px; transition: margin-top 0.3s ease-in-out;">
+        <header class="header" id="header" style="margin-top: 40px; transition: margin-top 0.3s ease-in-out; position: relative; z-index: 1000;">
         <div class="container">
             <div class="header-content">
                 <!-- Logo -->
@@ -647,7 +647,11 @@
         let lastScrollTop = 0;
         const demoBanner = document.getElementById('demo-banner');
         const header = document.getElementById('header');
-        const bannerHeight = 48; // Height of the banner
+        
+        // Calculate banner height dynamically
+        function getBannerHeight() {
+            return demoBanner ? demoBanner.offsetHeight : 40;
+        }
         
         function hideBanner() {
             demoBanner.style.transform = 'translateY(-100%)';
@@ -656,16 +660,19 @@
         
         function showBanner() {
             demoBanner.style.transform = 'translateY(0)';
-            header.style.marginTop = bannerHeight + 'px';
+            header.style.marginTop = getBannerHeight() + 'px';
         }
+        
+        // Set initial margin
+        header.style.marginTop = getBannerHeight() + 'px';
         
         window.addEventListener('scroll', function() {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
-            // Hide banner when scrolling down more than 50px
-            if (scrollTop > 50) {
+            // Hide banner when scrolling down more than 30px
+            if (scrollTop > 30) {
                 hideBanner();
-            } else if (scrollTop <= 10) {
+            } else if (scrollTop <= 5) {
                 showBanner();
             }
             
@@ -677,6 +684,13 @@
             link.addEventListener('click', function() {
                 setTimeout(hideBanner, 100);
             });
+        });
+        
+        // Recalculate on resize
+        window.addEventListener('resize', function() {
+            if (demoBanner.style.transform !== 'translateY(-100%)') {
+                header.style.marginTop = getBannerHeight() + 'px';
+            }
         });
     })();
     </script>
