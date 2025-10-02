@@ -304,16 +304,19 @@ body {
 }
 
 .checkmark {
-    width: 24px;
-    height: 24px;
-    border: 2.5px solid var(--border-color);
-    border-radius: 8px;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
     background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
     position: relative;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     flex-shrink: 0;
     margin-top: 0.125rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .checkmark:hover {
@@ -325,14 +328,14 @@ body {
 .checkmark::after {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    width: 7px;
-    height: 11px;
-    border: 2px solid white;
-    border-top: none;
-    border-left: none;
+    display: block;
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg) scale(0);
     transform-origin: center;
     transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
@@ -345,22 +348,22 @@ body {
 }
 
 .checkbox-label input[type="checkbox"]:checked + .checkmark::after {
-    transform: translate(-50%, -60%) rotate(45deg) scale(1);
+    transform: rotate(45deg) scale(1);
     animation: checkIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 /* Animation for checkbox check */
 @keyframes checkIn {
     0% {
-        transform: translate(-50%, -60%) rotate(45deg) scale(0);
+        transform: rotate(45deg) scale(0);
         opacity: 0;
     }
     50% {
-        transform: translate(-50%, -60%) rotate(45deg) scale(1.2);
+        transform: rotate(45deg) scale(1.2);
         opacity: 1;
     }
     100% {
-        transform: translate(-50%, -60%) rotate(45deg) scale(1);
+        transform: rotate(45deg) scale(1);
         opacity: 1;
     }
 }
@@ -1033,35 +1036,7 @@ body {
     text-decoration: none;
 }
 
-/* Enhanced checkbox hover and active states */
-.checkmark {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.checkmark:hover {
-    transform: scale(1.05);
-}
-
-/* Enhanced animations */
-@keyframes checkIn {
-    0% {
-        transform: translate(-50%, -60%) rotate(45deg) scale(0);
-        opacity: 0;
-    }
-    50% {
-        transform: translate(-50%, -60%) rotate(45deg) scale(1.2);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(-50%, -60%) rotate(45deg) scale(1);
-        opacity: 1;
-    }
-}
-
-.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
-    animation: checkIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
+/* Enhanced checkbox states already defined above */
 
 /* Responsive improvements for mobile */
 @media (max-width: 768px) {
