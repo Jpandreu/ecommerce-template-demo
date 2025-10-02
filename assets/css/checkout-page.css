@@ -833,6 +833,35 @@ body {
         right: -1rem;
         width: 0.5rem;
     }
+    
+    /* Mobile checkout button improvements */
+    .payment-method-item {
+        min-height: 60px;
+        padding: 1rem;
+        touch-action: manipulation;
+    }
+    
+    .payment-method-item input[type="radio"] {
+        min-width: 20px;
+        min-height: 20px;
+    }
+    
+    #placeOrderBtn {
+        min-height: 52px;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        font-weight: 700;
+        width: 100%;
+        touch-action: manipulation;
+    }
+    
+    .form-actions .btn {
+        min-height: 48px;
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
 }
 
 @media (max-width: 480px) {

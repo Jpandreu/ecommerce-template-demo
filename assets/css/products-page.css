@@ -665,8 +665,14 @@ body {
 .add-to-cart {
     position: relative;
     overflow: hidden;
-    padding: 0.5rem 1rem; /* Botón más compacto */
-    font-size: 0.8rem; /* Texto ligeramente más pequeño */
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    min-height: 44px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .add-to-cart.loading::before {
@@ -728,6 +734,25 @@ body {
     .products-grid.list-view .product-image {
         width: 100%;
         height: 200px;
+    }
+    
+    /* Mobile-specific button improvements */
+    .add-to-cart {
+        min-height: 48px;
+        padding: 0.875rem 1rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        touch-action: manipulation; /* Prevents zoom on double-tap */
+    }
+    
+    .product-actions {
+        margin-top: 0.5rem;
+    }
+    
+    /* Larger touch targets for filter buttons */
+    .filter-btn, .view-toggle-btn {
+        min-height: 44px;
+        padding: 0.75rem 1rem;
     }
 }
 
