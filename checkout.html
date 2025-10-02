@@ -497,9 +497,55 @@
     </button>
 
     <!-- PayPal SDK - SANDBOX MODE for testing -->
-    <!-- Replace with your production client ID for live payments -->
-    <!-- Get your client ID from: https://developer.paypal.com/ -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AZ9iJD_rQThbLgbXhsW0XDx1sJbAKjiL6wf8C5YGV0vcF7K2hXniErnzw3MQaw8zuEw4Jh7_5q6E7Tmu&currency=USD&disable-funding=credit,card"></script>
+    <!-- Using PayPal's sandbox client ID for demo purposes -->
+    <!-- Get your own client ID from: https://developer.paypal.com/ -->
+    <script 
+        src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD&disable-funding=credit,card"
+        onload="console.log('✅ PayPal SDK loaded successfully'); window.paypalReady = true;"
+        onerror="console.error('❌ Failed to load PayPal SDK'); window.paypalFailed = true;">
+    </script>
+    
+    <!-- PayPal SDK Loading Handler -->
+    <script>
+        // Wait for PayPal SDK or handle failure
+        let paypalCheckAttempts = 0;
+        const maxAttempts = 10;
+        
+        function checkPayPalStatus() {
+            paypalCheckAttempts++;
+            
+            if (window.paypalReady || typeof paypal !== 'undefined') {
+                console.log('✅ PayPal SDK confirmed loaded after', paypalCheckAttempts, 'attempts');
+                return;
+            }
+            
+            if (window.paypalFailed || paypalCheckAttempts >= maxAttempts) {
+                console.warn('⚠️ PayPal SDK failed to load after', paypalCheckAttempts, 'attempts');
+                
+                // Show fallback message
+                setTimeout(() => {
+                    const container = document.getElementById('paypal-button-container');
+                    if (container) {
+                        container.innerHTML = `
+                            <div style="padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; text-align: center; color: #856404; font-weight: 500;">
+                                ⚠️ PayPal is temporarily unavailable<br>
+                                <small>Please use the "Bank Transfer" option to complete your purchase</small>
+                            </div>
+                        `;
+                    }
+                }, 1000);
+                return;
+            }
+            
+            // Retry in 500ms
+            setTimeout(checkPayPalStatus, 500);
+        }
+        
+        // Start checking after page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(checkPayPalStatus, 1000);
+        });
+    </script>
 
     <!-- JavaScript -->
     <script src="./assets/js/analytics.js"></script>

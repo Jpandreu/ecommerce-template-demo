@@ -786,13 +786,31 @@ class CheckoutManager {
 
     // Initialize PayPal integration
     initializePayPal() {
-        console.log('Initializing PayPal...');
+        console.log('🔄 Initializing PayPal...');
         
-        // Check if PayPal SDK is loaded
+        // Check if PayPal SDK is loaded with more detailed logging
         if (typeof paypal === 'undefined') {
-            console.error('PayPal SDK not loaded');
+            console.error('❌ PayPal SDK not loaded - retrying in 2 seconds...');
+            
+            // Show user-friendly message
+            const paypalContainer = document.getElementById('paypal-button-container');
+            if (paypalContainer) {
+                paypalContainer.innerHTML = `
+                    <div style="padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; text-align: center; color: #856404;">
+                        ⚠️ Loading PayPal... Please wait or try refreshing the page.
+                        <br><small>If this persists, you can complete your purchase via bank transfer.</small>
+                    </div>
+                `;
+            }
+            
+            // Retry after 2 seconds
+            setTimeout(() => {
+                this.initializePayPal();
+            }, 2000);
             return;
         }
+
+        console.log('✅ PayPal SDK loaded, setting up handlers...');
 
         // Setup payment method change handlers
         this.setupPaymentMethodHandlers();
@@ -857,17 +875,27 @@ class CheckoutManager {
         
         console.log('🔧 Setting up PayPal buttons...');
         
-        // Double check that PayPal is available
+        // Triple check that PayPal is available
         if (typeof paypal === 'undefined') {
-            console.error('❌ PayPal SDK not loaded');
+            console.error('❌ PayPal SDK still not loaded in setupPayPalButtons');
+            const paypalContainer = document.getElementById('paypal-button-container');
+            if (paypalContainer) {
+                paypalContainer.innerHTML = `
+                    <div style="padding: 15px; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 5px; text-align: center; color: #721c24;">
+                        ❌ PayPal is temporarily unavailable. Please use Bank Transfer option or refresh the page.
+                    </div>
+                `;
+            }
             return;
         }
         
-        // Double check that all required fields are filled
+        // Check that all required fields are filled
         if (!this.areRequiredFieldsFilled()) {
-            console.error('❌ Cannot setup PayPal buttons - required fields not filled');
+            console.log('⚠️ Required fields not filled yet - PayPal button will show when complete');
             return;
         }
+        
+        console.log('✅ All conditions met, creating PayPal button...');
         
         paypal.Buttons({
             style: {
