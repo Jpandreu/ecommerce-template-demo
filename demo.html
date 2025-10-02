@@ -154,8 +154,8 @@
         const THEMEFOREST_CONFIG = {
             // Cuando tu template sea aprobado, actualiza esta URL
             itemUrl: 'https://themeforest.net/item/professional-ecommerce-template/YOUR_ITEM_ID',
-            // Tu perfil de autor en ThemeForest
-            authorUrl: 'https://themeforest.net/user/YOUR_USERNAME',
+            // Tu perfil de autor en GitHub (por ahora)
+            authorUrl: 'https://github.com/Jpandreu',
             // Email de contacto temporal
             contactEmail: 'tu-email@gmail.com',
             // Estado: 'pending' (pendiente) o 'approved' (aprobado)
@@ -173,11 +173,8 @@
         }
 
         function redirectToProfile() {
-            if (THEMEFOREST_CONFIG.status === 'approved') {
-                window.open(THEMEFOREST_CONFIG.authorUrl, '_blank');
-            } else {
-                showContactModal();
-            }
+            // Siempre redirigir al perfil de GitHub
+            window.open(THEMEFOREST_CONFIG.authorUrl, '_blank');
         }
 
         function showPurchaseModal() {
@@ -231,16 +228,24 @@
             modal.innerHTML = `
                 <div style="background: white; padding: 40px; border-radius: 15px; max-width: 500px; text-align: center; color: #333;">
                     <div style="font-size: 3rem; margin-bottom: 20px;">👨‍💻</div>
-                    <h2 style="margin-bottom: 15px;">Sobre el Autor</h2>
+                    <h2 style="margin-bottom: 15px;">Perfil del Desarrollador</h2>
                     <p style="margin-bottom: 25px; line-height: 1.6;">
                         Desarrollador especializado en templates de ecommerce profesionales.
-                        Enfoque en UX/UX, performance y conversiones.
+                        Enfoque en UX/UI, performance y conversiones.
                     </p>
                     <div style="margin-bottom: 25px;">
                         <strong>🎯 Especialidades:</strong><br>
                         <span style="color: #666;">E-commerce • PayPal • Responsive Design • SEO</span>
                     </div>
+                    <div style="margin-bottom: 25px;">
+                        <strong>🔗 GitHub:</strong><br>
+                        <span style="color: #666;">github.com/Jpandreu</span>
+                    </div>
                     <div>
+                        <button onclick="window.open('${THEMEFOREST_CONFIG.authorUrl}', '_blank')" 
+                                style="background: #333; color: white; border: none; padding: 12px 25px; border-radius: 25px; margin: 5px; cursor: pointer; font-weight: 600;">
+                            🐙 Ver GitHub
+                        </button>
                         <button onclick="window.open('mailto:${THEMEFOREST_CONFIG.contactEmail}?subject=Consulta sobre templates&body=Hola, me gustaría conocer más sobre tus templates y servicios.')" 
                                 style="background: #28a745; color: white; border: none; padding: 12px 25px; border-radius: 25px; margin: 5px; cursor: pointer; font-weight: 600;">
                             📧 Contactar
