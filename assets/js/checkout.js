@@ -501,9 +501,28 @@ class CheckoutManager {
         if (!form) return false;
 
         let isFormValid = true;
-        const requiredFields = form.querySelectorAll('input[required], select[required]');
 
-        requiredFields.forEach(field => {
+        // Always validate required shipping fields for ALL payment methods
+        const shippingFields = ['firstName', 'lastName', 'email', 'address', 'city', 'postalCode'];
+        shippingFields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                const isFieldValid = this.validateField(field);
+                if (!isFieldValid) {
+                    isFormValid = false;
+                }
+            }
+        });
+
+        // If shipping fields are not valid, show specific message
+        if (!this.areRequiredFieldsFilled()) {
+            isFormValid = false;
+            this.showMessage('Please complete all required shipping information before proceeding with payment', 'error');
+        }
+
+        // Validate other required fields
+        const otherRequiredFields = form.querySelectorAll('input[required]:not(#firstName):not(#lastName):not(#email):not(#address):not(#city):not(#postalCode), select[required]');
+        otherRequiredFields.forEach(field => {
             const isFieldValid = this.validateField(field);
             if (!isFieldValid) {
                 isFormValid = false;
@@ -705,6 +724,10 @@ class CheckoutManager {
 
         console.log('🔄 Payment method handler called - method:', selectedMethod);
 
+        // Check if required fields are filled for ANY payment method
+        const fieldsValid = this.areRequiredFieldsFilled();
+        console.log('📋 Required fields validation result:', fieldsValid);
+
         // Hide all payment options first
         if (creditCardBtn) creditCardBtn.style.display = 'none';
         if (paypalContainer) paypalContainer.style.display = 'none';
@@ -718,10 +741,19 @@ class CheckoutManager {
                 const cardFields = cardDetails.querySelectorAll('input');
                 cardFields.forEach(field => field.setAttribute('required', ''));
                 
-                // Show credit card button
+                // Show credit card button only if shipping fields are filled
                 if (creditCardBtn) {
-                    creditCardBtn.style.display = 'block';
-                    if (instructions) instructions.style.display = 'none';
+                    if (!fieldsValid) {
+                        // Show message that shipping info is required
+                        creditCardBtn.style.display = 'none';
+                        if (instructions) {
+                            instructions.innerHTML = '<div style="padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; text-align: center; color: #856404; font-weight: 500;">⚠️ Please complete all required shipping information above to continue with card payment.</div>';
+                            instructions.style.display = 'block';
+                        }
+                    } else {
+                        creditCardBtn.style.display = 'block';
+                        if (instructions) instructions.style.display = 'none';
+                    }
                 }
             } else {
                 cardDetails.style.display = 'none';
@@ -760,8 +792,20 @@ class CheckoutManager {
         // Show credit card button for bank transfer (as fallback)
         if (selectedMethod === 'transfer') {
             if (creditCardBtn) {
-                creditCardBtn.style.display = 'block';
-                if (instructions) instructions.style.display = 'none';
+                if (!fieldsValid) {
+                    // Show message that shipping info is required for bank transfer too
+                    creditCardBtn.style.display = 'none';
+                    if (instructions) {
+                        instructions.innerHTML = '<div style="padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; text-align: center; color: #856404; font-weight: 500;">⚠️ Please complete all required shipping information above to continue with bank transfer.</div>';
+                        instructions.style.display = 'block';
+                    }
+                } else {
+                    creditCardBtn.style.display = 'block';
+                    if (instructions) {
+                        instructions.innerHTML = '<div style="padding: 15px; background: #d1ecf1; border: 1px solid #bee5eb; border-radius: 5px; text-align: center; color: #0c5460; font-weight: 500;"><strong>💳 Bank Transfer Instructions:</strong><br>Transfer the total amount to our bank account. Order will be processed once payment is confirmed.</div>';
+                        instructions.style.display = 'block';
+                    }
+                }
             }
         }
     }
@@ -880,16 +924,27 @@ class CheckoutManager {
                 if (paypalContainer) paypalContainer.style.display = 'none';
                 if (instructions) instructions.style.display = 'block';
 
+                // Check if required fields are filled for all methods
+                const fieldsValid = self.areRequiredFieldsFilled();
+
                 // Show selected payment option
                 if (selectedMethod === 'card') {
                     if (creditCardBtn) {
-                        creditCardBtn.style.display = 'block';
-                        if (instructions) instructions.style.display = 'none';
+                        if (!fieldsValid) {
+                            creditCardBtn.style.display = 'none';
+                            if (instructions) {
+                                instructions.innerHTML = '<div style="padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; text-align: center; color: #856404; font-weight: 500;">⚠️ Please complete all required shipping information above to continue with card payment.</div>';
+                                instructions.style.display = 'block';
+                            }
+                        } else {
+                            creditCardBtn.style.display = 'block';
+                            if (instructions) instructions.style.display = 'none';
+                        }
                     }
                 } else if (selectedMethod === 'paypal') {
                     if (paypalContainer) {
-                        if (!self.areRequiredFieldsFilled()) {
-                            paypalContainer.innerHTML = '<div style="padding: 15px; background: #f0f0f0; border-radius: 5px; text-align: center; color: #666;">Please complete all required shipping information above to enable PayPal payment.</div>';
+                        if (!fieldsValid) {
+                            paypalContainer.innerHTML = '<div style="padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; text-align: center; color: #856404; font-weight: 500;">⚠️ Please complete all required shipping information above to enable PayPal payment.</div>';
                             paypalContainer.style.display = 'block';
                         } else {
                             paypalContainer.style.display = 'block';
@@ -902,8 +957,19 @@ class CheckoutManager {
                     }
                 } else if (selectedMethod === 'transfer') {
                     if (creditCardBtn) {
-                        creditCardBtn.style.display = 'block';
-                        if (instructions) instructions.style.display = 'none';
+                        if (!fieldsValid) {
+                            creditCardBtn.style.display = 'none';
+                            if (instructions) {
+                                instructions.innerHTML = '<div style="padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; text-align: center; color: #856404; font-weight: 500;">⚠️ Please complete all required shipping information above to continue with bank transfer.</div>';
+                                instructions.style.display = 'block';
+                            }
+                        } else {
+                            creditCardBtn.style.display = 'block';
+                            if (instructions) {
+                                instructions.innerHTML = '<div style="padding: 15px; background: #d1ecf1; border: 1px solid #bee5eb; border-radius: 5px; text-align: center; color: #0c5460; font-weight: 500;"><strong>💳 Bank Transfer Instructions:</strong><br>Transfer the total amount to our bank account. Order will be processed once payment is confirmed.</div>';
+                                instructions.style.display = 'block';
+                            }
+                        }
                     }
                 }
             });
