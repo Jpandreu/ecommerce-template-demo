@@ -1170,3 +1170,5 @@ window.debugPayPal = function() {
 if (typeof window !== 'undefined') {
     window.CheckoutManager = CheckoutManager;
 }
+
+// Force GitHub Pages update - PayPal fix deployed
