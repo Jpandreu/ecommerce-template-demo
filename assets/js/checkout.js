@@ -54,7 +54,7 @@ class CheckoutManager {
                     if (!hasPayPalButton && !hasMessage) {
                         console.log('🔍 Auto-check: PayPal selected but no button found - triggering update');
                         this.handlePaymentMethodChange();
-                    } else if (hasMessage && this.areRequiredFieldsFilled()) {
+                    } else if (hasMessage && this.checkRequiredFields()) {
                         console.log('🔍 Auto-check: Fields now complete - triggering PayPal setup');
                         this.handlePaymentMethodChange();
                     }
@@ -515,7 +515,7 @@ class CheckoutManager {
         });
 
         // If shipping fields are not valid, show specific message
-        if (!this.areRequiredFieldsFilled()) {
+        if (!this.checkRequiredFields()) {
             isFormValid = false;
             this.showMessage('Please complete all required shipping information before proceeding with payment', 'error');
         }
@@ -725,7 +725,7 @@ class CheckoutManager {
         console.log('🔄 Payment method handler called - method:', selectedMethod);
 
         // Check if required fields are filled for ANY payment method
-        const fieldsValid = this.areRequiredFieldsFilled();
+        const fieldsValid = this.checkRequiredFields();
         console.log('📋 Required fields validation result:', fieldsValid);
 
         // Hide all payment options first
@@ -767,7 +767,7 @@ class CheckoutManager {
         if (selectedMethod === 'paypal') {
             if (paypalContainer) {
                 console.log('🔍 Checking PayPal conditions...');
-                const fieldsValid = this.areRequiredFieldsFilled();
+                const fieldsValid = this.checkRequiredFields();
                 
                 if (!fieldsValid) {
                     console.log('❌ Required fields not filled, showing message');
@@ -925,7 +925,7 @@ class CheckoutManager {
                 if (instructions) instructions.style.display = 'block';
 
                 // Check if required fields are filled for all methods
-                const fieldsValid = self.areRequiredFieldsFilled();
+                const fieldsValid = self.checkRequiredFields();
 
                 // Show selected payment option
                 if (selectedMethod === 'card') {
@@ -997,7 +997,7 @@ class CheckoutManager {
         }
         
         // Check that all required fields are filled
-        if (!this.areRequiredFieldsFilled()) {
+        if (!this.checkRequiredFields()) {
             console.log('⚠️ Required fields not filled yet - PayPal button will show when complete');
             return;
         }
@@ -1161,6 +1161,24 @@ class CheckoutManager {
         
         console.log(`=== RESULT: All required fields filled: ${result} ===`);
         return result;
+    }
+
+    // Safe wrapper for areRequiredFieldsFilled that works in any context
+    checkRequiredFields() {
+        try {
+            if (typeof this.areRequiredFieldsFilled === 'function') {
+                return this.areRequiredFieldsFilled();
+            }
+            // Fallback implementation
+            const requiredFields = ['firstName', 'lastName', 'email', 'address', 'city', 'postalCode'];
+            return requiredFields.every(fieldName => {
+                const field = document.getElementById(fieldName);
+                return field && field.value && field.value.trim() !== '';
+            });
+        } catch (error) {
+            console.error('Error checking required fields:', error);
+            return false;
+        }
     }
 
     // Handle successful PayPal payment
