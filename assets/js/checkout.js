@@ -34,34 +34,74 @@ class CheckoutManager {
             this.initializePayPal();
         }, 500);
         
+        // Set up automatic PayPal checking every 2 seconds when PayPal is selected
+        this.setupAutoPayPalCheck();
+        
         console.log('CheckoutManager initialized successfully');
+    }
+
+    // Setup automatic PayPal checking
+    setupAutoPayPalCheck() {
+        setInterval(() => {
+            const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value;
+            if (selectedMethod === 'paypal') {
+                const paypalContainer = document.getElementById('paypal-button-container');
+                if (paypalContainer && paypalContainer.style.display !== 'none') {
+                    // Check if PayPal button exists or if we need to create it
+                    const hasPayPalButton = paypalContainer.querySelector('.paypal-buttons') !== null;
+                    const hasMessage = paypalContainer.innerHTML.includes('Please complete') || paypalContainer.innerHTML.includes('Loading PayPal');
+                    
+                    if (!hasPayPalButton && !hasMessage) {
+                        console.log('🔍 Auto-check: PayPal selected but no button found - triggering update');
+                        this.handlePaymentMethodChange();
+                    } else if (hasMessage && this.areRequiredFieldsFilled()) {
+                        console.log('🔍 Auto-check: Fields now complete - triggering PayPal setup');
+                        this.handlePaymentMethodChange();
+                    }
+                    
+                    // Run auto-debug to catch and fix issues
+                    if (window.autoDebugPayPal) {
+                        window.autoDebugPayPal();
+                    }
+                }
+            }
+        }, 3000); // Increased to 3 seconds to avoid too frequent checks
     }
 
     // Setup real-time validation for PayPal
     setupRealTimeValidation() {
         const requiredFields = ['firstName', 'lastName', 'email', 'address', 'city', 'postalCode'];
         
-        console.log('Setting up real-time validation for PayPal...');
+        console.log('🔧 Setting up real-time validation for PayPal...');
         
         requiredFields.forEach(fieldId => {
             const field = document.getElementById(fieldId);
             if (field) {
                 console.log(`✅ Adding listeners to field: ${fieldId}`);
                 
-                // Add listeners for real-time validation
+                // Add listeners for real-time validation with immediate update
                 const updatePayPal = () => {
-                    console.log(`🔄 Field ${fieldId} changed, updating PayPal...`);
-                    setTimeout(() => {
-                        this.handlePaymentMethodChange();
-                    }, 100);
+                    console.log(`🔄 Field ${fieldId} changed, updating PayPal immediately...`);
+                    // Call immediately without timeout
+                    this.handlePaymentMethodChange();
                 };
                 
                 field.addEventListener('input', updatePayPal);
                 field.addEventListener('blur', updatePayPal);
                 field.addEventListener('change', updatePayPal);
+                field.addEventListener('keyup', updatePayPal); // Add keyup for immediate response
             } else {
                 console.warn(`❌ Required field ${fieldId} not found in form`);
             }
+        });
+        
+        // Also add listeners to payment method radio buttons
+        const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
+        paymentMethods.forEach(method => {
+            method.addEventListener('change', () => {
+                console.log('💳 Payment method changed, updating immediately...');
+                this.handlePaymentMethodChange();
+            });
         });
     }
 
@@ -663,7 +703,7 @@ class CheckoutManager {
         const paypalContainer = document.getElementById('paypal-button-container');
         const instructions = document.getElementById('paymentInstructions');
 
-        console.log('Payment method changed to:', selectedMethod);
+        console.log('🔄 Payment method handler called - method:', selectedMethod);
 
         // Hide all payment options first
         if (creditCardBtn) creditCardBtn.style.display = 'none';
@@ -1269,21 +1309,28 @@ window.debugPayPalAdvanced = function() {
     // Check form fields
     console.log('\n2. Required Fields Status:');
     const requiredFields = ['firstName', 'lastName', 'email', 'address', 'city', 'postalCode'];
+    let allFilled = true;
     requiredFields.forEach(fieldId => {
         const field = document.getElementById(fieldId);
         if (field) {
             const value = field.value.trim();
-            console.log(`  - ${fieldId}: "${value}" (${value ? '✅ FILLED' : '❌ EMPTY'})`);
+            const filled = value !== '';
+            if (!filled) allFilled = false;
+            console.log(`  - ${fieldId}: "${value}" (${filled ? '✅ FILLED' : '❌ EMPTY'})`);
         } else {
             console.log(`  - ${fieldId}: ❌ FIELD NOT FOUND`);
+            allFilled = false;
         }
     });
     
     // Check payment method
     console.log('\n3. Payment Method:');
+    let paypalSelected = false;
     const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
     paymentMethods.forEach(method => {
-        console.log(`  - ${method.value}: ${method.checked ? '✅ SELECTED' : '⭕ not selected'}`);
+        const selected = method.checked;
+        if (selected && method.value === 'paypal') paypalSelected = true;
+        console.log(`  - ${method.value}: ${selected ? '✅ SELECTED' : '⭕ not selected'}`);
     });
     
     // Check PayPal container
@@ -1316,9 +1363,31 @@ window.debugPayPalAdvanced = function() {
     console.log('\n🔍 DEBUG COMPLETE');
     console.log('==================');
     
-    // Try to force PayPal update
-    if (window.checkoutManager && typeof window.checkoutManager.handlePaymentMethodChange === 'function') {
-        console.log('\n🔄 Forcing PayPal update...');
+    // Auto-fix if conditions are met
+    if (paypalSelected && allFilled && window.checkoutManager) {
+        console.log('\n🔧 AUTO-FIX: All conditions met, forcing PayPal update...');
         window.checkoutManager.handlePaymentMethodChange();
+    } else {
+        console.log('\n⚠️ Cannot auto-fix - missing conditions:');
+        if (!paypalSelected) console.log('  - PayPal not selected');
+        if (!allFilled) console.log('  - Required fields not filled');
+        if (!window.checkoutManager) console.log('  - CheckoutManager not available');
+    }
+};
+
+// Auto-run debug when PayPal issues detected
+window.autoDebugPayPal = function() {
+    const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value;
+    if (selectedMethod === 'paypal') {
+        const container = document.getElementById('paypal-button-container');
+        if (container && container.style.display !== 'none') {
+            const hasButton = container.querySelector('.paypal-buttons') !== null;
+            const hasMessage = container.innerHTML.includes('Please complete');
+            
+            if (!hasButton && !hasMessage && window.checkoutManager?.areRequiredFieldsFilled()) {
+                console.log('🔍 Auto-debug triggered - PayPal issue detected');
+                debugPayPalAdvanced();
+            }
+        }
     }
 };
