@@ -92,75 +92,112 @@ function initializeApp() {
    Mobile Menu
    ========================================================================== */
 function initMobileMenu() {
+    console.log('🍎 Initializing Mobile Menu...');
+    
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const nav = document.getElementById('nav');
     
-    if (!mobileMenuBtn || !nav) return;
+    if (!mobileMenuBtn || !nav) {
+        console.error('❌ Mobile menu elements not found:', {
+            mobileMenuBtn: !!mobileMenuBtn,
+            nav: !!nav
+        });
+        return;
+    }
     
-    mobileMenuBtn.addEventListener('click', function(e) {
+    console.log('✅ Mobile menu elements found');
+    
+    // Remove any existing event listeners
+    const newMobileMenuBtn = mobileMenuBtn.cloneNode(true);
+    mobileMenuBtn.parentNode.replaceChild(newMobileMenuBtn, mobileMenuBtn);
+    
+    const handleMenuToggle = (e) => {
         e.preventDefault();
         e.stopPropagation();
         
         const isOpen = nav.classList.contains('mobile-open');
-        
-        console.log('Mobile menu clicked, isOpen:', isOpen);
+        console.log('🍎 Safari Mobile menu toggle, isOpen:', isOpen);
         
         if (isOpen) {
             closeMobileMenu();
         } else {
             openMobileMenu();
         }
-    });
+    };
     
-    // Add touch event for better Safari mobile support
-    mobileMenuBtn.addEventListener('touchstart', function(e) {
-        e.preventDefault();
-        this.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
-    });
+    // Multiple event handlers for Safari compatibility
+    newMobileMenuBtn.addEventListener('click', handleMenuToggle);
+    newMobileMenuBtn.addEventListener('touchend', handleMenuToggle, { passive: false });
     
-    mobileMenuBtn.addEventListener('touchend', function(e) {
+    // Safari-specific touch feedback
+    newMobileMenuBtn.addEventListener('touchstart', function(e) {
+        console.log('🍎 Touch start on menu button');
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0.05)';
+        this.style.transform = 'scale(0.95)';
+    }, { passive: true });
+    
+    newMobileMenuBtn.addEventListener('touchcancel', function(e) {
         this.style.backgroundColor = '';
-    });
+        this.style.transform = '';
+    }, { passive: true });
     
     // Close menu when clicking on a link
     const navLinks = nav.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', closeMobileMenu);
+        link.addEventListener('touchend', closeMobileMenu, { passive: false });
     });
     
-    // Close menu when clicking outside
+    // Close menu when clicking outside (improved for Safari)
     document.addEventListener('click', function(e) {
-        if (!nav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        if (!nav.contains(e.target) && !newMobileMenuBtn.contains(e.target)) {
             closeMobileMenu();
         }
     });
+    
+    document.addEventListener('touchend', function(e) {
+        if (!nav.contains(e.target) && !newMobileMenuBtn.contains(e.target)) {
+            closeMobileMenu();
+        }
+    }, { passive: false });
+    
+    console.log('✅ Mobile menu initialized successfully');
 }
 
 function openMobileMenu() {
-    console.log('Opening mobile menu...');
+    console.log('🍎 Opening mobile menu...');
     const nav = document.getElementById('nav');
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     
     if (!nav || !mobileMenuBtn) {
-        console.error('Nav elements not found');
+        console.error('❌ Nav elements not found for opening menu');
         return;
     }
     
+    // Add classes
     nav.classList.add('mobile-open');
     mobileMenuBtn.classList.add('active');
     
-    // Safari-specific fixes
-    document.body.style.overflow = 'hidden';
+    // Safari mobile body scroll fix
+    const scrollY = window.scrollY;
     document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
     document.body.style.width = '100%';
-    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
     
-    // Force repaint for Safari
-    nav.style.display = 'none';
-    nav.offsetHeight; // Trigger reflow
-    nav.style.display = '';
+    // Store scroll position for later restore
+    document.body.dataset.scrollY = scrollY;
     
-    console.log('Mobile menu opened');
+    // Safari-specific force repaint
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        nav.style.transform = 'translateZ(0)';
+        setTimeout(() => {
+            nav.offsetHeight; // Force reflow
+            nav.style.display = 'flex';
+        }, 10);
+    }
+    
+    console.log('✅ Mobile menu opened successfully');
     
     // Add CSS styles for mobile if they don't exist
     if (!document.querySelector('#mobile-nav-styles')) {
@@ -210,33 +247,50 @@ function openMobileMenu() {
 }
 
 function closeMobileMenu() {
-    console.log('Cerrando menú móvil...');
+    console.log('🍎 Closing mobile menu...');
     
     const nav = document.getElementById('nav');
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     
     if (nav) {
         nav.classList.remove('mobile-open');
-        console.log('Clase mobile-open removida del nav');
+        console.log('✅ Clase mobile-open removida del nav');
     }
     
     if (mobileMenuBtn) {
         mobileMenuBtn.classList.remove('active');
-        console.log('Clase active removida del botón');
+        mobileMenuBtn.style.backgroundColor = '';
+        mobileMenuBtn.style.transform = '';
+        console.log('✅ Clase active removida del botón');
     }
     
-    // Restaurar scroll del body
-    document.body.style.overflow = '';
+    // Restore scroll position for Safari mobile
+    const scrollY = document.body.dataset.scrollY;
     document.body.style.position = '';
+    document.body.style.top = '';
     document.body.style.width = '';
+    document.body.style.overflow = '';
     
-    // Safari mobile fix: forzar reflow
-    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-        nav && nav.offsetHeight;
-        mobileMenuBtn && mobileMenuBtn.offsetHeight;
+    if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0'));
+        delete document.body.dataset.scrollY;
     }
     
-    console.log('Menú móvil cerrado completamente');
+    // Safari mobile fix: force reflow and cleanup
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        setTimeout(() => {
+            if (nav) {
+                nav.offsetHeight; // Trigger reflow
+                nav.style.transform = '';
+                nav.style.display = '';
+            }
+            if (mobileMenuBtn) {
+                mobileMenuBtn.offsetHeight; // Trigger reflow
+            }
+        }, 50);
+    }
+    
+    console.log('✅ Mobile menu closed successfully');
 }
 
 // Safari mobile debugging helper
