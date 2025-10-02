@@ -604,6 +604,26 @@ class CheckoutManager {
                 field.addEventListener('input', () => this.autoFillBilling(fieldName, field.value));
             }
         });
+
+        // Add listeners for PayPal validation - check when required fields change
+        const paypalRequiredFields = ['firstName', 'lastName', 'email', 'address', 'city', 'postalCode'];
+        paypalRequiredFields.forEach(fieldName => {
+            const field = document.getElementById(fieldName);
+            if (field) {
+                field.addEventListener('input', () => {
+                    // Delay validation to avoid constant checking while typing
+                    clearTimeout(this.paypalValidationTimeout);
+                    this.paypalValidationTimeout = setTimeout(() => {
+                        this.handlePaymentMethodChange();
+                    }, 300);
+                });
+                
+                field.addEventListener('blur', () => {
+                    // Immediate validation when leaving field
+                    this.handlePaymentMethodChange();
+                });
+            }
+        });
     }
 
     // Handle payment method change
@@ -941,10 +961,17 @@ class CheckoutManager {
     // Check if all required fields for PayPal are filled
     areRequiredFieldsFilled() {
         const requiredFields = ['firstName', 'lastName', 'email', 'address', 'city', 'postalCode'];
-        return requiredFields.every(fieldName => {
+        
+        console.log('Checking required fields...');
+        const result = requiredFields.every(fieldName => {
             const field = document.getElementById(fieldName);
-            return field && field.value && field.value.trim() !== '';
+            const isValid = field && field.value && field.value.trim() !== '';
+            console.log(`Field ${fieldName}: ${field ? field.value : 'not found'} - Valid: ${isValid}`);
+            return isValid;
         });
+        
+        console.log('All required fields filled:', result);
+        return result;
     }
 
     // Handle successful PayPal payment
