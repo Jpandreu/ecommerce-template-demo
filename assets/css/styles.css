@@ -143,7 +143,19 @@ ul {
     padding: 0 1rem;
 }
 
+@media (max-width: 480px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+}
+
 @media (min-width: 768px) {
+    .container {
+        padding: 0 2rem;
+    }
+}
+
+@media (min-width: 1200px) {
     .container {
         padding: 0 2rem;
     }
@@ -774,11 +786,39 @@ ul {
     margin-bottom: 3rem;
 }
 
+@media (max-width: 767px) {
+    .section-header {
+        margin-bottom: 2rem;
+        padding: 0 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-header {
+        margin-bottom: 1.5rem;
+    }
+}
+
 .section-title {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
     color: var(--text-primary);
+    line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.6rem;
+        line-height: 1.3;
+    }
 }
 
 .section-description {
@@ -786,6 +826,22 @@ ul {
     color: var(--text-secondary);
     max-width: 600px;
     margin: 0 auto;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .section-description {
+        font-size: 1rem;
+        max-width: 95%;
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-description {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
 }
 
 .section-footer {
@@ -801,19 +857,41 @@ ul {
 
 .products-grid {
     display: grid;
-    gap: 2rem;
-    margin-bottom: 3rem;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    grid-template-columns: 1fr;
 }
 
-@media (min-width: 768px) {
+/* Small mobile */
+@media (min-width: 480px) {
     .products-grid {
-        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
     }
 }
 
+/* Tablets */
+@media (min-width: 768px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        margin-bottom: 3rem;
+    }
+}
+
+/* Desktop */
 @media (min-width: 1024px) {
     .products-grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Mobile specific optimizations */
+@media (max-width: 767px) {
+    .products {
+        padding: 2rem 0;
+    }
+    
+    .products .container {
+        padding: 0 1rem;
     }
 }
 
@@ -823,6 +901,15 @@ ul {
     box-shadow: var(--shadow-md);
     overflow: hidden;
     transition: var(--transition-normal);
+    width: 100%;
+    max-width: 100%;
+}
+
+@media (max-width: 767px) {
+    .product-card {
+        border-radius: 0.8rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
 }
 
 .product-card:hover {
@@ -835,6 +922,18 @@ ul {
     height: 250px;
     overflow: hidden;
     background-color: var(--bg-secondary);
+}
+
+@media (max-width: 767px) {
+    .product-image {
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-image {
+        height: 180px;
+    }
 }
 
 .product-image::before {
@@ -906,17 +1005,51 @@ ul {
     padding: 1.5rem;
 }
 
+@media (max-width: 767px) {
+    .product-info {
+        padding: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-info {
+        padding: 1rem;
+    }
+}
+
 .product-name {
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: var(--text-primary);
+    line-height: 1.3;
+}
+
+@media (max-width: 767px) {
+    .product-name {
+        font-size: 1.1rem;
+        margin-bottom: 0.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-name {
+        font-size: 1rem;
+    }
 }
 
 .product-description {
     color: var(--text-secondary);
     margin-bottom: 1rem;
     font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+@media (max-width: 767px) {
+    .product-description {
+        font-size: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
 }
 
 .product-price {
@@ -1164,6 +1297,16 @@ ul {
     background: var(--bg-primary);
 }
 
+@media (max-width: 767px) {
+    .testimonials {
+        padding: 2rem 0;
+    }
+    
+    .testimonials .container {
+        padding: 0 1rem;
+    }
+}
+
 .testimonials-slider {
     position: relative;
     max-width: 800px;
@@ -1174,6 +1317,18 @@ ul {
     display: none;
     text-align: center;
     padding: 2rem;
+}
+
+@media (max-width: 767px) {
+    .testimonial-card {
+        padding: 1.5rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonial-card {
+        padding: 1rem 0.5rem;
+    }
 }
 
 .testimonial-card.active {
@@ -1266,6 +1421,13 @@ ul {
     margin: 0 auto;
 }
 
+@media (max-width: 767px) {
+    .newsletter-form {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+}
+
 .form-group {
     display: flex;
     gap: 0.5rem;
@@ -1275,6 +1437,7 @@ ul {
 @media (max-width: 767px) {
     .form-group {
         flex-direction: column;
+        gap: 0.8rem;
     }
 }
 
@@ -1285,6 +1448,16 @@ ul {
     border-radius: 0.5rem;
     font-size: 1rem;
     outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+@media (max-width: 767px) {
+    .newsletter-input {
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 1rem;
+        width: 100%;
+    }
 }
 
 .newsletter-privacy {
@@ -1303,9 +1476,25 @@ ul {
     background: var(--bg-secondary);
 }
 
+@media (max-width: 767px) {
+    .contact {
+        padding: 2rem 0;
+    }
+    
+    .contact .container {
+        padding: 0 1rem;
+    }
+}
+
 .contact-grid {
     display: grid;
     gap: 3rem;
+}
+
+@media (max-width: 767px) {
+    .contact-grid {
+        gap: 2rem;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -1318,6 +1507,13 @@ ul {
     display: grid;
     gap: 1.5rem;
     margin-top: 2rem;
+}
+
+@media (max-width: 767px) {
+    .contact-items {
+        gap: 1.2rem;
+        margin-top: 1.5rem;
+    }
 }
 
 @media (min-width: 768px) {
@@ -1528,6 +1724,20 @@ ul {
 .footer-links {
     display: grid;
     gap: 2rem;
+}
+
+@media (max-width: 480px) {
+    .footer-links {
+        gap: 1.5rem;
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .footer-links {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.8rem;
+    }
 }
 
 @media (min-width: 768px) {
@@ -2124,6 +2334,118 @@ img.image-error {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+/* ============================================================================
+   MOBILE OPTIMIZATIONS - Complete Responsive Design
+   ============================================================================ */
+
+/* Mobile touch optimizations */
+@media (max-width: 767px) {
+    * {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+        -webkit-touch-callout: none;
+    }
+    
+    /* Improve scroll performance on mobile */
+    html {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+    
+    /* General mobile optimizations */
+    h1, h2, h3, h4, h5, h6 {
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    p {
+        word-wrap: break-word;
+    }
+    
+    /* Better spacing for mobile */
+    section {
+        overflow-x: hidden;
+    }
+    
+    /* Improve button touch targets */
+    button, .btn, a[role="button"] {
+        min-height: 48px;
+        min-width: 48px;
+        padding: 0.9rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 0.6rem;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    
+    /* Form elements for mobile */
+    input, select, textarea {
+        font-size: 16px !important; /* Prevents zoom on iOS */
+        -webkit-appearance: none;
+        appearance: none;
+        border-radius: 0.5rem;
+    }
+    
+    /* Better link spacing */
+    a {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+}
+
+/* Small mobile devices (iPhone SE and similar) */
+@media (max-width: 375px) {
+    .container {
+        padding: 0 0.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.4rem;
+    }
+    
+    .hero-title {
+        font-size: 1.5rem;
+    }
+    
+    .btn {
+        font-size: 0.9rem;
+        padding: 0.8rem 1.2rem;
+    }
+}
+
+/* Landscape mobile orientation fixes */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        min-height: 100vh;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    .hero-content {
+        padding: 1rem;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .hero-actions {
+        margin-top: 1rem;
+        gap: 0.8rem;
+    }
+    
+    .scroll-indicator {
+        display: none;
+    }
 }
 
 /* WebP support detection */
