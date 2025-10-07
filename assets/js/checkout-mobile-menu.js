@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const menuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileNav');
+    const mobileMenu = document.getElementById('navbarCollapse');
     const closeBtn = document.getElementById('mobileCloseBtn');
     
     if (!menuBtn || !mobileMenu) return;

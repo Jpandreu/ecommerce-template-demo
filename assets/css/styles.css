@@ -3031,11 +3031,16 @@ img.image-error {
         background: #1d4ed8 !important;
     }
     
-    /* Navigation links */
+    /* Navigation links - Enhanced */
+    .mobile-nav {
+        flex: 1 !important;
+        overflow-y: auto !important;
+    }
+    
     .navbar-nav {
         list-style: none !important;
         margin: 0 !important;
-        padding: 0.5rem 0 !important;
+        padding: 1rem 0 !important;
         flex: 1 !important;
     }
     
@@ -3044,22 +3049,38 @@ img.image-error {
     }
     
     .navbar-nav .nav-link {
-        display: block !important;
-        padding: 1rem 1.25rem !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 1rem !important;
+        padding: 1.25rem 1.5rem !important;
         color: #374151 !important;
         text-decoration: none !important;
         font-weight: 500 !important;
         font-size: 1rem !important;
         border-bottom: 1px solid #f3f4f6 !important;
-        transition: all 0.2s ease !important;
+        transition: all 0.3s ease !important;
         position: relative !important;
+    }
+    
+    .navbar-nav .nav-link i {
+        font-size: 1.1rem !important;
+        color: #64748b !important;
+        transition: color 0.3s ease !important;
+        width: 20px !important;
+        text-align: center !important;
     }
     
     .navbar-nav .nav-link:hover,
     .navbar-nav .nav-link.active {
-        background: linear-gradient(90deg, #eff6ff 0%, #f8fafc 100%) !important;
+        background: linear-gradient(90deg, #eff6ff 0%, #f0f9ff 100%) !important;
         color: #2563eb !important;
-        padding-left: 1.75rem !important;
+        padding-left: 2rem !important;
+        transform: translateX(4px) !important;
+    }
+    
+    .navbar-nav .nav-link:hover i,
+    .navbar-nav .nav-link.active i {
+        color: #2563eb !important;
     }
     
     .navbar-nav .nav-link:hover::before,
@@ -3070,7 +3091,78 @@ img.image-error {
         top: 0 !important;
         bottom: 0 !important;
         width: 4px !important;
+        background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%) !important;
+        border-radius: 0 4px 4px 0 !important;
+    }
+    
+    /* Cart badge in mobile menu */
+    .cart-badge {
+        background: #ef4444 !important;
+        color: white !important;
+        border-radius: 50% !important;
+        padding: 0.25rem 0.5rem !important;
+        font-size: 0.75rem !important;
+        font-weight: 700 !important;
+        min-width: 20px !important;
+        height: 20px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-left: auto !important;
+    }
+    
+    /* Mobile Menu Footer */
+    .mobile-menu-footer {
+        border-top: 1px solid #e5e7eb !important;
+        padding: 1.5rem !important;
+        background: #f8fafc !important;
+        margin-top: auto !important;
+    }
+    
+    .mobile-social-links {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 1rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .mobile-social-links a {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 40px !important;
+        height: 40px !important;
+        background: white !important;
+        color: #64748b !important;
+        border-radius: 50% !important;
+        text-decoration: none !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .mobile-social-links a:hover {
         background: #2563eb !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3) !important;
+    }
+    
+    .mobile-contact-info {
+        text-align: center !important;
+    }
+    
+    .mobile-contact-info p {
+        margin: 0.5rem 0 !important;
+        font-size: 0.875rem !important;
+        color: #64748b !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.5rem !important;
+    }
+    
+    .mobile-contact-info i {
+        color: #2563eb !important;
     }
 }
 

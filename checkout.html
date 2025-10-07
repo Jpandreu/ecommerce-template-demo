@@ -84,33 +84,70 @@
         </div>
     </header>
 
-    <!-- Mobile Navigation Menu -->
-    <div class="navbar-collapse" id="mobileNav" style="display: none;">
-        <div class="mobile-nav-overlay"></div>
+    <!-- Mobile Menu Overlay -->
+    <div class="navbar-collapse" id="navbarCollapse">
         <div class="mobile-nav-content">
+            <!-- Mobile Menu Header -->
             <div class="mobile-nav-header">
-                <img src="assets/images/logo.svg" alt="Store Logo" class="mobile-logo">
-                <button class="mobile-close-btn" id="mobileCloseBtn">
-                    <i class="fa-solid fa-times"></i>
+                <div class="logo">
+                    <img src="./assets/images/logo.svg" alt="Your Store" class="mobile-logo">
+                    <span class="logo-text">YourStore</span>
+                </div>
+                <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close menu">
+                    <i class="fas fa-times"></i>
                 </button>
             </div>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="products.html">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="services.html">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="cart.html">Cart</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="checkout.html">Checkout</a>
-                </li>
-            </ul>
+            
+            <!-- Mobile Navigation Links -->
+            <nav class="mobile-nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="products.html" class="nav-link">
+                            <i class="fas fa-shopping-bag"></i>
+                            Products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="services.html" class="nav-link">
+                            <i class="fas fa-cogs"></i>
+                            Services
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="cart.html" class="nav-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            Shopping Cart
+                            <span class="cart-badge" id="mobileCartCount">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="checkout.html" class="nav-link active">
+                            <i class="fas fa-credit-card"></i>
+                            Checkout
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <!-- Mobile Menu Footer -->
+            <div class="mobile-menu-footer">
+                <div class="mobile-social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+                <div class="mobile-contact-info">
+                    <p><i class="fas fa-phone"></i> +34 123 456 789</p>
+                    <p><i class="fas fa-envelope"></i> info@yourstore.com</p>
+                </div>
+            </div>
         </div>
     </div>
 
