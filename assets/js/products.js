@@ -242,11 +242,11 @@ function updateCartCount() {
         const currentCount = parseInt(cartCount.textContent) || 0;
         cartCount.textContent = currentCount + 1;
         
-        // Animation
-        cartCount.style.transform = 'scale(1.3)';
+        // Enhanced animation with pulse class
+        cartCount.classList.add('pulse');
         setTimeout(() => {
-            cartCount.style.transform = 'scale(1)';
-        }, 200);
+            cartCount.classList.remove('pulse');
+        }, 600);
     }
 }
 
@@ -1058,13 +1058,37 @@ function initCartFunctionality() {
             const productId = this.getAttribute('data-product-id');
             if (productId) {
                 console.log(`Button clicked for product: ${productId}`);
+                
+                // Store original button text
+                const originalText = this.innerHTML;
+                
+                // Loading animation
+                this.innerHTML = '<span class="loading-spinner"></span> Adding...';
+                this.disabled = true;
+                
+                // Call add to cart function
                 addToCart(productId);
+                
+                // Button animation (success state)
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-check"></i> Added!';
+                    this.style.background = '#10b981'; // Success green color
+                    this.style.borderColor = '#10b981';
+                    
+                    // Restore button after 2 seconds
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.disabled = false;
+                        this.style.background = '';
+                        this.style.borderColor = '';
+                    }, 2000);
+                }, 500);
+            } else {
+                // Re-enable button if no product ID
+                setTimeout(() => {
+                    this.disabled = false;
+                }, 1500);
             }
-            
-            // Re-enable button after short delay
-            setTimeout(() => {
-                this.disabled = false;
-            }, 1500);
         }, { once: false }); // Allow multiple uses but prevent bubbling
     });
 }

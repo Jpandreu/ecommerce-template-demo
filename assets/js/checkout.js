@@ -712,6 +712,142 @@ class CheckoutManager {
                 });
             }
         });
+
+        // Country selector enhancement
+        this.setupCountrySelector();
+    }
+
+    // Setup country selector functionality
+    setupCountrySelector() {
+        const countrySelect = document.getElementById('country');
+        if (!countrySelect) return;
+
+        // Set default country based on user's likely location (can be enhanced with geolocation)
+        this.setDefaultCountry(countrySelect);
+
+        // Add change event listener
+        countrySelect.addEventListener('change', (e) => {
+            const selectedCountry = e.target.value;
+            const selectedText = e.target.options[e.target.selectedIndex].text;
+            
+            console.log('Country selected:', selectedCountry, '-', selectedText);
+            
+            // Validate that a country is selected
+            if (!selectedCountry) {
+                countrySelect.classList.add('error');
+            } else {
+                countrySelect.classList.remove('error');
+            }
+            
+            // You can add additional logic here for:
+            // - Updating shipping costs based on country
+            // - Showing/hiding payment methods based on country
+            // - Updating tax calculations
+            this.handleCountryChange(selectedCountry, selectedText);
+        });
+    }
+
+    // Set default country (can be enhanced with geolocation API)
+    setDefaultCountry(countrySelect) {
+        // Try to detect user's country or set a reasonable default
+        // For now, we'll set Spain as default since it was in the original list
+        const defaultCountry = 'ES'; // Spain
+        
+        if (countrySelect.querySelector(`option[value="${defaultCountry}"]`)) {
+            countrySelect.value = defaultCountry;
+            console.log('Default country set to:', defaultCountry);
+        }
+    }
+
+    // Handle country change events
+    handleCountryChange(countryCode, countryName) {
+        // Update shipping information based on country
+        this.updateShippingByCountry(countryCode);
+        
+        // Update available payment methods if needed
+        this.updatePaymentMethodsByCountry(countryCode);
+        
+        // Trigger form validation
+        this.validateCountryField();
+    }
+
+    // Update shipping costs based on selected country
+    updateShippingByCountry(countryCode) {
+        const shippingElement = document.getElementById('summaryShipping');
+        if (!shippingElement) return;
+
+        let shippingCost = 5.00; // Default shipping
+
+        // Define shipping zones
+        const freeShippingCountries = ['ES', 'PT', 'FR', 'IT']; // Europe free shipping
+        const europeCountries = ['DE', 'NL', 'BE', 'AT', 'CH', 'SE', 'NO', 'DK', 'FI']; // Europe standard
+        const worldwideCountries = ['US', 'CA', 'AU', 'JP', 'BR', 'MX']; // Worldwide
+
+        if (freeShippingCountries.includes(countryCode)) {
+            shippingCost = 0.00;
+        } else if (europeCountries.includes(countryCode)) {
+            shippingCost = 8.00;
+        } else if (worldwideCountries.includes(countryCode)) {
+            shippingCost = 15.00;
+        } else {
+            shippingCost = 12.00; // Rest of world
+        }
+
+        shippingElement.textContent = `$${shippingCost.toFixed(2)}`;
+        
+        // Update mobile shipping if it exists
+        const mobileShipping = document.getElementById('mobileShipping');
+        if (mobileShipping) {
+            mobileShipping.textContent = `$${shippingCost.toFixed(2)}`;
+        }
+
+        // Recalculate total
+        this.updateOrderTotal();
+        
+        console.log('Shipping updated for', countryCode, '- Cost:', shippingCost);
+    }
+
+    // Update payment methods availability based on country
+    updatePaymentMethodsByCountry(countryCode) {
+        // Some countries might have restrictions on certain payment methods
+        const paypalOption = document.querySelector('input[value="paypal"]')?.closest('.payment-option');
+        const bankTransferOption = document.querySelector('input[value="transfer"]')?.closest('.payment-option');
+        
+        // PayPal is available in most countries, but let's add some logic
+        const paypalUnavailableCountries = ['IR', 'KP', 'SY']; // Sanctioned countries
+        
+        if (paypalOption) {
+            if (paypalUnavailableCountries.includes(countryCode)) {
+                paypalOption.style.display = 'none';
+                // If PayPal was selected, switch to card
+                const paypalRadio = paypalOption.querySelector('input[type="radio"]');
+                if (paypalRadio && paypalRadio.checked) {
+                    const cardRadio = document.querySelector('input[value="card"]');
+                    if (cardRadio) cardRadio.checked = true;
+                    this.handlePaymentMethodChange();
+                }
+            } else {
+                paypalOption.style.display = 'block';
+            }
+        }
+        
+        console.log('Payment methods updated for country:', countryCode);
+    }
+
+    // Validate country field
+    validateCountryField() {
+        const countrySelect = document.getElementById('country');
+        if (!countrySelect) return true;
+
+        const isValid = countrySelect.value !== '';
+        
+        if (!isValid) {
+            countrySelect.classList.add('error');
+        } else {
+            countrySelect.classList.remove('error');
+        }
+        
+        return isValid;
     }
 
     // Handle payment method change
@@ -1209,6 +1345,36 @@ class CheckoutManager {
         // Redirect to success page with order data
         const orderDataEncoded = encodeURIComponent(JSON.stringify(orderData));
         window.location.href = `success.html?order=${orderDataEncoded}`;
+    }
+
+    // Update order total calculation
+    updateOrderTotal() {
+        const subtotalElement = document.getElementById('summarySubtotal');
+        const shippingElement = document.getElementById('summaryShipping');
+        const taxElement = document.getElementById('summaryTax');
+        const totalElement = document.getElementById('summaryTotal');
+
+        if (!subtotalElement || !totalElement) return;
+
+        const subtotal = this.parsePrice(subtotalElement.textContent);
+        const shipping = this.parsePrice(shippingElement?.textContent || '0');
+        const tax = subtotal * 0.1; // 10% tax rate
+
+        const total = subtotal + shipping + tax;
+
+        if (taxElement) taxElement.textContent = `$${tax.toFixed(2)}`;
+        totalElement.textContent = `$${total.toFixed(2)}`;
+
+        // Update mobile totals if they exist
+        const mobileSubtotal = document.getElementById('mobileSubtotal');
+        const mobileTax = document.getElementById('mobileTax');
+        const mobileTotal = document.getElementById('mobileTotal');
+
+        if (mobileSubtotal) mobileSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+        if (mobileTax) mobileTax.textContent = `$${tax.toFixed(2)}`;
+        if (mobileTotal) mobileTotal.textContent = `$${total.toFixed(2)}`;
+
+        console.log('Order total updated:', { subtotal, shipping, tax, total });
     }
 }
 

@@ -19,10 +19,18 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
     
     <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/reset-whitespace.css">
     <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/banner-responsive.css">
+    <link rel="stylesheet" href="./assets/css/footer-mobile.css">
+    <link rel="stylesheet" href="./assets/css/mobile-header-fixes.css">
     <link rel="stylesheet" href="./assets/css/cross-browser.css">
     <link rel="stylesheet" href="./assets/css/safari-mobile-fixes.css">
+    <link rel="stylesheet" href="./assets/css/services-safari-fixes.css">
     <link rel="stylesheet" href="./assets/css/checkout-page.css">
+    <link rel="stylesheet" href="./assets/css/checkout-payment-button.css">
+    <link rel="stylesheet" href="./assets/css/mobile-direct-payment.css">
+    <link rel="stylesheet" href="./assets/css/universal-mobile-header.css">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -32,8 +40,18 @@
 </head>
 
 <body>
+    <!-- Demo Banner -->
+    <div id="demo-banner" class="demo-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; position: relative; z-index: 998; transition: transform 0.3s ease-in-out; -webkit-transform: translateZ(0); transform: translateZ(0); width: 100%; box-sizing: border-box; padding: 10px 0; display: block;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
+            <p class="banner-text" style="margin: 0; font-weight: 500; line-height: 1.4; font-size: 14px; color: white;">
+                🎯 <strong>ThemeForest Demo</strong> • Professional Template • 
+                <a href="https://github.com/jpandreu/ecommerce-template-demo" style="color: #FFE066; text-decoration: none; font-weight: 600; margin-left: 8px; transition: color 0.2s ease;">📁 Download</a>
+            </p>
+        </div>
+    </div>
+
     <!-- Header -->
-    <header class="header">
+    <header class="header" id="header" style="transition: margin-top 0.3s ease-in-out; position: relative; z-index: 997; -webkit-transform: translateZ(0); transform: translateZ(0); width: 100%; box-sizing: border-box;">
         <div class="container">
             <div class="header-content">
                 <!-- Logo -->
@@ -50,8 +68,8 @@
                         <li><a href="index.html" class="nav-link">Home</a></li>
                         <li><a href="products.html" class="nav-link">Products</a></li>
                         <li><a href="services.html" class="nav-link">Services</a></li>
-                        <li><a href="index.html#Testimonials" class="nav-link">Testimonials</a></li>
-                        <li><a href="index.html#Contact" class="nav-link">Contact</a></li>
+                        <li><a href="index.html#testimonials" class="nav-link">Testimonials</a></li>
+                        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
                     </ul>
                 </nav>
                 
@@ -75,6 +93,36 @@
             </div>
         </div>
     </header>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="navbar-collapse" id="mobileNav" style="display: none;">
+        <div class="mobile-nav-overlay"></div>
+        <div class="mobile-nav-content">
+            <div class="mobile-nav-header">
+                <img src="assets/images/logo.svg" alt="Store Logo" class="mobile-logo">
+                <button class="mobile-close-btn" id="mobileCloseBtn">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="products.html">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="services.html">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.html">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="checkout.html">Checkout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
     <!-- Breadcrumb -->
     <section class="breadcrumb">
@@ -119,6 +167,98 @@
                         <span class="step-title">Confirmation</span>
                         <span class="step-description">Order completed</span>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Direct Payment Interface -->
+    <section class="mobile-direct-payment-section" id="mobileDirectPayment" style="display: none;">
+        <div class="container">
+            <div class="mobile-payment-wrapper">
+                <!-- Order Summary Mobile -->
+                <div class="mobile-order-summary">
+                    <h3 class="summary-title">
+                        <i class="fas fa-receipt"></i>
+                        Order Summary
+                    </h3>
+                    <div class="summary-content" id="mobileOrderItems">
+                        <!-- Cart items will be populated here -->
+                    </div>
+                    <div class="summary-totals">
+                        <div class="total-row subtotal">
+                            <span>Subtotal:</span>
+                            <span id="mobileSubtotal">$0.00</span>
+                        </div>
+                        <div class="total-row shipping">
+                            <span>Shipping:</span>
+                            <span id="mobileShipping">$5.00</span>
+                        </div>
+                        <div class="total-row tax">
+                            <span>Tax:</span>
+                            <span id="mobileTax">$0.00</span>
+                        </div>
+                        <div class="total-row final">
+                            <span>Total:</span>
+                            <span id="mobileTotal">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Options -->
+                <div class="mobile-payment-card">
+                    <h3 class="payment-title">Select Payment Method</h3>
+                    
+                    <!-- PayPal Button -->
+                    <div class="direct-paypal-button" id="directPaypalButton">
+                        <div class="paypal-logo-container">
+                            <span class="paypal-text">PayPal</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Credit Card Option -->
+                    <div class="direct-card-button" id="directCardButton">
+                        <div class="card-icon-container">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- PayPal Branding -->
+                    <div class="paypal-branding">
+                        <span class="developed-text">Desarrollado por</span>
+                        <strong class="paypal-brand">PayPal</strong>
+                    </div>
+                </div>
+
+                <!-- Terms and Offers -->
+                <div class="mobile-terms-section">
+                    <div class="terms-group">
+                        <label class="terms-checkbox">
+                            <input type="checkbox" id="mobileTermsAccept" required>
+                            <span class="checkmark"></span>
+                            <span class="terms-text">
+                                I accept the <a href="#" class="terms-link">Terms & Conditions</a> and <a href="#" class="terms-link">Privacy Policy</a> *
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <div class="terms-group">
+                        <label class="terms-checkbox">
+                            <input type="checkbox" id="mobileOffersAccept">
+                            <span class="checkmark"></span>
+                            <span class="terms-text">
+                                I want to receive promotional offers and updates via email
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Cancel Message -->
+                <div class="payment-cancel-message" style="display: none;">
+                    <div class="cancel-icon">
+                        <i class="fab fa-paypal"></i>
+                    </div>
+                    <span>Pago cancelado. Puedes intentar de nuevo.</span>
                 </div>
             </div>
         </div>
@@ -187,10 +327,198 @@
                                 <div class="form-group">
                                     <label for="country">Country *</label>
                                     <select id="country" name="country" required>
-                                        <option value="ES">Spain</option>
-                                        <option value="PT">Portugal</option>
-                                        <option value="FR">France</option>
-                                        <option value="IT">Italy</option>
+                                        <option value="">Select your country</option>
+                                        <!-- Europe -->
+                                        <optgroup label="Europe">
+                                            <option value="AD">Andorra</option>
+                                            <option value="AT">Austria</option>
+                                            <option value="BE">Belgium</option>
+                                            <option value="BG">Bulgaria</option>
+                                            <option value="HR">Croatia</option>
+                                            <option value="CY">Cyprus</option>
+                                            <option value="CZ">Czech Republic</option>
+                                            <option value="DK">Denmark</option>
+                                            <option value="EE">Estonia</option>
+                                            <option value="FI">Finland</option>
+                                            <option value="FR">France</option>
+                                            <option value="DE">Germany</option>
+                                            <option value="GR">Greece</option>
+                                            <option value="HU">Hungary</option>
+                                            <option value="IS">Iceland</option>
+                                            <option value="IE">Ireland</option>
+                                            <option value="IT">Italy</option>
+                                            <option value="LV">Latvia</option>
+                                            <option value="LI">Liechtenstein</option>
+                                            <option value="LT">Lithuania</option>
+                                            <option value="LU">Luxembourg</option>
+                                            <option value="MT">Malta</option>
+                                            <option value="MC">Monaco</option>
+                                            <option value="NL">Netherlands</option>
+                                            <option value="NO">Norway</option>
+                                            <option value="PL">Poland</option>
+                                            <option value="PT">Portugal</option>
+                                            <option value="RO">Romania</option>
+                                            <option value="SM">San Marino</option>
+                                            <option value="SK">Slovakia</option>
+                                            <option value="SI">Slovenia</option>
+                                            <option value="ES">Spain</option>
+                                            <option value="SE">Sweden</option>
+                                            <option value="CH">Switzerland</option>
+                                            <option value="GB">United Kingdom</option>
+                                            <option value="VA">Vatican City</option>
+                                        </optgroup>
+                                        
+                                        <!-- North America -->
+                                        <optgroup label="North America">
+                                            <option value="CA">Canada</option>
+                                            <option value="MX">Mexico</option>
+                                            <option value="US">United States</option>
+                                        </optgroup>
+                                        
+                                        <!-- South America -->
+                                        <optgroup label="South America">
+                                            <option value="AR">Argentina</option>
+                                            <option value="BO">Bolivia</option>
+                                            <option value="BR">Brazil</option>
+                                            <option value="CL">Chile</option>
+                                            <option value="CO">Colombia</option>
+                                            <option value="EC">Ecuador</option>
+                                            <option value="GY">Guyana</option>
+                                            <option value="PY">Paraguay</option>
+                                            <option value="PE">Peru</option>
+                                            <option value="SR">Suriname</option>
+                                            <option value="UY">Uruguay</option>
+                                            <option value="VE">Venezuela</option>
+                                        </optgroup>
+                                        
+                                        <!-- Asia -->
+                                        <optgroup label="Asia">
+                                            <option value="AF">Afghanistan</option>
+                                            <option value="BD">Bangladesh</option>
+                                            <option value="BT">Bhutan</option>
+                                            <option value="BN">Brunei</option>
+                                            <option value="KH">Cambodia</option>
+                                            <option value="CN">China</option>
+                                            <option value="IN">India</option>
+                                            <option value="ID">Indonesia</option>
+                                            <option value="JP">Japan</option>
+                                            <option value="KZ">Kazakhstan</option>
+                                            <option value="KG">Kyrgyzstan</option>
+                                            <option value="LA">Laos</option>
+                                            <option value="MY">Malaysia</option>
+                                            <option value="MV">Maldives</option>
+                                            <option value="MN">Mongolia</option>
+                                            <option value="MM">Myanmar</option>
+                                            <option value="NP">Nepal</option>
+                                            <option value="KP">North Korea</option>
+                                            <option value="PK">Pakistan</option>
+                                            <option value="PH">Philippines</option>
+                                            <option value="SG">Singapore</option>
+                                            <option value="KR">South Korea</option>
+                                            <option value="LK">Sri Lanka</option>
+                                            <option value="TW">Taiwan</option>
+                                            <option value="TJ">Tajikistan</option>
+                                            <option value="TH">Thailand</option>
+                                            <option value="TL">Timor-Leste</option>
+                                            <option value="TM">Turkmenistan</option>
+                                            <option value="UZ">Uzbekistan</option>
+                                            <option value="VN">Vietnam</option>
+                                        </optgroup>
+                                        
+                                        <!-- Africa -->
+                                        <optgroup label="Africa">
+                                            <option value="DZ">Algeria</option>
+                                            <option value="AO">Angola</option>
+                                            <option value="BJ">Benin</option>
+                                            <option value="BW">Botswana</option>
+                                            <option value="BF">Burkina Faso</option>
+                                            <option value="BI">Burundi</option>
+                                            <option value="CV">Cape Verde</option>
+                                            <option value="CM">Cameroon</option>
+                                            <option value="CF">Central African Republic</option>
+                                            <option value="TD">Chad</option>
+                                            <option value="KM">Comoros</option>
+                                            <option value="CG">Congo</option>
+                                            <option value="CD">Democratic Republic of the Congo</option>
+                                            <option value="DJ">Djibouti</option>
+                                            <option value="EG">Egypt</option>
+                                            <option value="GQ">Equatorial Guinea</option>
+                                            <option value="ER">Eritrea</option>
+                                            <option value="ET">Ethiopia</option>
+                                            <option value="GA">Gabon</option>
+                                            <option value="GM">Gambia</option>
+                                            <option value="GH">Ghana</option>
+                                            <option value="GN">Guinea</option>
+                                            <option value="GW">Guinea-Bissau</option>
+                                            <option value="CI">Ivory Coast</option>
+                                            <option value="KE">Kenya</option>
+                                            <option value="LS">Lesotho</option>
+                                            <option value="LR">Liberia</option>
+                                            <option value="LY">Libya</option>
+                                            <option value="MG">Madagascar</option>
+                                            <option value="MW">Malawi</option>
+                                            <option value="ML">Mali</option>
+                                            <option value="MR">Mauritania</option>
+                                            <option value="MU">Mauritius</option>
+                                            <option value="MA">Morocco</option>
+                                            <option value="MZ">Mozambique</option>
+                                            <option value="NA">Namibia</option>
+                                            <option value="NE">Niger</option>
+                                            <option value="NG">Nigeria</option>
+                                            <option value="RW">Rwanda</option>
+                                            <option value="ST">Sao Tome and Principe</option>
+                                            <option value="SN">Senegal</option>
+                                            <option value="SC">Seychelles</option>
+                                            <option value="SL">Sierra Leone</option>
+                                            <option value="SO">Somalia</option>
+                                            <option value="ZA">South Africa</option>
+                                            <option value="SS">South Sudan</option>
+                                            <option value="SD">Sudan</option>
+                                            <option value="SZ">Eswatini</option>
+                                            <option value="TZ">Tanzania</option>
+                                            <option value="TG">Togo</option>
+                                            <option value="TN">Tunisia</option>
+                                            <option value="UG">Uganda</option>
+                                            <option value="ZM">Zambia</option>
+                                            <option value="ZW">Zimbabwe</option>
+                                        </optgroup>
+                                        
+                                        <!-- Oceania -->
+                                        <optgroup label="Oceania">
+                                            <option value="AU">Australia</option>
+                                            <option value="FJ">Fiji</option>
+                                            <option value="KI">Kiribati</option>
+                                            <option value="MH">Marshall Islands</option>
+                                            <option value="FM">Micronesia</option>
+                                            <option value="NR">Nauru</option>
+                                            <option value="NZ">New Zealand</option>
+                                            <option value="PW">Palau</option>
+                                            <option value="PG">Papua New Guinea</option>
+                                            <option value="WS">Samoa</option>
+                                            <option value="SB">Solomon Islands</option>
+                                            <option value="TO">Tonga</option>
+                                            <option value="TV">Tuvalu</option>
+                                            <option value="VU">Vanuatu</option>
+                                        </optgroup>
+                                        
+                                        <!-- Middle East -->
+                                        <optgroup label="Middle East">
+                                            <option value="BH">Bahrain</option>
+                                            <option value="IR">Iran</option>
+                                            <option value="IQ">Iraq</option>
+                                            <option value="IL">Israel</option>
+                                            <option value="JO">Jordan</option>
+                                            <option value="KW">Kuwait</option>
+                                            <option value="LB">Lebanon</option>
+                                            <option value="OM">Oman</option>
+                                            <option value="PS">Palestine</option>
+                                            <option value="QA">Qatar</option>
+                                            <option value="SA">Saudi Arabia</option>
+                                            <option value="SY">Syria</option>
+                                            <option value="TR">Turkey</option>
+                                            <option value="AE">United Arab Emirates</option>
+                                            <option value="YE">Yemen</option>
+                                        </optgroup>
                                     </select>
                                 </div>
                             </div>
@@ -232,7 +560,7 @@
                         </div>
 
                         <!-- Payment Method -->
-                        <div class="form-section">
+                        <div class="form-section payment-method-section">
                             <div class="section-header">
                                 <h3 class="section-title">
                                     <i class="fas fa-credit-card"></i>
@@ -240,10 +568,10 @@
                                 </h3>
                             </div>
                             
-                            <div class="payment-methods">
+                            <div class="payment-methods" id="paymentMethodsUnified">
                                 <div class="payment-option">
                                     <label class="payment-label">
-                                        <input type="radio" name="paymentMethod" value="card" checked>
+                                        <input type="radio" name="paymentMethod" value="card" checked id="unifiedCreditCard">
                                         <span class="payment-checkmark"></span>
                                         <div class="payment-info">
                                             <span class="payment-title">Credit/Debit Card</span>
@@ -258,7 +586,7 @@
 
                                 <div class="payment-option">
                                     <label class="payment-label">
-                                        <input type="radio" name="paymentMethod" value="paypal">
+                                        <input type="radio" name="paymentMethod" value="paypal" id="unifiedPayPal">
                                         <span class="payment-checkmark"></span>
                                         <div class="payment-info">
                                             <span class="payment-title">PayPal</span>
@@ -279,6 +607,31 @@
                                             <i class="fas fa-university"></i>
                                         </div>
                                     </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Mobile Payment Sections (only visible on mobile) -->
+                            <div class="mobile-payment-sections">
+                                <!-- Credit Card Payment Section -->
+                                <div class="mobile-credit-section" id="unifiedCreditSection" style="display: none;">
+                                    <button type="button" class="btn btn-primary btn-full mobile-proceed-btn" id="unifiedPaymentBtn">
+                                        <i class="fas fa-credit-card"></i>
+                                        <span>Pay with Credit Card</span>
+                                        <div class="loading-spinner" style="display: none;">
+                                            <i class="fas fa-spinner fa-spin"></i>
+                                        </div>
+                                    </button>
+                                </div>
+                                
+                                <!-- PayPal Payment Section -->
+                                <div class="mobile-paypal-section" id="unifiedPaypalSection" style="display: none;">
+                                    <!-- Mobile PayPal Button Container -->
+                                    <div id="unified-paypal-button-container"></div>
+                                </div>
+                                
+                                <!-- Mobile Payment Instructions -->
+                                <div class="mobile-payment-instructions" id="unifiedPaymentInstructions">
+                                    <p><i class="fas fa-credit-card"></i> Selecciona tu método de pago arriba</p>
                                 </div>
                             </div>
 
@@ -318,6 +671,8 @@
                                           placeholder="Special delivery instructions, additional comments..."></textarea>
                             </div>
                         </div>
+
+
 
                         <!-- Terms and Conditions -->
                         <div class="form-section">
@@ -558,5 +913,49 @@
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/cart.js"></script>
     <script src="./assets/js/checkout.js"></script>
+    <!-- PayPal SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R&currency=USD"></script>
+    <!-- Mobile Direct Payment Interface -->
+    <script src="./assets/js/mobile-direct-payment.js"></script>
+    <!-- Mobile Menu Handler -->
+    <script src="./assets/js/checkout-mobile-menu.js"></script>
+    
+    <!-- Banner JavaScript -->
+    <script>
+    (function() {
+        const demoBanner = document.getElementById('demo-banner');
+        
+        function hideBanner() {
+            if (demoBanner) {
+                demoBanner.style.webkitTransform = 'translateY(-100%)';
+                demoBanner.style.transform = 'translateY(-100%)';
+            }
+        }
+        
+        function showBanner() {
+            if (demoBanner) {
+                demoBanner.style.webkitTransform = 'translateY(0)';
+                demoBanner.style.transform = 'translateY(0)';
+            }
+        }
+        
+        let ticking = false;
+        function handleScroll() {
+            if (!ticking) {
+                requestAnimationFrame(function() {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    if (scrollTop > 20) { hideBanner(); } else if (scrollTop <= 5) { showBanner(); }
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+            link.addEventListener('click', function() { setTimeout(hideBanner, 100); });
+        });
+    })();
+    </script>
 </body>
 </html>

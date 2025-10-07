@@ -1,97 +1,190 @@
-/* Cross-Browser Compatibility Fixes */
+/* Cross-Browser Compatibility Fixes *//* Cross-Browser Compatibility Fixes */
+
 /* Este archivo asegura compatibilidad con Chrome, Firefox, Safari, Opera y Edge */
 
-/* Flexbox fallbacks */
-.header-content,
-.hero-content,
-.featured-grid,
-.services-grid,
-.testimonials-grid,
-.footer-content {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
+/* CSS Grid fallback for older browsers */
+
+@supports not (display: grid) {/* Flexbox fallbacks */
+
+    .grid-container {.header-content,
+
+        display: flex;.hero-content,
+
+        flex-wrap: wrap;.featured-grid,
+
+    }.services-grid,
+
+    .testimonials-grid,
+
+    .grid-item {.footer-content {
+
+        flex: 1 1 300px;    display: -webkit-box;
+
+        margin: 0.5rem;    display: -webkit-flex;
+
+    }    display: -moz-box;
+
+}    display: -ms-flexbox;
+
     display: flex;
-}
 
-/* Grid fallbacks for older browsers */
-@supports not (display: grid) {
-    .featured-grid,
-    .services-grid,
-    .testimonials-grid {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: flex;
+/* Flexbox fallback for even older browsers */}
+
+@supports not (display: flex) {
+
+    .flex-container {/* Grid fallbacks for older browsers */
+
+        display: table;@supports not (display: grid) {
+
+        width: 100%;    .featured-grid,
+
+    }    .services-grid,
+
+        .testimonials-grid {
+
+    .flex-item {        display: -webkit-box;
+
+        display: table-cell;        display: -webkit-flex;
+
+        vertical-align: middle;        display: -moz-box;
+
+    }        display: -ms-flexbox;
+
+}        display: flex;
+
         -webkit-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        margin: -0.5rem;
-    }
-    
-    .featured-grid > *,
-    .services-grid > *,
-    .testimonials-grid > * {
-        -webkit-box-flex: 1;
-        -webkit-flex: 1 1 calc(33.333% - 1rem);
+
+/* Custom properties fallback */        -ms-flex-wrap: wrap;
+
+@supports not (--css: variables) {        flex-wrap: wrap;
+
+    .primary-color {        margin: -0.5rem;
+
+        color: #3b82f6;    }
+
+    }    
+
+        .featured-grid > *,
+
+    .secondary-color {    .services-grid > *,
+
+        color: #64748b;    .testimonials-grid > * {
+
+    }        -webkit-box-flex: 1;
+
+}        -webkit-flex: 1 1 calc(33.333% - 1rem);
+
         -moz-box-flex: 1;
-        -ms-flex: 1 1 calc(33.333% - 1rem);
-        flex: 1 1 calc(33.333% - 1rem);
-        min-width: 280px;
-        margin: 0.5rem;
-    }
-}
 
-/* Transform prefixes para mejor compatibilidad */
-.product-card:hover,
-.service-card:hover,
-.testimonial-card:hover {
-    -webkit-transform: translateY(-5px);
+/* Smooth scrolling polyfill */        -ms-flex: 1 1 calc(33.333% - 1rem);
+
+@media (prefers-reduced-motion: no-preference) {        flex: 1 1 calc(33.333% - 1rem);
+
+    html {        min-width: 280px;
+
+        scroll-behavior: smooth;        margin: 0.5rem;
+
+    }    }
+
+}}
+
+
+
+/* Focus styles for accessibility *//* Transform prefixes para mejor compatibilidad */
+
+:focus {.product-card:hover,
+
+    outline: 2px solid #3b82f6;.service-card:hover,
+
+    outline-offset: 2px;.testimonial-card:hover {
+
+}    -webkit-transform: translateY(-5px);
+
     -moz-transform: translateY(-5px);
-    -ms-transform: translateY(-5px);
-    -o-transform: translateY(-5px);
-    transform: translateY(-5px);
+
+:focus:not(:focus-visible) {    -ms-transform: translateY(-5px);
+
+    outline: none;    -o-transform: translateY(-5px);
+
+}    transform: translateY(-5px);
+
 }
 
-/* Transition prefixes */
-.btn,
-.product-card,
+:focus-visible {
+
+    outline: 2px solid #3b82f6;/* Transition prefixes */
+
+    outline-offset: 2px;.btn,
+
+}.product-card,
+
 .service-card,
-.testimonial-card {
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
+
+/* High contrast mode support */.testimonial-card {
+
+@media (prefers-contrast: high) {    -webkit-transition: all 0.3s ease;
+
+    .card, .button, .form-control {    -moz-transition: all 0.3s ease;
+
+        border: 2px solid;    -o-transition: all 0.3s ease;
+
+    }    transition: all 0.3s ease;
+
+}    transition: all 0.3s ease;
+
     transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    transition: all 0.3s ease;
+
+/* Reduced motion support */}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *, *::before, *::after {/* Box-shadow prefixes */
+
+        animation-duration: 0.01ms !important;.btn:hover,
+
+        animation-iteration-count: 1 !important;.product-card:hover,
+
+        transition-duration: 0.01ms !important;.service-card:hover {
+
+        scroll-behavior: auto !important;    -webkit-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+    }    -moz-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+}    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
 }
 
-/* Box-shadow prefixes */
-.btn:hover,
-.product-card:hover,
-.service-card:hover {
-    -webkit-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
+/* Print styles */
 
-/* Border-radius para navegadores antiguos */
-.btn,
-.product-card,
-.service-card,
-.form-input,
-.form-select {
-    -webkit-border-radius: 0.5rem;
-    -moz-border-radius: 0.5rem;
-    border-radius: 0.5rem;
-}
+@media print {/* Border-radius para navegadores antiguos */
 
-/* Backdrop-filter fallback */
-.header {
-    /* Fallback más sólido para navegadores sin soporte */
-    background: rgba(255, 255, 255, 0.98);
+    .header, .footer, .mobile-menu-btn {.btn,
+
+        display: none !important;.product-card,
+
+    }.service-card,
+
+    .form-input,
+
+    body {.form-select {
+
+        font-size: 12pt !important;    -webkit-border-radius: 0.5rem;
+
+        line-height: 1.4 !important;    -moz-border-radius: 0.5rem;
+
+    }    border-radius: 0.5rem;
+
+    }
+
+    .container {
+
+        max-width: none !important;/* Backdrop-filter fallback */
+
+        padding: 0 !important;.header {
+
+    }    /* Fallback más sólido para navegadores sin soporte */
+
+}    background: rgba(255, 255, 255, 0.98);
 }
 
 @supports (backdrop-filter: blur(10px)) {

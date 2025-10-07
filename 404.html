@@ -9,7 +9,13 @@
     <title>404 - Page Not Found | YourStore</title>
     
     <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/reset-whitespace.css">
     <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/banner-responsive.css">
+    <link rel="stylesheet" href="./assets/css/footer-mobile.css">
+    <link rel="stylesheet" href="./assets/css/mobile-header-fixes.css">
+    <link rel="stylesheet" href="./assets/css/cross-browser.css">
+    <link rel="stylesheet" href="./assets/css/safari-mobile-fixes.css">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -127,7 +133,17 @@
 </head>
 
 <body>
-    <div class="error-page">
+    <!-- Demo Banner -->
+    <div id="demo-banner" class="demo-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; position: fixed; top: 0; z-index: 998; width: 100%; padding: 10px 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <p style="margin: 0; font-weight: 500; font-size: 14px; color: white;">
+                🎯 <strong>ThemeForest Demo</strong> • Professional Template • 
+                <a href="https://github.com/jpandreu/ecommerce-template-demo" style="color: #FFE066; text-decoration: none; font-weight: 600; margin-left: 8px;">📁 Download</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="error-page" style="padding-top: 60px;">
         <div class="error-content">
             <div class="error-icon">
                 <i class="fas fa-search"></i>

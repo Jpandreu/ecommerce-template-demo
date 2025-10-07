@@ -470,8 +470,12 @@ body {
     }
     
     .cart-summary {
-        order: -1;
+        order: 2; /* Aparece después de los productos */
         position: static;
+    }
+    
+    .cart-items {
+        order: 1; /* Aparece primero - productos encima */
     }
 }
 

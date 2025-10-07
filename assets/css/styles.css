@@ -9,33 +9,7 @@
    See LICENSE.md for complete license terms.
    ========================================================================== */
 
-/* Skip Links for Accessibility */
-.skip-links {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10001;
-}
-
-.skip-link {
-    position: absolute;
-    top: -100px;
-    left: 0;
-    background: var(--primary-color);
-    color: white;
-    padding: 0.75rem 1rem;
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 0 0 0.5rem 0;
-    transition: top 0.3s ease;
-    z-index: 10002;
-}
-
-.skip-link:focus {
-    top: 0;
-    outline: 2px solid white;
-    outline-offset: 2px;
-}
+/* Skip Links removed - were causing visual issues above banner */
 
 /* Variables CSS */
 :root {
@@ -852,6 +826,7 @@ ul {
 /* Products Section */
 .products {
     padding: var(--section-padding);
+    padding-top: 7rem; /* Extra space above Our Products section */
     background: var(--bg-primary);
 }
 
@@ -1376,19 +1351,86 @@ ul {
 .testimonials-nav {
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
+    margin-top: 1.5rem;
 }
 
 .testimonial-btn {
-    width: 12px;
-    height: 12px;
+    width: 3px;
+    height: 3px;
     border-radius: 50%;
     background: var(--text-light);
+    border: none;
+    cursor: pointer;
     transition: var(--transition-fast);
+    opacity: 0.4;
+}
+
+.testimonial-btn:hover {
+    opacity: 0.7;
+    transform: scale(1.3);
 }
 
 .testimonial-btn.active {
     background: var(--primary-color);
+    opacity: 1;
+    transform: scale(1.5);
+}
+
+/* Mobile optimizations for testimonial navigation */
+@media (max-width: 768px) {
+    .testimonials-nav {
+        gap: 0.15rem;
+        margin-top: 1rem;
+    }
+    
+    .testimonial-btn {
+        width: 2.5px;
+        height: 2.5px;
+        min-width: 2.5px;
+        min-height: 2.5px;
+    }
+    
+    .testimonial-btn:hover {
+        transform: scale(1.4);
+    }
+    
+    .testimonial-btn.active {
+        transform: scale(2);
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .testimonial-btn {
+        width: 2.5px;
+        height: 2.5px;
+        min-width: 44px;
+        min-height: 44px;
+        position: relative;
+        padding: 20px;
+        background: transparent !important;
+    }
+    
+    .testimonial-btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 2.5px;
+        height: 2.5px;
+        border-radius: 50%;
+        background: var(--text-light);
+        opacity: 0.3;
+        transition: var(--transition-fast);
+    }
+    
+    .testimonial-btn.active::before {
+        background: var(--primary-color);
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(2);
+    }
 }
 
 /* Newsletter Section */

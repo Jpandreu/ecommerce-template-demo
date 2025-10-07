@@ -94,8 +94,13 @@ function initializeApp() {
 function initMobileMenu() {
     console.log('🍎 Initializing Mobile Menu...');
     
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const nav = document.getElementById('nav');
+    // Try multiple selectors for menu button and navigation
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn') || 
+                          document.querySelector('.mobile-menu-btn') ||
+                          document.querySelector('.navbar-toggler');
+    const nav = document.getElementById('nav') || 
+                document.querySelector('.navbar-collapse') ||
+                document.querySelector('.nav');
     
     if (!mobileMenuBtn || !nav) {
         console.error('❌ Mobile menu elements not found:', {
@@ -115,7 +120,8 @@ function initMobileMenu() {
         e.preventDefault();
         e.stopPropagation();
         
-        const isOpen = nav.classList.contains('mobile-open');
+        // Check for both Bootstrap navbar and custom mobile menu
+        const isOpen = nav.classList.contains('mobile-open') || nav.classList.contains('show');
         console.log('🍎 Safari Mobile menu toggle, isOpen:', isOpen);
         
         if (isOpen) {
@@ -166,27 +172,39 @@ function initMobileMenu() {
 
 function openMobileMenu() {
     console.log('🍎 Opening mobile menu...');
-    const nav = document.getElementById('nav');
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const nav = document.getElementById('nav') || 
+                document.querySelector('.navbar-collapse') ||
+                document.querySelector('.nav');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn') ||
+                          document.querySelector('.mobile-menu-btn') ||
+                          document.querySelector('.navbar-toggler');
     
     if (!nav || !mobileMenuBtn) {
         console.error('❌ Nav elements not found for opening menu');
         return;
     }
     
-    // Add classes
-    nav.classList.add('mobile-open');
-    mobileMenuBtn.classList.add('active');
+    // Handle Bootstrap navbar vs custom menu
+    if (nav.classList.contains('navbar-collapse')) {
+        nav.classList.add('show');
+        mobileMenuBtn.classList.remove('collapsed');
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+    } else {
+        nav.classList.add('mobile-open');
+        mobileMenuBtn.classList.add('active');
+    }
     
-    // Safari mobile body scroll fix
-    const scrollY = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = '100%';
-    document.body.style.overflow = 'hidden';
-    
-    // Store scroll position for later restore
-    document.body.dataset.scrollY = scrollY;
+    // Safari mobile body scroll fix (only for full-screen menus)
+    if (!nav.classList.contains('navbar-collapse')) {
+        const scrollY = window.scrollY;
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${scrollY}px`;
+        document.body.style.width = '100%';
+        document.body.style.overflow = 'hidden';
+        
+        // Store scroll position for later restore
+        document.body.dataset.scrollY = scrollY;
+    }
     
     // Safari-specific force repaint
     if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
@@ -249,31 +267,46 @@ function openMobileMenu() {
 function closeMobileMenu() {
     console.log('🍎 Closing mobile menu...');
     
-    const nav = document.getElementById('nav');
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const nav = document.getElementById('nav') || 
+                document.querySelector('.navbar-collapse') ||
+                document.querySelector('.nav');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn') ||
+                          document.querySelector('.mobile-menu-btn') ||
+                          document.querySelector('.navbar-toggler');
     
     if (nav) {
-        nav.classList.remove('mobile-open');
-        console.log('✅ Clase mobile-open removida del nav');
+        // Handle Bootstrap navbar vs custom menu
+        if (nav.classList.contains('navbar-collapse')) {
+            nav.classList.remove('show');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.classList.add('collapsed');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            }
+        } else {
+            nav.classList.remove('mobile-open');
+        }
+        console.log('✅ Menu classes removed from nav');
     }
     
     if (mobileMenuBtn) {
         mobileMenuBtn.classList.remove('active');
         mobileMenuBtn.style.backgroundColor = '';
         mobileMenuBtn.style.transform = '';
-        console.log('✅ Clase active removida del botón');
+        console.log('✅ Active class removed from button');
     }
     
-    // Restore scroll position for Safari mobile
-    const scrollY = document.body.dataset.scrollY;
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    document.body.style.overflow = '';
-    
-    if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0'));
-        delete document.body.dataset.scrollY;
+    // Restore scroll position for Safari mobile (only if body was fixed)
+    if (document.body.style.position === 'fixed') {
+        const scrollY = document.body.dataset.scrollY;
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        
+        if (scrollY) {
+            window.scrollTo(0, parseInt(scrollY || '0'));
+            delete document.body.dataset.scrollY;
+        }
     }
     
     // Safari mobile fix: force reflow and cleanup

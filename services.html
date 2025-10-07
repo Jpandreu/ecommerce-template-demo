@@ -19,10 +19,19 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
     
     <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/reset-whitespace.css">
     <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/banner-responsive.css">
+    <link rel="stylesheet" href="./assets/css/footer-mobile.css">
+    <link rel="stylesheet" href="./assets/css/mobile-header-fixes.css">
+    <link rel="stylesheet" href="./assets/css/cross-browser.css">
+    <link rel="stylesheet" href="./assets/css/safari-mobile-fixes.css">
+    <link rel="stylesheet" href="./assets/css/services-safari-fixes.css">
+    <link rel="stylesheet" href="./assets/css/services-mobile-enhanced.css">
     <link rel="stylesheet" href="./assets/css/cross-browser.css">
     <link rel="stylesheet" href="./assets/css/safari-mobile-fixes.css">
     <link rel="stylesheet" href="./assets/css/services-page.css">
+    <link rel="stylesheet" href="./assets/css/universal-mobile-header.css">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -35,8 +44,18 @@
 </head>
 
 <body>
+    <!-- Demo Banner -->
+    <div id="demo-banner" class="demo-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; position: relative; z-index: 998; transition: transform 0.3s ease-in-out; -webkit-transform: translateZ(0); transform: translateZ(0); width: 100%; box-sizing: border-box; padding: 10px 0; display: block;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; box-sizing: border-box;">
+            <p class="banner-text" style="margin: 0; font-weight: 500; line-height: 1.4; font-size: 14px; color: white;">
+                🎯 <strong>ThemeForest Demo</strong> • Professional Template • 
+                <a href="https://github.com/jpandreu/ecommerce-template-demo" style="color: #FFE066; text-decoration: none; font-weight: 600; margin-left: 8px; transition: color 0.2s ease;">📁 Download</a>
+            </p>
+        </div>
+    </div>
+
     <!-- Header -->
-    <header class="header">
+    <header class="header" style="transition: margin-top 0.3s ease-in-out; position: relative; z-index: 997; -webkit-transform: translateZ(0); transform: translateZ(0); width: 100%; box-sizing: border-box;">
         <div class="container">
             <div class="header-content">
                 <!-- Logo -->
@@ -729,5 +748,65 @@
     <script src="./assets/js/cart-sync.js"></script>
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/services.js"></script>
+    
+    <!-- Mobile Menu Handler -->
+    <script src="./assets/js/checkout-mobile-menu.js"></script>
+    
+    <!-- Banner JavaScript -->
+    <script>
+    (function() {
+        let lastScrollTop = 0;
+        const demoBanner = document.getElementById('demo-banner');
+        const header = document.querySelector('.header');
+        
+        function getBannerHeight() {
+            if (!demoBanner) return 0;
+            return demoBanner.offsetHeight || 0;
+        }
+        
+        function hideBanner() {
+            if (demoBanner) {
+                demoBanner.style.webkitTransform = 'translateY(-100%)';
+                demoBanner.style.transform = 'translateY(-100%)';
+            }
+        }
+        
+        function showBanner() {
+            if (demoBanner) {
+                demoBanner.style.webkitTransform = 'translateY(0)';
+                demoBanner.style.transform = 'translateY(0)';
+            }
+        }
+        
+        // Scroll handling
+        let ticking = false;
+        function handleScroll() {
+            if (!ticking) {
+                requestAnimationFrame(function() {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    
+                    if (scrollTop > 20) {
+                        hideBanner();
+                    } else if (scrollTop <= 5) {
+                        showBanner();
+                    }
+                    
+                    lastScrollTop = scrollTop;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        
+        // Navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+            link.addEventListener('click', function() {
+                setTimeout(hideBanner, 100);
+            });
+        });
+    })();
+    </script>
 </body>
 </html>
