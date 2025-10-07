@@ -303,7 +303,7 @@
         if (isMobile()) {
             // Hide payment sections until method is selected
             if (unifiedInstructions) {
-                unifiedInstructions.innerHTML = '<p><i class="fas fa-hand-pointer"></i> Selecciona tu método de pago arriba</p>';
+                unifiedInstructions.innerHTML = '<p><i class="fas fa-hand-pointer"></i> Select your payment method above</p>';
                 unifiedInstructions.className = 'mobile-payment-instructions';
             }
             
