@@ -2988,6 +2988,7 @@ img.image-error {
         transform: translateX(100%) !important;
         transition: transform 0.3s ease !important;
         overflow-y: auto !important;
+        overflow-x: hidden !important;
         display: flex !important;
         flex-direction: column !important;
     }
@@ -3117,6 +3118,7 @@ img.image-error {
         padding: 1.5rem !important;
         background: #f8fafc !important;
         margin-top: auto !important;
+        overflow: hidden !important;
     }
     
     .mobile-social-links {
@@ -3163,6 +3165,42 @@ img.image-error {
     
     .mobile-contact-info i {
         color: #2563eb !important;
+    }
+    
+    /* Hide scrollbars in mobile menu - Cross Browser */
+    .mobile-nav-content {
+        scrollbar-width: none !important; /* Firefox */
+        -ms-overflow-style: none !important; /* Internet Explorer 10+ */
+    }
+    
+    .mobile-nav-content::-webkit-scrollbar {
+        display: none !important; /* WebKit browsers (Chrome, Safari, newer Edge) */
+        width: 0px !important;
+        background: transparent !important;
+    }
+    
+    .mobile-nav {
+        overflow-x: hidden !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
+    
+    .mobile-nav::-webkit-scrollbar {
+        display: none !important;
+        width: 0px !important;
+    }
+    
+    /* Ensure no horizontal overflow anywhere in mobile menu */
+    .navbar-nav,
+    .navbar-nav .nav-item,
+    .navbar-nav .nav-link,
+    .mobile-nav-header,
+    .mobile-menu-footer,
+    .mobile-social-links,
+    .mobile-contact-info {
+        overflow-x: hidden !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 }
 
