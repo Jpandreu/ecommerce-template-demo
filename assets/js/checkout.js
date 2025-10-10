@@ -210,8 +210,17 @@ class CheckoutManager {
             
             const price = this.parsePrice(item.price || 0);
             const originalPrice = item.originalPrice ? this.parsePrice(item.originalPrice) : null;
-            const originalPriceHtml = originalPrice ? 
-                `<span class="original-price">$${(originalPrice * (item.quantity || 1)).toFixed(2)}</span>` : '';
+            
+            // Build price HTML with proper order (original price first, then current price)
+            let priceHtml = '';
+            if (originalPrice && originalPrice > price) {
+                priceHtml = `
+                    <span class="original-price">$${(originalPrice * (item.quantity || 1)).toFixed(2)}</span>
+                    <span class="current-price">$${(price * (item.quantity || 1)).toFixed(2)}</span>
+                `;
+            } else {
+                priceHtml = `<span class="current-price">$${(price * (item.quantity || 1)).toFixed(2)}</span>`;
+            }
             
             const safeItem = {
                 name: item.name || 'Unknown Product',
@@ -231,8 +240,7 @@ class CheckoutManager {
                         <div class="order-item-name">${safeItem.name}</div>
                         <div class="order-item-details">Quantity: ${safeItem.quantity} | ${safeItem.category}</div>
                         <div class="order-item-price">
-                            $${(price * safeItem.quantity).toFixed(2)}
-                            ${originalPriceHtml}
+                            ${priceHtml}
                         </div>
                     </div>
                 </div>
@@ -1112,23 +1120,26 @@ class CheckoutManager {
         });
     }
 
-    // Setup PayPal buttons
+    // Setup PayPal buttons for unified system (desktop + mobile)
     setupPayPalButtons() {
         const self = this;
         
-        console.log('🔧 Setting up PayPal buttons...');
+        console.log('🔧 Setting up PayPal buttons for unified system...');
         
         // Triple check that PayPal is available
         if (typeof paypal === 'undefined') {
             console.error('❌ PayPal SDK still not loaded in setupPayPalButtons');
-            const paypalContainer = document.getElementById('paypal-button-container');
-            if (paypalContainer) {
-                paypalContainer.innerHTML = `
-                    <div style="padding: 15px; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 5px; text-align: center; color: #721c24;">
-                        ❌ PayPal is temporarily unavailable. Please use Bank Transfer option or refresh the page.
-                    </div>
-                `;
-            }
+            const containers = ['paypal-button-container', 'desktop-paypal-container', 'unified-paypal-button-container'];
+            containers.forEach(containerId => {
+                const container = document.getElementById(containerId);
+                if (container) {
+                    container.innerHTML = `
+                        <div style="padding: 15px; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 5px; text-align: center; color: #721c24;">
+                            ❌ PayPal is temporarily unavailable. Please use Bank Transfer option or refresh the page.
+                        </div>
+                    `;
+                }
+            });
             return;
         }
         
@@ -1138,17 +1149,10 @@ class CheckoutManager {
             return;
         }
         
-        console.log('✅ All conditions met, creating PayPal button...');
+        console.log('✅ All conditions met, creating PayPal buttons...');
         
-        paypal.Buttons({
-            style: {
-                layout: 'horizontal',
-                color: 'blue',
-                shape: 'rect',
-                label: 'checkout',
-                height: 45
-            },
-
+        // Define PayPal button configuration
+        const paypalButtonConfig = {
             // Create order
             createOrder: function(data, actions) {
                 console.log('Creating PayPal order...');
@@ -1253,10 +1257,44 @@ class CheckoutManager {
                 console.log('PayPal payment cancelled:', data);
                 self.showMessage('Payment was cancelled.', 'warning');
             }
+        };
 
-        }).render('#paypal-button-container');
+        // Render PayPal buttons in all available containers
+        const containers = [
+            { id: 'desktop-paypal-container', name: 'Desktop' },
+            { id: 'paypal-button-container', name: 'Mobile Legacy' },
+            { id: 'unified-paypal-button-container', name: 'Mobile Unified' }
+        ];
 
-        console.log('PayPal buttons rendered successfully');
+        containers.forEach(container => {
+            const element = document.getElementById(container.id);
+            if (element) {
+                try {
+                    // Clear existing content
+                    element.innerHTML = '';
+                    
+                    // Create PayPal buttons configuration for this container
+                    const containerConfig = {
+                        ...paypalButtonConfig,
+                        style: {
+                            layout: 'vertical',
+                            color: 'blue',
+                            shape: 'rect',
+                            label: 'paypal',
+                            height: container.id === 'desktop-paypal-container' ? 45 : 48
+                        }
+                    };
+
+                    // Render the button
+                    paypal.Buttons(containerConfig).render(`#${container.id}`);
+                    console.log(`✅ ${container.name} PayPal buttons rendered in #${container.id}`);
+                } catch (error) {
+                    console.error(`❌ Error rendering PayPal buttons in ${container.name}:`, error);
+                }
+            }
+        });
+
+        console.log('PayPal buttons setup completed for all containers');
     }
 
     // Setup field listeners for PayPal availability
@@ -1642,3 +1680,284 @@ window.autoDebugPayPal = function() {
         }
     }
 };
+
+// PayPal Official Buttons Manager
+class PayPalOfficialButtons {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        this.attachEventListeners();
+        this.updateButtonsVisibility();
+    }
+    
+    attachEventListeners() {
+        // Official PayPal Button
+        const paypalBtn = document.getElementById('paypalButtonOfficial');
+        if (paypalBtn) {
+            paypalBtn.addEventListener('click', () => this.handlePayPalPayment());
+        }
+        
+        // Official Credit/Debit Card Button
+        const cardBtn = document.getElementById('paypalCardButtonOfficial');
+        if (cardBtn) {
+            cardBtn.addEventListener('click', () => this.handleCardPayment());
+        }
+        
+        // Listen for payment method changes to update button visibility
+        const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
+        paymentMethods.forEach(method => {
+            method.addEventListener('change', () => this.updateButtonsVisibility());
+        });
+        
+        // Listen for form field changes to update button states
+        const formInputs = document.querySelectorAll('input, select, textarea');
+        formInputs.forEach(input => {
+            input.addEventListener('input', () => this.updateButtonStates());
+        });
+    }
+    
+    handlePayPalPayment() {
+        console.log('Official PayPal button clicked');
+        
+        // Validate form first
+        if (!this.validateForm()) {
+            this.showValidationErrors();
+            return;
+        }
+        
+        // Set PayPal as selected payment method
+        const paypalRadio = document.getElementById('unifiedPayPal');
+        if (paypalRadio) {
+            paypalRadio.checked = true;
+            
+            // Trigger PayPal button creation
+            if (window.checkoutManager) {
+                window.checkoutManager.handlePaymentMethodChange();
+            }
+        }
+        
+        this.showMessage('Redirigiendo a PayPal...', 'info');
+    }
+    
+    handleCardPayment() {
+        console.log('Official Card button clicked');
+        
+        // Validate form first
+        if (!this.validateForm()) {
+            this.showValidationErrors();
+            return;
+        }
+        
+        // Set card as selected payment method
+        const cardRadio = document.getElementById('unifiedCard');
+        if (cardRadio) {
+            cardRadio.checked = true;
+            
+            // Trigger card form display
+            if (window.checkoutManager) {
+                window.checkoutManager.handlePaymentMethodChange();
+            }
+        }
+        
+        this.showMessage('Por favor, complete los datos de su tarjeta abajo.', 'info');
+        
+        // Scroll to card form
+        setTimeout(() => {
+            const cardForm = document.querySelector('.credit-card-form');
+            if (cardForm) {
+                cardForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }, 500);
+    }
+    
+    validateForm() {
+        const requiredFields = [
+            'firstName', 'lastName', 'email', 'phone', 
+            'address', 'city', 'postalCode', 'country'
+        ];
+        
+        let isValid = true;
+        
+        requiredFields.forEach(fieldName => {
+            const field = document.getElementById(fieldName);
+            if (field && !field.value.trim()) {
+                isValid = false;
+                field.classList.add('error');
+            } else if (field) {
+                field.classList.remove('error');
+            }
+        });
+        
+        // Validate payment method specific fields
+        const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value;
+        
+        if (selectedMethod === 'card') {
+            const cardFields = ['cardNumber', 'cardExpiry', 'cardCvv'];
+            cardFields.forEach(fieldName => {
+                const field = document.getElementById(fieldName);
+                if (field && !field.value.trim()) {
+                    isValid = false;
+                    field.classList.add('error');
+                } else if (field) {
+                    field.classList.remove('error');
+                }
+            });
+        }
+        
+        return isValid;
+    }
+    
+    showValidationErrors() {
+        // Scroll to first error field
+        const firstError = document.querySelector('.error');
+        if (firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            firstError.focus();
+        }
+        
+        // Show error message
+        this.showMessage('Please complete all required fields before proceeding.', 'error');
+    }
+    
+    showConfirmationAnimation(paymentType) {
+        const button = document.getElementById(`${paymentType}ConfirmButton`);
+        if (button) {
+            button.style.transform = 'scale(0.95)';
+            button.style.opacity = '0.8';
+            
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+                button.style.opacity = '1';
+            }, 150);
+        }
+    }
+    
+    processCreditCardPayment(cardType) {
+        this.showMessage(`Processing ${cardType.charAt(0).toUpperCase() + cardType.slice(1)} payment...`, 'info');
+        
+        // Simulate payment processing
+        setTimeout(() => {
+            this.showSuccessMessage(cardType);
+            this.redirectToConfirmation();
+        }, 2000);
+    }
+    
+    processPayPalPayment() {
+        // Set PayPal as selected payment method
+        const paypalRadio = document.getElementById('unifiedPayPal');
+        if (paypalRadio) {
+            paypalRadio.checked = true;
+            
+            // Trigger PayPal button creation
+            if (window.checkoutManager) {
+                window.checkoutManager.handlePaymentMethodChange();
+            }
+        }
+        
+        this.showMessage('Redirecting to PayPal...', 'info');
+    }
+    
+    showSuccessMessage(paymentType) {
+        const message = `Your ${paymentType.charAt(0).toUpperCase() + paymentType.slice(1)} payment has been processed successfully!`;
+        this.showMessage(message, 'success');
+    }
+    
+    showMessage(text, type = 'info') {
+        // Create or update message element
+        let messageEl = document.getElementById('paymentMessage');
+        if (!messageEl) {
+            messageEl = document.createElement('div');
+            messageEl.id = 'paymentMessage';
+            messageEl.className = 'payment-message';
+            
+            const buttonsContainer = document.getElementById('mobilePaymentButtons');
+            if (buttonsContainer) {
+                buttonsContainer.parentNode.insertBefore(messageEl, buttonsContainer);
+            }
+        }
+        
+        messageEl.textContent = text;
+        messageEl.className = `payment-message ${type}`;
+        messageEl.style.display = 'block';
+        
+        // Auto-hide after 4 seconds for non-error messages
+        if (type !== 'error') {
+            setTimeout(() => {
+                messageEl.style.display = 'none';
+            }, 4000);
+        }
+    }
+    
+    updateButtonsVisibility() {
+        const buttonsContainer = document.getElementById('paypalOfficialButtons');
+        if (!buttonsContainer) return;
+        
+        // Show buttons only on mobile devices
+        const isMobile = window.innerWidth <= 768;
+        buttonsContainer.style.display = isMobile ? 'block' : 'none';
+    }
+    
+    updateButtonStates() {
+        const isFormValid = this.validateFormSilently();
+        const buttons = [
+            'paypalButtonOfficial',
+            'paypalCardButtonOfficial'
+        ];
+        
+        buttons.forEach(buttonId => {
+            const button = document.getElementById(buttonId);
+            if (button) {
+                if (isFormValid) {
+                    button.style.opacity = '1';
+                    button.style.cursor = 'pointer';
+                } else {
+                    button.style.opacity = '0.6';
+                    button.style.cursor = 'not-allowed';
+                }
+            }
+        });
+    }
+    
+    validateFormSilently() {
+        // Same as validateForm but without adding error classes
+        const requiredFields = [
+            'firstName', 'lastName', 'email', 'phone', 
+            'address', 'city', 'postalCode', 'country'
+        ];
+        
+        let isValid = true;
+        
+        requiredFields.forEach(fieldName => {
+            const field = document.getElementById(fieldName);
+            if (field && !field.value.trim()) {
+                isValid = false;
+            }
+        });
+        
+        return isValid;
+    }
+    
+    redirectToConfirmation() {
+        // Simulate redirect to confirmation page
+        setTimeout(() => {
+            window.location.href = 'index.html?order=confirmed';
+        }, 1500);
+    }
+}
+
+// Initialize PayPal Official Buttons when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof PayPalOfficialButtons !== 'undefined') {
+        window.paypalOfficialButtons = new PayPalOfficialButtons();
+        console.log('PayPal Official Buttons initialized');
+    }
+});
+
+// Handle window resize to update button visibility
+window.addEventListener('resize', () => {
+    if (window.paypalOfficialButtons) {
+        window.paypalOfficialButtons.updateButtonsVisibility();
+    }
+});

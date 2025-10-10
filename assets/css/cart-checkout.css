@@ -748,13 +748,34 @@
 }
 
 @media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+    
+    .container {
+        padding: 0 0.75rem;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    
     .checkout-content {
-        padding: 1.5rem 0;
+        padding: 1rem 0;
     }
     
     .checkout-layout {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 1rem;
+        padding: 0;
+        margin: 0;
+    }
+    
+    /* Prevent horizontal overflow */
+    .checkout-form-section,
+    .order-summary {
+        width: 100%;
+        box-sizing: border-box;
+        margin-left: 0;
+        margin-right: 0;
     }
 }
 
@@ -1614,6 +1635,26 @@
     color: var(--primary-color);
     font-size: 1rem;
     text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+}
+
+.order-item-price .original-price {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    text-decoration: line-through;
+    font-weight: 400;
+    order: 1;
+    margin-bottom: 0.125rem;
+}
+
+.order-item-price .current-price {
+    font-size: 1rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    order: 2;
 }
 
 @media (max-width: 768px) {
@@ -2303,15 +2344,20 @@
 /* Additional mobile optimizations for very small screens */
 @media (max-width: 480px) {
     .container {
-        padding: 0 0.75rem;
+        padding: 0 0.5rem;
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
     }
     
     .checkout-content {
-        padding: 1rem 0;
+        padding: 0.5rem 0;
     }
     
     .checkout-layout {
-        gap: 1rem;
+        gap: 0.75rem;
+        padding: 0;
+        margin: 0;
     }
     
     .payment-methods {
@@ -2754,22 +2800,1330 @@ select.form-control {
     
     /* Mobile payment wrapper */
     .mobile-payment-wrapper {
-        padding: 0 1rem;
+        padding: 0 0.5rem;
+        margin: 0;
     }
     
     .mobile-order-summary,
     .mobile-payment-card,
     .mobile-terms-section {
-        margin-bottom: 1.5rem;
-        padding: 1.25rem;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        margin-left: 0;
+        margin-right: 0;
     }
     
     .form-row {
         grid-template-columns: 1fr;
+        gap: 0.75rem;
     }
     
     .checkout-form,
     .checkout-summary {
-        padding: 2rem 1.5rem;
+        padding: 1rem 0.5rem;
+        margin: 0;
+    }
+    
+    /* Form sections mobile optimization */
+    .form-section {
+        padding: 1rem 0.75rem;
+        margin-bottom: 1rem;
+    }
+    
+    .checkout-form-section {
+        border-radius: 8px;
+        margin-bottom: 0.75rem;
+    }
+    
+    /* Input fields mobile optimization */
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 0.75rem 0.5rem;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    /* Breadcrumb mobile */
+    .breadcrumb {
+        margin-top: 60px;
+        padding: 0.5rem 0;
+    }
+    
+    .breadcrumb .container {
+        padding: 0 0.5rem;
+    }
+}
+
+/* PayPal Official Payment Buttons */
+.paypal-official-buttons {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 2px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    position: relative;
+    z-index: 10;
+}
+
+/* PayPal Button Official */
+.paypal-button-official {
+    width: 100%;
+    background: #0070ba;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.2s ease;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paypal-button-official:hover {
+    background: #005ea6;
+}
+
+.paypal-text-official {
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+/* Credit/Debit Card Button Official */
+.paypal-card-button-official {
+    width: 100%;
+    background: #2c2e2f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    text-align: center;
+    transition: background-color 0.2s ease;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paypal-card-button-official:hover {
+    background: #1a1c1d;
+}
+
+.card-icon-official i {
+    font-size: 18px;
+    color: white;
+}
+
+/* PayPal Branding Official */
+.paypal-branding-official {
+    text-align: center;
+    margin: 12px 0;
+    font-size: 12px;
+    color: #6c7378;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.paypal-branding-official .developed-text {
+    font-weight: normal;
+}
+
+.paypal-branding-official .paypal-brand {
+    color: #0070ba;
+    font-weight: 600;
+}
+
+/* Security Message */
+.paypal-security-message {
+    background: #e6f3ff;
+    border: 1px solid #b8deff;
+    border-radius: 6px;
+    padding: 12px;
+    margin-top: 12px;
+}
+
+.security-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #1565c0;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.security-content i {
+    color: #1565c0;
+    font-size: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .paypal-official-buttons {
+        margin: 1rem 0;
+        padding: 1.25rem;
+        border-radius: 8px;
+    }
+    
+    .paypal-button-official,
+    .paypal-card-button-official {
+        font-size: 15px;
+        min-height: 42px;
+        padding: 10px 20px;
+    }
+}
+
+/* Ultra mobile optimization for checkout */
+@media (max-width: 375px) {
+    body {
+        padding-top: 60px;
+        margin: 0;
+        overflow-x: hidden;
+    }
+    
+    .container {
+        padding: 0 0.25rem !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    .checkout-content {
+        padding: 0.25rem 0 !important;
+    }
+    
+    .checkout-layout {
+        gap: 0.5rem !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .checkout-form-section,
+    .order-summary {
+        margin-bottom: 0.5rem !important;
+        border-radius: 6px !important;
+    }
+    
+    .form-section {
+        padding: 0.75rem 0.5rem !important;
+    }
+    
+    .section-header h2 {
+        font-size: 1.125rem !important;
+    }
+    
+    .form-group {
+        margin-bottom: 0.75rem !important;
+    }
+    
+    .mobile-payment-wrapper {
+        padding: 0 0.25rem !important;
+    }
+    
+    .breadcrumb .container {
+        padding: 0 0.25rem !important;
+    }
+}
+
+/* Mobile-First Simplified Checkout */
+@media (max-width: 768px) {
+    /* Hide unnecessary sections on mobile */
+    .mobile-order-summary,
+    .order-summary,
+    .checkout-summary,
+    .payment-methods:not(.mobile-payment-wrapper),
+    .mobile-terms-section:not(.final-terms),
+    .checkout-security-badges,
+    .breadcrumb {
+        display: none !important;
+    }
+    
+    /* Show only essential sections */
+    .form-section:has(.section-title:contains("Contact Information")),
+    .form-section:has(.section-title:contains("Shipping Address")),
+    .form-section:has(.section-title:contains("Terms")),
+    .form-section:has(.section-title:contains("Newsletter")),
+    .paypal-official-buttons {
+        display: block !important;
+    }
+    
+    /* Simplify layout */
+    .checkout-layout {
+        display: block !important;
+        grid-template-columns: none !important;
+    }
+    
+    .checkout-form {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Hide payment method selection - PayPal buttons handle this */
+    .unified-payment-methods,
+    .mobile-payment-card:not(.paypal-official-buttons),
+    .credit-card-form,
+    .mobile-paypal-section {
+        display: none !important;
+    }
+}
+
+/* Show only on mobile devices */
+@media (min-width: 769px) {
+    .paypal-official-buttons {
+        display: none !important;
+    }
+}
+
+/* Force visibility on mobile for debugging */
+@media (max-width: 768px) {
+    .paypal-official-buttons {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .mobile-payment-confirmation {
+        margin: 1rem 0;
+        padding: 1.25rem;
+        border-radius: 8px;
+    }
+    
+    .payment-confirm-button {
+        padding: 1rem;
+    }
+    
+    .payment-text {
+        font-size: 1rem;
+    }
+    
+    .payment-security {
+        font-size: 0.75rem;
+    }
+}
+
+/* Payment Messages */
+.payment-message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    font-weight: 500;
+    text-align: center;
+    display: none;
+    animation: slideIn 0.3s ease-out;
+}
+
+.payment-message.info {
+    background: #dbeafe;
+    color: #1e40af;
+    border: 1px solid #93c5fd;
+}
+
+.payment-message.success {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+}
+
+.payment-message.error {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fca5a5;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Button States */
+.payment-confirm-button.enabled {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.payment-confirm-button.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.payment-confirm-button.disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Form validation styles */
+input.error,
+select.error,
+textarea.error {
+    border-color: #dc2626;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* Show only on mobile devices */
+@media (min-width: 769px) {
+    .mobile-payment-confirmation {
+        display: none;
+    }
+}
+
+/* ========================================================================
+   MOBILE CHECKOUT SIMPLIFICATION
+   Simplified mobile checkout showing only essential elements
+   ======================================================================== */
+
+/* Mobile-only checkout simplification */
+@media (max-width: 768px) {
+    
+    /* Force full width on mobile - Ultra aggressive */
+    html, body {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+    }
+    
+    * {
+        box-sizing: border-box !important;
+    }
+    
+    /* Override any inherited width restrictions */
+    .checkout-page *,
+    .mobile-essential *,
+    .form-section *,
+    .form-grid *,
+    .form-group * {
+        max-width: 100% !important;
+    }
+    
+    .container,
+    .checkout-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* Hide all checkout form sections by default on mobile */
+    .checkout-form .form-section {
+        display: none;
+    }
+    
+    /* Show only mobile-essential sections */
+    .checkout-form .form-section.mobile-essential {
+        display: block;
+    }
+    
+    /* Hide order summary on mobile for simplified experience */
+    .order-summary {
+        display: none;
+    }
+    
+    /* Hide payment method selection (cards, etc.) since we only want PayPal */
+    .payment-method {
+        display: none;
+    }
+    
+    /* Hide order notes (optional field) */
+    .order-notes {
+        display: none;
+    }
+    
+    /* Hide security badges on mobile to save space */
+    .security-info {
+        display: none;
+    }
+    
+    /* Hide order guarantee text on mobile */
+    .order-guarantee {
+        display: none;
+    }
+    
+    /* Hide coupon section on mobile */
+    .coupon-section {
+        display: none;
+    }
+    
+    /* Hide newsletter checkbox (keep only terms required) */
+    .form-section.mobile-essential .checkbox-group:has(#newsletter) {
+        display: none;
+    }
+    
+    /* Larger checkbox for mobile */
+    .mobile-essential .checkbox-group {
+        margin: 1.5rem 0;
+    }
+    
+    .mobile-essential .checkbox-label {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        cursor: pointer;
+        line-height: 1.5;
+        font-size: 1rem;
+    }
+    
+    .mobile-essential .checkbox-label input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        min-height: 20px;
+        margin: 0;
+        cursor: pointer;
+    }
+    
+    .mobile-essential .checkbox-label .label-text {
+        flex: 1;
+        color: #374151;
+        line-height: 1.5;
+    }
+    
+    .mobile-essential .checkbox-label .label-text a {
+        color: #3b82f6;
+        text-decoration: underline;
+    }
+    
+    /* Optimize mobile-essential sections spacing */
+    .form-section.mobile-essential {
+        margin: 0 0.5rem 1rem 0.5rem !important;
+        padding: 1rem !important;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        width: calc(100% - 1rem) !important;
+        max-width: calc(100% - 1rem) !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Ensure full width containers */
+    .checkout-form {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-sizing: border-box;
+    }
+    
+    .checkout-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Override any parent container restrictions */
+    .checkout-page .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Ensure mobile PayPal section is prominent */
+    .mobile-paypal-section.mobile-essential {
+        margin: 1.5rem 0;
+        padding: 1rem 0;
+    }
+    
+    /* Ensure payment buttons are visible and prominent */
+    .payment-buttons.mobile-essential {
+        margin: 0 0.5rem 1rem 0.5rem !important;
+        padding: 1rem !important;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        width: calc(100% - 1rem) !important;
+        max-width: calc(100% - 1rem) !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Large mobile buttons */
+    .payment-buttons.mobile-essential .btn {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 1.2rem 1rem !important;
+        font-size: 1.2rem;
+        font-weight: 600;
+        min-height: 58px;
+        border-radius: 8px;
+        margin: 0 0 1rem 0 !important;
+        box-sizing: border-box !important;
+        border: none;
+        background: #3b82f6;
+        color: white;
+    }
+    
+    /* PayPal container full width */
+    #paypal-button-container,
+    #unified-paypal-button-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 58px;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* PayPal buttons styling */
+    #paypal-button-container iframe,
+    #unified-paypal-button-container iframe {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 58px !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Mobile PayPal section */
+    .mobile-paypal-section.mobile-essential {
+        margin: 0 0.5rem 1rem 0.5rem !important;
+        padding: 1rem !important;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        width: calc(100% - 1rem) !important;
+        max-width: calc(100% - 1rem) !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Simplified mobile checkout title */
+    .checkout-page h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    /* Clean mobile form styling */
+    .mobile-essential .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .mobile-essential .form-group label {
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0.75rem;
+        display: block;
+        font-size: 1.1rem;
+    }
+    
+    .mobile-essential .form-group input,
+    .mobile-essential .form-group select {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 1rem !important;
+        border: 2px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        min-height: 52px;
+        box-sizing: border-box !important;
+        -webkit-appearance: none;
+        appearance: none;
+        margin: 0 !important;
+    }
+    
+    .mobile-essential .form-group input:focus,
+    .mobile-essential .form-group select:focus {
+        border-color: #3b82f6;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    
+    /* Progress indicator simplified for mobile */
+    .checkout-progress {
+        margin-bottom: 1.5rem;
+        padding: 0 1rem;
+    }
+    
+    .checkout-progress .progress-step {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+    
+    /* Mobile title and headers */
+    .mobile-essential h3,
+    .mobile-essential .section-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .mobile-essential h3 i,
+    .mobile-essential .section-title i {
+        color: #3b82f6;
+        font-size: 1.1rem;
+    }
+    
+    /* Touch-friendly spacing */
+    .mobile-essential * {
+        -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+    }
+    
+    /* Ensure no horizontal scroll */
+    .checkout-page {
+        overflow-x: hidden;
+        width: 100%;
+    }
+    
+    /* Grid improvements for mobile */
+    .form-row {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .form-row .form-group {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 1.5rem !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Override any Bootstrap or framework restrictions */
+    .mobile-essential .col-md-6,
+    .mobile-essential .col-sm-6,
+    .mobile-essential .col-12,
+    .mobile-essential .col {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        flex: none !important;
+    }
+    
+    /* Override form-grid on mobile - ULTRA SPECIFIC */
+    .checkout-page .mobile-essential .form-grid,
+    .mobile-essential .form-grid,
+    .form-section.mobile-essential .form-grid {
+        display: block !important;
+        grid-template-columns: none !important;
+        grid-template-rows: none !important;
+        gap: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* Force full width on all form elements */
+    .mobile-essential input[type="text"],
+    .mobile-essential input[type="email"],
+    .mobile-essential input[type="tel"],
+    .mobile-essential select,
+    .mobile-essential textarea {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 1rem !important;
+        font-size: 1.1rem !important;
+        min-height: 52px !important;
+        border: 2px solid #d1d5db !important;
+        border-radius: 8px !important;
+    }
+    
+    /* Specific override for form-group in mobile-essential */
+    .mobile-essential .form-group {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 1.5rem !important;
+        padding: 0 !important;
+        display: block !important;
+        flex: none !important;
+        grid-column: none !important;
+        gap: 0 !important;
+        flex-direction: column !important;
+    }
+    
+    /* Override the global .form-group flex display */
+    .checkout-page .mobile-essential .form-group {
+        display: block !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Override any full-width class restrictions */
+    .mobile-essential .form-group.full-width {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Remove any margin/padding restrictions */
+    .checkout-page {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden;
+    }
+    
+    /* Ultra-specific selectors for Contact Information */
+    #contactInformation .form-grid {
+        display: block !important;
+        width: 100% !important;
+    }
+    
+    #contactInformation .form-group {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 1.5rem !important;
+        display: block !important;
+    }
+    
+    #contactInformation input[type="text"],
+    #contactInformation input[type="email"],
+    #contactInformation input[type="tel"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 1rem !important;
+        font-size: 1.1rem !important;
+        min-height: 52px !important;
+        border: 2px solid #d1d5db !important;
+        border-radius: 8px !important;
+        margin: 0 !important;
+        display: block !important;
+    }
+    
+    /* Shipping Address specific */
+    .mobile-essential[id*="shipping"] .form-grid,
+    .mobile-essential[id*="Shipping"] .form-grid {
+        display: block !important;
+        width: 100% !important;
+    }
+    
+    .mobile-essential[id*="shipping"] .form-group,
+    .mobile-essential[id*="Shipping"] .form-group {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
+    }
+    
+    /* NUCLEAR OPTION - Maximum specificity override */
+    html body .checkout-page .checkout-form .mobile-essential .form-grid .form-group input,
+    html body .checkout-page .checkout-form .mobile-essential .form-grid .form-group select,
+    html body .checkout-page .checkout-form .mobile-essential .form-grid .form-group textarea {
+        width: 100vw !important;
+        max-width: calc(100vw - 2rem) !important;
+        min-width: calc(100vw - 2rem) !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 1rem !important;
+        box-sizing: border-box !important;
+        display: block !important;
+        font-size: 1.2rem !important;
+        min-height: 56px !important;
+        border: 2px solid #d1d5db !important;
+        border-radius: 8px !important;
+    }
+    
+    /* NUCLEAR OPTION for form-group */
+    html body .checkout-page .checkout-form .mobile-essential .form-grid .form-group {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
+        margin-bottom: 1.5rem !important;
+        padding: 0 !important;
+        grid-column: unset !important;
+        flex: none !important;
+    }
+    
+    /* ULTIMATE MOBILE OVERRIDE - SCREEN SIZE SPECIFIC */
+    @media screen and (max-width: 480px) {
+        /* Force container to full width */
+        .container,
+        .checkout-container,
+        .checkout-form-section {
+            width: 100vw !important;
+            max-width: 100vw !important;
+            margin: 0 !important;
+            padding: 0 0.5rem !important;
+            box-sizing: border-box !important;
+        }
+        
+        /* Mobile-essential sections ultra-wide */
+        .mobile-essential {
+            width: calc(100vw - 1rem) !important;
+            max-width: calc(100vw - 1rem) !important;
+            margin: 0.5rem auto !important;
+            padding: 1rem !important;
+            box-sizing: border-box !important;
+        }
+        
+        /* Form grid complete override */
+        .mobile-essential .form-grid {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        
+        /* Form groups block layout */
+        .mobile-essential .form-group {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 0 1.5rem 0 !important;
+            padding: 0 !important;
+        }
+        
+        /* Inputs - Maximum size for mobile */
+        .mobile-essential input[type="text"],
+        .mobile-essential input[type="email"],
+        .mobile-essential input[type="tel"],
+        .mobile-essential select {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 100% !important;
+            height: 56px !important;
+            min-height: 56px !important;
+            padding: 1rem !important;
+            font-size: 16px !important;
+            border: 2px solid #ddd !important;
+            border-radius: 8px !important;
+            box-sizing: border-box !important;
+            margin: 0 !important;
+            -webkit-appearance: none !important;
+            appearance: none !important;
+            background: white !important;
+        }
+        
+        /* Labels larger for mobile */
+        .mobile-essential label {
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            color: #333 !important;
+            margin-bottom: 0.5rem !important;
+            display: block !important;
+        }
+        
+        /* Section titles */
+        .mobile-essential h3.section-title {
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            margin-bottom: 1rem !important;
+            color: #333 !important;
+        }
+        
+        /* Payment buttons mobile */
+        .payment-buttons.mobile-essential {
+            width: calc(100vw - 1rem) !important;
+            margin: 0.5rem auto !important;
+            padding: 1rem !important;
+        }
+        
+        .payment-buttons .btn {
+            width: 100% !important;
+            height: 56px !important;
+            font-size: 18px !important;
+            font-weight: 600 !important;
+            padding: 1rem !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        /* PayPal containers */
+        #paypal-button-container,
+        #unified-paypal-button-container {
+            width: 100% !important;
+            min-height: 56px !important;
+            margin: 0 !important;
+        }
+        
+        /* Checkbox larger for mobile */
+        .mobile-essential input[type="checkbox"] {
+            width: 24px !important;
+            height: 24px !important;
+            min-width: 24px !important;
+            min-height: 24px !important;
+        }
+        
+        .mobile-essential .checkbox-label {
+            font-size: 16px !important;
+            line-height: 1.4 !important;
+        }
+    }
+    
+    /* ========================================================================
+       UNIFIED PAYMENT SYSTEM - DISABLED (Using official PayPal buttons only)
+       ======================================================================== */
+    
+    .unified-payment-methods {
+        display: none !important;
+    }
+    
+    /* ========================================================================
+       OFFICIAL PAYPAL BUTTONS SECTION
+       Official PayPal buttons for all devices
+       ======================================================================== */
+    
+    .official-paypal-section {
+        margin: 2rem 0;
+        width: 100%;
+        display: block;
+    }
+
+    .official-paypal-section .paypal-official-buttons {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin: 0 auto;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        display: block;
+    }
+
+    .official-paypal-section .paypal-button-official {
+        width: 100%;
+        border: none;
+        border-radius: 6px;
+        padding: 14px 24px;
+        margin-bottom: 6px;
+        cursor: pointer;
+        font-family: "Helvetica Neue", Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
+        transition: all 0.2s ease;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        letter-spacing: 0.5px;
+    }
+
+    .official-paypal-section .paypal-primary {
+        background: #0070ba;
+        color: white;
+    }
+
+    .official-paypal-section .paypal-primary:hover {
+        background: #005ea6;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 112, 186, 0.3);
+    }
+
+    .official-paypal-section .paypal-secondary {
+        background: #333333;
+        color: white;
+    }
+
+    .official-paypal-section .paypal-secondary:hover {
+        background: #262626;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(51, 51, 51, 0.3);
+    }
+
+    .official-paypal-section .paypal-logo {
+        font-weight: 700;
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+
+    .official-paypal-section .paypal-card-icon {
+        font-size: 20px;
+        margin-right: 8px;
+    }
+
+    .official-paypal-section .paypal-branding {
+        text-align: center;
+        margin-top: 12px;
+        font-size: 12px;
+        color: #0070ba;
+        font-family: "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .official-paypal-section .paypal-branding strong {
+        font-weight: 600;
+    }
+
+    .official-paypal-section .paypal-notice {
+        margin-top: 12px;
+        padding: 12px;
+        background: #e3f2fd;
+        border: 1px solid #bbdefb;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    .official-paypal-section .notice-content {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #1976d2;
+    }
+
+    .official-paypal-section .notice-content i {
+        color: #2196f3;
+    }
+    
+    .payment-option {
+        background: white;
+        border: 2px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .payment-option:hover {
+        border-color: #3b82f6;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+        transform: translateY(-1px);
+    }
+    
+    .payment-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .payment-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #1f2937;
+        flex: 1;
+    }
+    
+    .payment-subtitle {
+        font-size: 0.9rem;
+        color: #6b7280;
+        margin-left: auto;
+    }
+    
+    /* PayPal Option Styling */
+    .paypal-option {
+        border-color: #0070ba;
+        background: linear-gradient(135deg, #fef7e0 0%, #fef3c7 100%);
+    }
+    
+    .paypal-option:hover {
+        border-color: #0070ba;
+        box-shadow: 0 4px 12px rgba(0, 112, 186, 0.2);
+    }
+    
+    .paypal-icon {
+        color: #0070ba;
+        font-size: 1.5rem;
+    }
+    
+    .paypal-button-container {
+        margin-top: 1rem;
+    }
+    
+    #desktop-paypal-container {
+        min-height: 45px;
+        width: 100%;
+    }
+    
+    /* Credit Card Option */
+    .card-option {
+        border-color: #10b981;
+        background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    }
+    
+    .card-option:hover {
+        border-color: #10b981;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    }
+    
+    .card-icon {
+        color: #10b981;
+        font-size: 1.3rem;
+    }
+    
+    .card-icons {
+        display: flex;
+        gap: 0.5rem;
+        margin-left: auto;
+    }
+    
+    .card-icons i {
+        font-size: 1.2rem;
+        color: #6b7280;
+    }
+    
+    /* Bank Transfer Option */
+    .transfer-option {
+        border-color: #8b5cf6;
+        background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+    }
+    
+    .transfer-option:hover {
+        border-color: #8b5cf6;
+        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+    }
+    
+    .transfer-icon {
+        color: #8b5cf6;
+        font-size: 1.3rem;
+    }
+    
+    /* Payment Buttons */
+    .card-payment-btn {
+        background: #10b981;
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+    
+    .card-payment-btn:hover {
+        background: #059669;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+    
+    .transfer-payment-btn {
+        background: transparent;
+        border: 2px solid #8b5cf6;
+        color: #8b5cf6;
+        font-weight: 600;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+    
+    .transfer-payment-btn:hover {
+        background: #8b5cf6;
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    }
+    
+    /* Security Note */
+    .security-note {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem;
+        background: #f8fafc;
+        border-radius: 8px;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: #475569;
+    }
+    
+    .security-note i {
+        color: #10b981;
+        font-size: 1rem;
+    }
+    
+    /* Mobile Responsive for Unified Payment System */
+    @media (max-width: 768px) {
+        .unified-payment-methods {
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .payment-option {
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .payment-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .payment-title {
+            font-size: 1rem;
+        }
+        
+        .payment-subtitle {
+            font-size: 0.85rem;
+            margin-left: 0;
+            margin-top: 0.25rem;
+        }
+        
+        .card-icons {
+            margin-left: 0;
+            margin-top: 0.5rem;
+            justify-content: flex-start;
+        }
+        
+        .card-payment-btn,
+        .transfer-payment-btn {
+            padding: 0.875rem 1rem;
+            font-size: 0.95rem;
+        }
+        
+        #desktop-paypal-container {
+            min-height: 48px;
+        }
+        
+        .security-note {
+            padding: 0.75rem;
+            font-size: 0.85rem;
+        }
+        
+        .security-note i {
+            font-size: 0.9rem;
+        }
+    }
+    
+    /* EXTRA SMALL MOBILE DEVICES */
+    @media screen and (max-width: 375px) {
+        /* Even more aggressive for small screens */
+        .mobile-essential {
+            width: calc(100vw - 0.5rem) !important;
+            margin: 0.25rem auto !important;
+            padding: 0.75rem !important;
+        }
+        
+        .mobile-essential input[type="text"],
+        .mobile-essential input[type="email"],
+        .mobile-essential input[type="tel"],
+        .mobile-essential select {
+            height: 52px !important;
+            font-size: 16px !important;
+            padding: 0.875rem !important;
+        }
+        
+        .container,
+        .checkout-container {
+            padding: 0 0.25rem !important;
+        }
     }
 }

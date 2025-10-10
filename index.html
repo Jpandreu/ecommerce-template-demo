@@ -215,7 +215,7 @@
                     <div class="product-image">
                         <img src="./assets/images/product1.jpg" alt="Premium Product 1">
                         <div class="product-overlay">
-                            <button class="btn btn-white btn-small">Quick View</button>
+                            <button class="btn btn-white btn-small quick-view-btn" data-product-id="1">Quick View</button>
                         </div>
                     </div>
                     <div class="product-info">
@@ -238,7 +238,7 @@
                         <img src="./assets/images/product2.jpg" alt="Premium Product 2">
                         <div class="product-badge">New</div>
                         <div class="product-overlay">
-                            <button class="btn btn-white btn-small">Quick View</button>
+                            <button class="btn btn-white btn-small quick-view-btn" data-product-id="2">Quick View</button>
                         </div>
                     </div>
                     <div class="product-info">
@@ -260,7 +260,7 @@
                         <img src="./assets/images/product3.jpg" alt="Premium Product 3">
                         <div class="product-badge sale">-30%</div>
                         <div class="product-overlay">
-                            <button class="btn btn-white btn-small">Quick View</button>
+                            <button class="btn btn-white btn-small quick-view-btn" data-product-id="3">Quick View</button>
                         </div>
                     </div>
                     <div class="product-info">
@@ -705,8 +705,7 @@
     </script>
     
     <!-- JavaScript -->
-    <script src="./assets/js/polyfills.js"></script>
-    <script src="./assets/js/analytics.js"></script>
+    <script src="./assets/js/utilities-bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="./assets/js/image-loader.js"></script>
     <script src="./assets/js/cart.js"></script>
@@ -815,5 +814,146 @@
     
     <!-- Universal Cart Fix -->
     <script src="./assets/js/universal-cart-fix.js"></script>
+    
+    <!-- Quick View Modal JavaScript -->
+    <script src="./assets/js/quick-view-modal.js"></script>
+    
+    <!-- Debug Script -->
+    <script>
+        console.log('Debug script loaded');
+        
+        // Check if Quick View buttons exist after DOM loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded');
+            
+            const quickViewButtons = document.querySelectorAll('.quick-view-btn');
+            console.log('Quick View buttons found:', quickViewButtons.length);
+            
+            quickViewButtons.forEach((btn, index) => {
+                console.log(`Button ${index + 1}:`, btn);
+                console.log(`  - Classes:`, btn.classList);
+                console.log(`  - Product ID:`, btn.getAttribute('data-product-id'));
+            });
+            
+            // Test modal element
+            const modal = document.getElementById('quickViewModal');
+            console.log('Modal element found:', !!modal);
+            
+            if (modal) {
+                console.log('Modal HTML structure exists');
+            } else {
+                console.error('Modal HTML structure missing!');
+            }
+        });
+        
+        // Add manual test function
+        window.testQuickView = function() {
+            console.log('Manual test triggered');
+            if (window.quickViewModal) {
+                window.quickViewModal.openModal('1');
+            } else {
+                console.error('quickViewModal instance not found');
+            }
+        };
+        
+        // Backup quick view handler
+        setTimeout(function() {
+            console.log('Setting up backup quick view handlers');
+            const buttons = document.querySelectorAll('.quick-view-btn');
+            
+            buttons.forEach(function(button) {
+                button.onclick = function(e) {
+                    console.log('Backup handler triggered!');
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const productId = this.getAttribute('data-product-id');
+                    console.log('Opening modal for product:', productId);
+                    
+                    if (window.quickViewModal) {
+                        window.quickViewModal.openModal(productId);
+                    } else {
+                        console.error('QuickViewModal not available');
+                    }
+                    
+                    return false;
+                };
+                
+                console.log('Backup handler attached to button with product ID:', button.getAttribute('data-product-id'));
+            });
+        }, 500);
+    </script>
+
+    <!-- Product Quick View Modal -->
+    <div id="quickViewModal" class="quick-view-modal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalProductName">Product Name</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-product-image">
+                    <img id="modalProductImage" src="" alt="Product Image">
+                    <div id="modalProductBadge" class="product-badge" style="display: none;"></div>
+                </div>
+                <div class="modal-product-info">
+                    <div class="modal-product-details">
+                        <p id="modalProductDescription">Product description will appear here...</p>
+                        <div class="modal-product-price">
+                            <span id="modalPriceCurrent" class="price-current">$0.00</span>
+                            <span id="modalPriceOriginal" class="price-original" style="display: none;">$0.00</span>
+                        </div>
+                        <div class="modal-product-features">
+                            <h4>Key Features:</h4>
+                            <ul id="modalProductFeatures">
+                                <li>High-quality materials and construction</li>
+                                <li>Modern design that fits any space</li>
+                                <li>Easy installation and maintenance</li>
+                                <li>1-year warranty included</li>
+                            </ul>
+                        </div>
+                        <div class="modal-product-specs">
+                            <h4>Specifications:</h4>
+                            <div class="specs-grid" id="modalProductSpecs">
+                                <div class="spec-item">
+                                    <span class="spec-label">Dimensions:</span>
+                                    <span class="spec-value">Varies by model</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Weight:</span>
+                                    <span class="spec-value">Lightweight design</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Material:</span>
+                                    <span class="spec-value">Premium quality</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <div class="quantity-selector">
+                            <label for="modalQuantity">Quantity:</label>
+                            <div class="quantity-controls">
+                                <button type="button" class="quantity-btn" id="quantityMinus">-</button>
+                                <input type="number" id="modalQuantity" value="1" min="1" max="99">
+                                <button type="button" class="quantity-btn" id="quantityPlus">+</button>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-full" id="modalAddToCart">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add to Cart
+                        </button>
+                        <button class="btn btn-outline btn-full" id="modalViewDetails">
+                            <i class="fas fa-eye"></i>
+                            View Full Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
