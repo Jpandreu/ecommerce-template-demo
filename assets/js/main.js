@@ -177,14 +177,29 @@ function initMobileMenu() {
             closeMobileMenu();
         }
     });
-    
+
     document.addEventListener('touchend', function(e) {
         if (!nav.contains(e.target) && !newMobileMenuBtn.contains(e.target)) {
             closeMobileMenu();
         }
     }, { passive: false });
-    
-    console.log('✅ Mobile menu initialized successfully');
+
+    // Global touch event delegation for buttons
+    document.addEventListener('touchend', function(e) {
+        // Handle Add to Cart buttons
+        if (e.target && (e.target.classList.contains('add-to-cart') || 
+            (e.target.classList.contains('btn-primary') && e.target.textContent.includes('Add to Cart')))) {
+            console.log('Mobile Add to Cart touched!');
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Find the product card
+            const productCard = e.target.closest('.product-card') || e.target.closest('[data-id]');
+            if (productCard) {
+                handleAddToCart(productCard);
+            }
+        }
+    }, { passive: false });    console.log('✅ Mobile menu initialized successfully');
 }
 
 function openMobileMenu() {
@@ -810,8 +825,10 @@ function initProductCards() {
         
         if (addToCartBtn && !addToCartBtn.hasAttribute('data-listener-added')) {
             addToCartBtn.setAttribute('data-listener-added', 'true');
-            addToCartBtn.addEventListener('click', function(e) {
+            
+            const handleAddToCartClick = function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 
                 // Prevent multiple rapid clicks
                 if (this.disabled) return;
@@ -823,14 +840,27 @@ function initProductCards() {
                 setTimeout(() => {
                     this.disabled = false;
                 }, 1000);
-            });
+            };
+
+            // Add click event for desktop
+            addToCartBtn.addEventListener('click', handleAddToCartClick);
+            
+            // Add touch event for mobile
+            addToCartBtn.addEventListener('touchend', handleAddToCartClick, { passive: false });
         }
         
         if (quickViewBtn) {
-            quickViewBtn.addEventListener('click', function(e) {
+            const handleQuickViewClick = function(e) {
                 e.preventDefault();
+                e.stopPropagation();
                 handleQuickView(card);
-            });
+            };
+
+            // Add click event for desktop
+            quickViewBtn.addEventListener('click', handleQuickViewClick);
+            
+            // Add touch event for mobile
+            quickViewBtn.addEventListener('touchend', handleQuickViewClick, { passive: false });
         }
     });
 }

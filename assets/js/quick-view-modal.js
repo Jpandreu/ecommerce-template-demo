@@ -97,6 +97,7 @@ class QuickViewModal {
             console.log('Attaching direct listeners to', quickViewButtons.length, 'buttons');
             
             quickViewButtons.forEach((button) => {
+                // Click event for desktop
                 button.addEventListener('click', (e) => {
                     console.log('Direct button click detected!');
                     const productId = e.target.getAttribute('data-product-id');
@@ -106,6 +107,17 @@ class QuickViewModal {
                     e.stopImmediatePropagation();
                     this.openModal(productId);
                 });
+
+                // Touch event for mobile
+                button.addEventListener('touchend', (e) => {
+                    console.log('Direct button touch detected!');
+                    const productId = e.target.getAttribute('data-product-id');
+                    console.log('Product ID from direct touch:', productId);
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    this.openModal(productId);
+                }, { passive: false });
             });
         }, 100);
         
@@ -121,6 +133,19 @@ class QuickViewModal {
                 this.openModal(productId);
             }
         }, true); // Use capture phase
+
+        // Method 3: Touch event delegation for mobile
+        document.addEventListener('touchend', (e) => {
+            if (e.target && e.target.classList.contains('quick-view-btn')) {
+                console.log('Delegation Quick View button touched!');
+                const productId = e.target.getAttribute('data-product-id');
+                console.log('Product ID from touch delegation:', productId);
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                this.openModal(productId);
+            }
+        }, { passive: false });
         
         // Modal close events
         this.modalClose?.addEventListener('click', () => this.closeModal());
