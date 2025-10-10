@@ -98,14 +98,17 @@ function initMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn') || 
                           document.querySelector('.mobile-menu-btn') ||
                           document.querySelector('.navbar-toggler');
-    const nav = document.getElementById('nav') || 
+    const nav = document.getElementById('navbarCollapse') || 
+                document.getElementById('nav') || 
                 document.querySelector('.navbar-collapse') ||
                 document.querySelector('.nav');
     
     if (!mobileMenuBtn || !nav) {
         console.error('❌ Mobile menu elements not found:', {
             mobileMenuBtn: !!mobileMenuBtn,
-            nav: !!nav
+            nav: !!nav,
+            mobileMenuBtnElement: mobileMenuBtn,
+            navElement: nav
         });
         return;
     }
@@ -119,6 +122,12 @@ function initMobileMenu() {
     const handleMenuToggle = (e) => {
         e.preventDefault();
         e.stopPropagation();
+        
+        console.log('🍎 Menu toggle clicked!', {
+            nav: nav,
+            navId: nav.id,
+            navClasses: nav.className
+        });
         
         // Check for both Bootstrap navbar and custom mobile menu
         const isOpen = nav.classList.contains('mobile-open') || nav.classList.contains('show');
@@ -147,6 +156,14 @@ function initMobileMenu() {
         this.style.transform = '';
     }, { passive: true });
     
+    // Configure close button if it exists
+    const closeBtn = document.getElementById('mobileCloseBtn') || 
+                     document.querySelector('.mobile-close-btn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeMobileMenu);
+        closeBtn.addEventListener('touchend', closeMobileMenu, { passive: false });
+    }
+
     // Close menu when clicking on a link
     const navLinks = nav.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
@@ -172,7 +189,8 @@ function initMobileMenu() {
 
 function openMobileMenu() {
     console.log('🍎 Opening mobile menu...');
-    const nav = document.getElementById('nav') || 
+    const nav = document.getElementById('navbarCollapse') || 
+                document.getElementById('nav') || 
                 document.querySelector('.navbar-collapse') ||
                 document.querySelector('.nav');
     const mobileMenuBtn = document.getElementById('mobileMenuBtn') ||
@@ -267,7 +285,8 @@ function openMobileMenu() {
 function closeMobileMenu() {
     console.log('🍎 Closing mobile menu...');
     
-    const nav = document.getElementById('nav') || 
+    const nav = document.getElementById('navbarCollapse') || 
+                document.getElementById('nav') || 
                 document.querySelector('.navbar-collapse') ||
                 document.querySelector('.nav');
     const mobileMenuBtn = document.getElementById('mobileMenuBtn') ||
