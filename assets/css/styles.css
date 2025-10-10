@@ -3684,3 +3684,117 @@ body {
         height: 250px;
     }
 }
+
+/* ==========================================================================
+   CRITICAL MOBILE BUTTON FIXES - DO NOT DELETE
+   ========================================================================== */
+
+/* Nuclear mobile button optimization */
+@media (max-width: 767px) {
+    /* All buttons must be touchable and functional */
+    .btn, button, [role="button"], .add-to-cart, .quick-view-btn {
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+        -webkit-user-select: none !important;
+        -moz-user-select: none !important;
+        -ms-user-select: none !important;
+        user-select: none !important;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+        cursor: pointer !important;
+        position: relative !important;
+        z-index: 10 !important;
+        min-height: 44px !important;
+        min-width: 44px !important;
+        border: none !important;
+        outline: none !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+        display: inline-block !important;
+    }
+
+    /* Force all clickable elements to work on mobile */
+    .btn-primary, .add-to-cart, .btn.btn-primary {
+        background-color: #2563eb !important;
+        color: white !important;
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+        z-index: 100 !important;
+        position: relative !important;
+    }
+
+    .btn-white, .quick-view-btn, .btn.btn-white {
+        background-color: white !important;
+        color: #1e293b !important;
+        border: 1px solid #e5e7eb !important;
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+        z-index: 100 !important;
+        position: relative !important;
+    }
+
+    /* Mobile menu button critical fix */
+    .mobile-menu-btn {
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+        z-index: 1000 !important;
+        position: relative !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .mobile-menu-btn span {
+        pointer-events: none !important;
+        display: block !important;
+        background: currentColor !important;
+    }
+
+    /* Product card buttons */
+    .product-card .btn {
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+        z-index: 50 !important;
+        position: relative !important;
+    }
+
+    /* Mobile nav links */
+    .mobile-nav .nav-link {
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+        z-index: 50 !important;
+        min-height: 48px !important;
+        display: flex !important;
+        align-items: center !important;
+        padding: 12px 20px !important;
+    }
+
+    /* Close button in mobile menu */
+    .mobile-close-btn {
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+        z-index: 1000 !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* Ensure mobile overlay doesn't block interactions */
+    .navbar-collapse {
+        touch-action: auto !important;
+        pointer-events: auto !important;
+    }
+
+    .mobile-nav-content {
+        touch-action: auto !important;
+        pointer-events: auto !important;
+    }
+
+    /* Force visibility and interaction */
+    .btn:active, button:active, [role="button"]:active {
+        transform: scale(0.98) !important;
+        opacity: 0.8 !important;
+    }
+}

@@ -86,6 +86,24 @@ function initializeApp() {
     debugSafariMobile();
     
     console.log('Ecommerce Template initialized successfully');
+    
+    // CRITICAL MOBILE BUTTON FIXES
+    if (window.innerWidth <= 768) {
+        console.log('📱 Mobile device detected, applying critical fixes');
+        setTimeout(() => {
+            forceMobileButtonInit();
+        }, 1000);
+        
+        // Reinitialize every 5 seconds on mobile for stubborn buttons
+        setInterval(() => {
+            forceMobileButtonInit();
+        }, 5000);
+    } else {
+        // Also run on desktop but less frequently
+        setTimeout(() => {
+            forceMobileButtonInit();
+        }, 2000);
+    }
 }
 
 /* ==========================================================================
@@ -184,8 +202,10 @@ function initMobileMenu() {
         }
     }, { passive: false });
 
-    // Global touch event delegation for buttons
+    // Global touch event delegation for buttons - CRITICAL MOBILE FIX
     document.addEventListener('touchend', function(e) {
+        console.log('Touch detected on:', e.target.className, e.target.tagName);
+        
         // Handle Add to Cart buttons
         if (e.target && (e.target.classList.contains('add-to-cart') || 
             (e.target.classList.contains('btn-primary') && e.target.textContent.includes('Add to Cart')))) {
@@ -199,7 +219,75 @@ function initMobileMenu() {
                 handleAddToCart(productCard);
             }
         }
-    }, { passive: false });    console.log('✅ Mobile menu initialized successfully');
+
+        // Handle Quick View buttons
+        if (e.target && e.target.classList.contains('quick-view-btn')) {
+            console.log('Mobile Quick View touched!');
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const productId = e.target.getAttribute('data-product-id');
+            if (productId && window.quickViewModal) {
+                window.quickViewModal.openModal(productId);
+            }
+        }
+    }, { passive: false });
+
+    // Additional click delegation for stubborn buttons
+    document.addEventListener('click', function(e) {
+        console.log('Click detected on:', e.target.className, e.target.tagName);
+        
+        // Force handle Add to Cart on any click
+        if (e.target && (e.target.classList.contains('add-to-cart') || 
+            (e.target.classList.contains('btn-primary') && e.target.textContent.includes('Add to Cart')))) {
+            console.log('Fallback Add to Cart clicked!');
+            
+            const productCard = e.target.closest('.product-card') || e.target.closest('[data-id]');
+            if (productCard) {
+                handleAddToCart(productCard);
+            }
+        }
+
+        // Force handle Quick View on any click
+        if (e.target && e.target.classList.contains('quick-view-btn')) {
+            console.log('Fallback Quick View clicked!');
+            
+            const productId = e.target.getAttribute('data-product-id');
+            if (productId && window.quickViewModal) {
+                window.quickViewModal.openModal(productId);
+            }
+        }
+    }, true);    console.log('✅ Mobile menu initialized successfully');
+}
+
+// Force button reinitialization for mobile - CRITICAL FIX
+function forceMobileButtonInit() {
+    console.log('🔄 Force reinitializing mobile buttons...');
+    
+    // Reinitialize product cards
+    initProductCards();
+    
+    // Force enable all buttons
+    document.querySelectorAll('.btn, button, [role="button"]').forEach(btn => {
+        btn.style.pointerEvents = 'auto';
+        btn.style.touchAction = 'manipulation';
+        btn.style.cursor = 'pointer';
+        
+        if (!btn.hasAttribute('data-mobile-fixed')) {
+            btn.setAttribute('data-mobile-fixed', 'true');
+            
+            // Add fallback click handler
+            btn.addEventListener('click', function(e) {
+                console.log('Fallback click handler fired for:', this.className);
+            }, { passive: false });
+            
+            btn.addEventListener('touchend', function(e) {
+                console.log('Fallback touch handler fired for:', this.className);
+            }, { passive: false });
+        }
+    });
+    
+    console.log('✅ Mobile buttons reinitialized');
 }
 
 function openMobileMenu() {
@@ -816,23 +904,45 @@ function showSuccessMessage(message) {
    Product Cards
    ========================================================================== */
 function initProductCards() {
+    console.log('🎯 Initializing Product Cards...');
     const productCards = document.querySelectorAll('.product-card:not([data-initialized])');
+    console.log(`Found ${productCards.length} product cards to initialize`);
     
-    productCards.forEach(card => {
+    productCards.forEach((card, index) => {
         card.setAttribute('data-initialized', 'true');
-        const addToCartBtn = card.querySelector('.btn-primary:not(.add-to-cart)');
-        const quickViewBtn = card.querySelector('.btn-white');
+        console.log(`Initializing card ${index + 1}:`, card);
+        
+        // Multiple selectors for Add to Cart buttons
+        const addToCartBtn = card.querySelector('.add-to-cart') || 
+                            card.querySelector('.btn-primary[data-product-id]') ||
+                            card.querySelector('.btn-primary:not(.quick-view-btn)') ||
+                            card.querySelector('button[data-product-id]');
+        
+        // Multiple selectors for Quick View buttons  
+        const quickViewBtn = card.querySelector('.quick-view-btn') ||
+                            card.querySelector('.btn-white[data-product-id]') ||
+                            card.querySelector('.btn[data-product-id]:not(.btn-primary)');
+        
+        console.log('Buttons found:', { addToCartBtn: !!addToCartBtn, quickViewBtn: !!quickViewBtn });
         
         if (addToCartBtn && !addToCartBtn.hasAttribute('data-listener-added')) {
             addToCartBtn.setAttribute('data-listener-added', 'true');
+            console.log('Adding events to Add to Cart button:', addToCartBtn);
             
             const handleAddToCartClick = function(e) {
+                console.log('Add to Cart button activated!', e.type);
                 e.preventDefault();
                 e.stopPropagation();
                 
                 // Prevent multiple rapid clicks
                 if (this.disabled) return;
                 this.disabled = true;
+                
+                // Visual feedback
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
                 
                 handleAddToCart(card);
                 
@@ -842,25 +952,55 @@ function initProductCards() {
                 }, 1000);
             };
 
-            // Add click event for desktop
+            // Add multiple event types for maximum compatibility
             addToCartBtn.addEventListener('click', handleAddToCartClick);
-            
-            // Add touch event for mobile
             addToCartBtn.addEventListener('touchend', handleAddToCartClick, { passive: false });
+            addToCartBtn.addEventListener('touchstart', function(e) {
+                console.log('Touch start on Add to Cart');
+                this.style.opacity = '0.8';
+            }, { passive: true });
+            addToCartBtn.addEventListener('touchcancel', function(e) {
+                this.style.opacity = '';
+            }, { passive: true });
+            
+            // Force button properties
+            addToCartBtn.style.pointerEvents = 'auto';
+            addToCartBtn.style.touchAction = 'manipulation';
+            addToCartBtn.style.cursor = 'pointer';
         }
         
         if (quickViewBtn) {
+            console.log('Adding events to Quick View button:', quickViewBtn);
+            
             const handleQuickViewClick = function(e) {
+                console.log('Quick View button activated!', e.type);
                 e.preventDefault();
                 e.stopPropagation();
+                
+                // Visual feedback
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+                
                 handleQuickView(card);
             };
 
-            // Add click event for desktop
+            // Add multiple event types for maximum compatibility
             quickViewBtn.addEventListener('click', handleQuickViewClick);
-            
-            // Add touch event for mobile
             quickViewBtn.addEventListener('touchend', handleQuickViewClick, { passive: false });
+            quickViewBtn.addEventListener('touchstart', function(e) {
+                console.log('Touch start on Quick View');
+                this.style.opacity = '0.8';
+            }, { passive: true });
+            quickViewBtn.addEventListener('touchcancel', function(e) {
+                this.style.opacity = '';
+            }, { passive: true });
+            
+            // Force button properties
+            quickViewBtn.style.pointerEvents = 'auto';
+            quickViewBtn.style.touchAction = 'manipulation';
+            quickViewBtn.style.cursor = 'pointer';
         }
     });
 }
